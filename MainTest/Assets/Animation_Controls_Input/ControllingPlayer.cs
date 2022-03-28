@@ -255,6 +255,15 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""c1daf77e-6010-4972-8918-ca65051d68da"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -323,6 +332,28 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
                     ""action"": ""Sneak"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d464fffb-f28f-43f6-95ff-aeee92333406"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""de484a68-0253-464e-b6b4-585c35c7ad3f"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -338,6 +369,7 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
         m_PlayerAction_Sprint = m_PlayerAction.FindAction("Sprint", throwIfNotFound: true);
         m_PlayerAction_Jump = m_PlayerAction.FindAction("Jump", throwIfNotFound: true);
         m_PlayerAction_Sneak = m_PlayerAction.FindAction("Sneak", throwIfNotFound: true);
+        m_PlayerAction_Attack = m_PlayerAction.FindAction("Attack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -441,6 +473,7 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerAction_Sprint;
     private readonly InputAction m_PlayerAction_Jump;
     private readonly InputAction m_PlayerAction_Sneak;
+    private readonly InputAction m_PlayerAction_Attack;
     public struct PlayerActionActions
     {
         private @ControllingPlayer m_Wrapper;
@@ -448,6 +481,7 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
         public InputAction @Sprint => m_Wrapper.m_PlayerAction_Sprint;
         public InputAction @Jump => m_Wrapper.m_PlayerAction_Jump;
         public InputAction @Sneak => m_Wrapper.m_PlayerAction_Sneak;
+        public InputAction @Attack => m_Wrapper.m_PlayerAction_Attack;
         public InputActionMap Get() { return m_Wrapper.m_PlayerAction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -466,6 +500,9 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
                 @Sneak.started -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnSneak;
                 @Sneak.performed -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnSneak;
                 @Sneak.canceled -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnSneak;
+                @Attack.started -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnAttack;
+                @Attack.performed -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnAttack;
+                @Attack.canceled -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnAttack;
             }
             m_Wrapper.m_PlayerActionActionsCallbackInterface = instance;
             if (instance != null)
@@ -479,6 +516,9 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
                 @Sneak.started += instance.OnSneak;
                 @Sneak.performed += instance.OnSneak;
                 @Sneak.canceled += instance.OnSneak;
+                @Attack.started += instance.OnAttack;
+                @Attack.performed += instance.OnAttack;
+                @Attack.canceled += instance.OnAttack;
             }
         }
     }
@@ -493,5 +533,6 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnSneak(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
     }
 }

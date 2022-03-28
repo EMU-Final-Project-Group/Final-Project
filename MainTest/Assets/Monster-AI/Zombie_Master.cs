@@ -23,10 +23,11 @@ public class Zombie_Master : MonoBehaviour
 
     // AI System
     public NavMeshAgent _agent;
+    private Rigidbody rb;
 
     // Wandering Variables
     public float moveSpeed;
-    public float rotationSpeed = 100f;
+    public float rotationSpeed = 200f;
     private bool isWandering = false;
     private bool isRotatingLeft = false;
     private bool isRotatingRight = false;
@@ -36,6 +37,11 @@ public class Zombie_Master : MonoBehaviour
     {
         playerScript = player.GetComponent<Locomotion>();
         animationManager = GetComponent<ZombineAnimationManager>();
+    }
+
+    private void Start()
+    {
+        rb = this.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -54,16 +60,16 @@ public class Zombie_Master : MonoBehaviour
         // Moves the AI to the player 
         if(isAngered)
         {
-            //_agent.isStopped = false;
-            moveSpeed = 2.0f;
+            _agent.isStopped = false;
+            moveSpeed = 1.5f;
             _agent.SetDestination(player.transform.position);
             animationManager.UpdateAnimatorValues(0, 1);
         }
         else
         {
             moveSpeed = 0.5f;
-            //animationManager.UpdateAnimatorValues(0, 0.5f);
-            //_agent.isStopped = true;
+            animationManager.UpdateAnimatorValues(0, 0.5f);
+            _agent.isStopped = true;
             WanderingMode();
         }
     }

@@ -12,3 +12,4 @@ The group project final for EMU Computer Game Programming.
 - Camera : Mouse  -  Right Joystick
 - Sprint : Shift  -  North-Button
 - Jump   : Space  -  South-Button
+- Crouch : CTRL   -  East-Button

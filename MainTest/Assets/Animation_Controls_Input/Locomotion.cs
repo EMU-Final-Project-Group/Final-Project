@@ -36,7 +36,13 @@ public class Locomotion : MonoBehaviour
     [Header("Jump Speed")]
     public float jumpHeight = 3;
     public float gravityIntensity = -15;
-        
+
+    [Header("Player Stance")]
+    public int currentStance;
+    // 0 = Sneaking
+    // 1 = Walking/running
+    // 2 = Sprinting
+
 
     private void Awake()
     {
@@ -75,14 +81,17 @@ public class Locomotion : MonoBehaviour
 
         if(isSprinting && !isSneak)
         {
+            currentStance = 2;
             moveDirection *= sprintingSpeed;
         }
         else if (!isSprinting && isSneak)
         {
+            currentStance = 0;
             moveDirection *= sneakSpeed;
         }
         else
         {
+            currentStance = 1;
             // Various Moving speeds
             if (inputManager.moveAmount > 0.5f)
             {

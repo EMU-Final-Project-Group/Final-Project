@@ -29,4 +29,7 @@ public class SourceLinks : MonoBehaviour
     // Player Input
     // https://youtu.be/WIl6ysorTE0
     // https://youtu.be/_GxmGY2s4uw
+
+    // Setting up clue cubes
+    // https://stackoverflow.com/questions/49469377/attach-text-to-a-gameobject
 }

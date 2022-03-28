@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\Animation_Controls_Input\ResetBool.cs" />
     <Compile Include="Assets\Animation_Controls_Input\ManageInput.cs" />
+    <Compile Include="Assets\Monster-AI\Zombie_Master.cs" />
     <Compile Include="Assets\Animation_Controls_Input\ResetIsJumping.cs" />
     <Compile Include="Assets\Animation_Controls_Input\ControllingPlayer.cs" />
     <Compile Include="Assets\zzz_Documentation\SourceLinks.cs" />
@@ -66,8 +67,8 @@
     <Compile Include="Assets\Animation_Controls_Input\Locomotion.cs" />
     <Compile Include="Assets\Animation_Controls_Input\ManageAnimation.cs" />
     <Compile Include="Assets\Animation_Controls_Input\ManagePlayer.cs" />
-    <Compile Include="Assets\Monster-AI\Zombie_Master.cs" />
     <Compile Include="Assets\Monster-AI\ZombineAnimationManager.cs" />
+    <Compile Include="Assets\Weapons\BatCollision.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

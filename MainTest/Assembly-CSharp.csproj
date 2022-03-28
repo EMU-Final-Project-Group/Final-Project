@@ -67,6 +67,7 @@
     <Compile Include="Assets\Animation_Controls_Input\ManageAnimation.cs" />
     <Compile Include="Assets\Animation_Controls_Input\ManagePlayer.cs" />
     <Compile Include="Assets\Monster-AI\Zombie_Master.cs" />
+    <Compile Include="Assets\Monster-AI\ZombineAnimationManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

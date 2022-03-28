@@ -32,4 +32,10 @@ public class SourceLinks : MonoBehaviour
 
     // Setting up clue cubes
     // https://stackoverflow.com/questions/49469377/attach-text-to-a-gameobject
+
+    // AI Navigation
+    // https://youtu.be/BIiTKwHyD9s
+
+    // AI Wandering
+    // https://youtu.be/yFBB7gvmzK8
 }

@@ -8871,7 +8871,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 942247454}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -10764,7 +10764,7 @@ GameObject:
   - component: {fileID: 1159965511}
   m_Layer: 6
   m_Name: Zombies
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11519,7 +11519,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1253633195}
-  m_LocalRotation: {x: 0.07253064, y: -0.15525207, z: 0.01143036, w: 0.98514235}
+  m_LocalRotation: {x: 0.07253066, y: -0.15525208, z: 0.011430363, w: 0.98514235}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -12694,7 +12694,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1364768520}
-  m_LocalRotation: {x: 0.090390645, y: -0.15501916, z: 0.014244977, w: 0.9836644}
+  m_LocalRotation: {x: 0.090390645, y: -0.15501916, z: 0.014244979, w: 0.9836644}
   m_LocalPosition: {x: -2.9241712, y: 0.015515327, z: 17.462097}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -13843,7 +13843,7 @@ GameObject:
   - component: {fileID: 1473064668}
   m_Layer: 6
   m_Name: Zombie
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

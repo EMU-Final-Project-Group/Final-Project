@@ -6,7 +6,7 @@ public class BatCollision : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "enemy")
+        if(other.gameObject.tag == "Enemy")
         {
             print("Enemy Hit");
         }

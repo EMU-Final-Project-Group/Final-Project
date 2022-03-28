@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ManageInput : MonoBehaviour
 {
@@ -52,13 +53,19 @@ public class ManageInput : MonoBehaviour
 
             // Sneak - Crouch
             playerControls.PlayerAction.Sneak.performed += i => FlipSneak();
+
+            // Melee Attack
+            playerControls.PlayerAction.Attack.started += DoAttack;
         }
 
         playerControls.Enable();
     }
 
+   
+
     private void OnDisable()
     {
+        playerControls.PlayerAction.Attack.started -= DoAttack;
         playerControls.Disable();
     }
 
@@ -131,5 +138,13 @@ public class ManageInput : MonoBehaviour
             playerLocomotion.isSneak = false;
         }
         playerLocomotion.HandleSneaking();
+    }
+
+    // Melee Attack
+    private void DoAttack(InputAction.CallbackContext obj)
+    {
+        animatorManager.animator.speed = 3.0f;
+        animatorManager.animator.SetTrigger("attack");
+        animatorManager.animator.speed = 1.0f;
     }
 }

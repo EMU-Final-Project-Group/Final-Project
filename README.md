@@ -13,3 +13,4 @@ The group project final for EMU Computer Game Programming.
 - Sprint : Shift  -  North-Button
 - Jump   : Space  -  South-Button
 - Crouch : CTRL   -  East-Button
+- Attack : LMB    -  Right Trigger

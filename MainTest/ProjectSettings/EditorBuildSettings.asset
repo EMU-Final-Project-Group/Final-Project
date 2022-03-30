@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/UI/StartScreen.unity
+    guid: 98ff93aaff2406e4b9747e870bb3b892
+  - enabled: 1
+    path: Assets/Scenes/MonsterZombies.unity
+    guid: dd4a6c4ac50a86248bce6ffb28434270
   m_configObjects: {}

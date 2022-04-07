@@ -264,6 +264,15 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ObjectInteract"",
+                    ""type"": ""Button"",
+                    ""id"": ""3bcd43e4-cdfc-496c-bb08-04f909d5028a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -354,6 +363,28 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""482e362d-3799-4908-bde6-143f3f1c993d"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ObjectInteract"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a872e7e4-7f79-4f7c-bd1a-bbe8ea7fa516"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ObjectInteract"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -370,6 +401,7 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
         m_PlayerAction_Jump = m_PlayerAction.FindAction("Jump", throwIfNotFound: true);
         m_PlayerAction_Sneak = m_PlayerAction.FindAction("Sneak", throwIfNotFound: true);
         m_PlayerAction_Attack = m_PlayerAction.FindAction("Attack", throwIfNotFound: true);
+        m_PlayerAction_ObjectInteract = m_PlayerAction.FindAction("ObjectInteract", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -474,6 +506,7 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerAction_Jump;
     private readonly InputAction m_PlayerAction_Sneak;
     private readonly InputAction m_PlayerAction_Attack;
+    private readonly InputAction m_PlayerAction_ObjectInteract;
     public struct PlayerActionActions
     {
         private @ControllingPlayer m_Wrapper;
@@ -482,6 +515,7 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_PlayerAction_Jump;
         public InputAction @Sneak => m_Wrapper.m_PlayerAction_Sneak;
         public InputAction @Attack => m_Wrapper.m_PlayerAction_Attack;
+        public InputAction @ObjectInteract => m_Wrapper.m_PlayerAction_ObjectInteract;
         public InputActionMap Get() { return m_Wrapper.m_PlayerAction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -503,6 +537,9 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
                 @Attack.started -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnAttack;
+                @ObjectInteract.started -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnObjectInteract;
+                @ObjectInteract.performed -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnObjectInteract;
+                @ObjectInteract.canceled -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnObjectInteract;
             }
             m_Wrapper.m_PlayerActionActionsCallbackInterface = instance;
             if (instance != null)
@@ -519,6 +556,9 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
+                @ObjectInteract.started += instance.OnObjectInteract;
+                @ObjectInteract.performed += instance.OnObjectInteract;
+                @ObjectInteract.canceled += instance.OnObjectInteract;
             }
         }
     }
@@ -534,5 +574,6 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnSneak(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+        void OnObjectInteract(InputAction.CallbackContext context);
     }
 }

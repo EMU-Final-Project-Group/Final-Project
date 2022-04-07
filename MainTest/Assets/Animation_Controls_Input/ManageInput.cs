@@ -49,7 +49,8 @@ public class ManageInput : MonoBehaviour
             playerControls.PlayerAction.Sprint.canceled += i => b_input = false;
 
             // Jumping
-            playerControls.PlayerAction.Jump.performed += i => jump_input = true;
+            // Remove comment to re-enable jumping feature
+            //playerControls.PlayerAction.Jump.performed += i => jump_input = true;
 
             // Sneak - Crouch
             playerControls.PlayerAction.Sneak.performed += i => FlipSneak();

@@ -184,6 +184,20 @@ public class ManageInput : MonoBehaviour
         {
             animatorManager.animator.SetTrigger("punchAttack");
         }
+        else if(weaponAttack == 2)
+        {
+            animatorManager.animator.SetTrigger("knifeAttack");
+        }
+        else
+        {
+            animatorManager.animator.SetTrigger("attack");
+        }
+
+        /*
+        if(weaponAttack == 0)
+        {
+            animatorManager.animator.SetTrigger("punchAttack");
+        }
         else if(weaponAttack == 1)
         {
             animatorManager.animator.SetTrigger("baseBallBatAttack");
@@ -204,6 +218,7 @@ public class ManageInput : MonoBehaviour
         {
             animatorManager.animator.SetTrigger("attack");
         }
+        */
     }
 
     // Object Interact

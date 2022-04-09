@@ -23,6 +23,9 @@ public class GuessMachine : MonoBehaviour
     public GameObject clueCollection;
     public GameObject combatCollection;
 
+    [Header("Monster to Spawn")]
+    public GameObject spawnMonster;
+
     PlayerNearbyDetection playerDetection;
     public bool guessScreenOpen;
 
@@ -34,6 +37,7 @@ public class GuessMachine : MonoBehaviour
         guessScreenOpen = false;
         clueCollection.SetActive(true);
         combatCollection.SetActive(false);
+        spawnMonster.SetActive(false);
     }
 
     // Update is called once per frame
@@ -87,6 +91,7 @@ public class GuessMachine : MonoBehaviour
                 clueCollection.SetActive(false);
                 combatCollection.SetActive(true);
                 DisableGuessScreen();
+                spawnMonster.SetActive(true);
             }
             else
             {

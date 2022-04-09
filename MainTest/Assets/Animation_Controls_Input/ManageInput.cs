@@ -21,6 +21,10 @@ public class ManageInput : MonoBehaviour
     public GameObject guessObject;
     GuessMachine guessManager;
 
+    [Header("Weapon Selection Rack")]
+    public GameObject weaponObject;
+    ManageWeapons weaponManager;
+
     // Movement
     public Vector2 movementInput;
     public Vector2 cameraInput;
@@ -49,6 +53,7 @@ public class ManageInput : MonoBehaviour
         // clueObject.GetComponent<ClueManager>();
         clueManager = clueObject.GetComponent<ClueManager>();
         guessManager = guessObject.GetComponent<GuessMachine>();
+        weaponManager = weaponObject.GetComponent<ManageWeapons>();
         flashLightOn = true;
     }
 
@@ -184,6 +189,7 @@ public class ManageInput : MonoBehaviour
     {
         clueManager.HandleCluePick();
         guessManager.HandleGuessMachine();
+        weaponManager.HandleWeaponRack(0);
     }
 
     private void HandleDPadPress(int padDirection)
@@ -191,6 +197,10 @@ public class ManageInput : MonoBehaviour
         if(guessManager.guessScreenOpen)
         {
             guessManager.PlayerGuessSubmission(padDirection);
+        }
+        if(weaponManager.weaponScreenOpen)
+        {
+            weaponManager.HandleWeaponRack(padDirection);
         }
     }
 

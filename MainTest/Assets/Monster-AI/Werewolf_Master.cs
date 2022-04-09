@@ -20,21 +20,29 @@ public class Werewolf_Master : MonoBehaviour
     public bool isAngered;
     int playerStance;
 
+    // Animation
+    WerewolfAnimationManager animationManager;
+
     // AI Navigation System
     public NavMeshAgent _agent;
 
+    
     // Wandering Variables
     [Header("Wandering Values")]
     public float moveSpeed = 3f;
     public float rotationSpeed = 200f;
+
+    /*
     private bool isWandering = false;
     private bool isRotatingLeft = false;
     private bool isRotatingRight = false;
     private bool isWalking = false;
+    */
 
     private void Awake()
     {
         getPlayerStance = player.GetComponent<Locomotion>();
+        animationManager = GetComponent<WerewolfAnimationManager>();
     }
 
     // Update is called once per frame
@@ -53,18 +61,20 @@ public class Werewolf_Master : MonoBehaviour
         // Moves towards the player
         if(isAngered)
         {
-            isWalking = false;
+            // isWalking = false;
             _agent.isStopped = false;
             moveSpeed = 3f;
             transform.position += transform.forward * moveSpeed * Time.deltaTime;
             _agent.SetDestination(player.transform.position);
+            animationManager.UpdateAnimatorValues(0,1.0f);
         }
         else
         {
-            isWalking=true;
+            // isWalking=true;
             moveSpeed = 1.5f;
+            animationManager.UpdateAnimatorValues(0, 0.5f);
             _agent.isStopped = true;
-            WanderingMode();
+            // WanderingMode();
         }
     }
 
@@ -100,6 +110,7 @@ public class Werewolf_Master : MonoBehaviour
         }
     }
 
+    /*
     private void WanderingMode()
     {
         if(!isWandering)
@@ -108,14 +119,17 @@ public class Werewolf_Master : MonoBehaviour
         }
         if(isRotatingRight)
         {
+            animationManager.UpdateAnimatorValues(0, 0);
             transform.Rotate(transform.up * Time.deltaTime * rotationSpeed);
         }
         if(isRotatingLeft)
         {
+            animationManager.UpdateAnimatorValues(0, 0);
             transform.Rotate(transform.up * Time.deltaTime * -rotationSpeed);
         }
         if(isWalking)
         {
+            animationManager.UpdateAnimatorValues(0, 0.5f);
             transform.position += transform.forward * moveSpeed * Time.deltaTime;
         }
     }
@@ -149,4 +163,5 @@ public class Werewolf_Master : MonoBehaviour
         }
         isWandering = false;
     }
+    */
 }

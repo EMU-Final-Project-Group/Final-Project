@@ -19,6 +19,10 @@ public class GuessMachine : MonoBehaviour
     [Header("Guess Screen")]
     public GameObject guessScreen;
 
+    [Header("UI Element Toggles")]
+    public GameObject clueCollection;
+    public GameObject combatCollection;
+
     PlayerNearbyDetection playerDetection;
     public bool guessScreenOpen;
 
@@ -28,6 +32,8 @@ public class GuessMachine : MonoBehaviour
         playerDetection = GetComponent<PlayerNearbyDetection>();
         DisableGuessScreen();
         guessScreenOpen = false;
+        clueCollection.SetActive(true);
+        combatCollection.SetActive(false);
     }
 
     // Update is called once per frame
@@ -78,6 +84,9 @@ public class GuessMachine : MonoBehaviour
             if (guess == 1)
             {
                 Debug.Log("Winner is you.");
+                clueCollection.SetActive(false);
+                combatCollection.SetActive(true);
+                DisableGuessScreen();
             }
             else
             {

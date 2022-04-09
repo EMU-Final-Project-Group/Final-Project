@@ -78,6 +78,7 @@
     <Compile Include="Assets\Animation_Controls_Input\ManagePlayer.cs" />
     <Compile Include="Assets\Monster-AI\ZombineAnimationManager.cs" />
     <Compile Include="Assets\Monster-AI\Werewolf_Master.cs" />
+    <Compile Include="Assets\Monster-AI\WerewolfAnimationManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

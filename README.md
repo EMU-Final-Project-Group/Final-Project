@@ -22,6 +22,7 @@ The group project final for EMU Computer Game Programming.
 ### Camera continues to rotate
 - Camera will keep rotating to the right after player lets go of controls
 - How to fix : have to restart game
+- Status : Seems to be working, needs testing
 
 ### Camera roatation doesn't work
 - Camera rotation will be unresponsive from the start of the game

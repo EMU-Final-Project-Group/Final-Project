@@ -179,9 +179,31 @@ public class ManageInput : MonoBehaviour
     // Melee Attack
     private void DoAttack(InputAction.CallbackContext obj)
     {
-        animatorManager.animator.speed = 3.0f;
-        animatorManager.animator.SetTrigger("attack");
-        animatorManager.animator.speed = 1.0f;
+        int weaponAttack = weaponManager.equippedWeapon;
+        if(weaponAttack == 0)
+        {
+            animatorManager.animator.SetTrigger("punchAttack");
+        }
+        else if(weaponAttack == 1)
+        {
+            animatorManager.animator.SetTrigger("baseBallBatAttack");
+        }
+        else if(weaponAttack == 2)
+        {
+            animatorManager.animator.SetTrigger("knifeAttack");
+        }
+        else if(weaponAttack == 3)
+        {
+            animatorManager.animator.SetTrigger("butcherAttack");
+        }
+        else if(weaponAttack == 4)
+        {
+            animatorManager.animator.SetTrigger("hatchetAttack");
+        }
+        else
+        {
+            animatorManager.animator.SetTrigger("attack");
+        }
     }
 
     // Object Interact

@@ -75,7 +75,10 @@ public class ManageInput : MonoBehaviour
             playerControls.PlayerAction.ObjectInteract.performed += i => HandleObjectInteraction();
 
             // Menu Interaction
-            playerControls.MenuActions.NavUp
+            playerControls.MenuActions.NavUp.performed += i => HandleDPadPress(1);
+            playerControls.MenuActions.NavDown.performed += i => HandleDPadPress(2);
+            playerControls.MenuActions.NavLeft.performed += i => HandleDPadPress(3);
+            playerControls.MenuActions.NavRight.performed += i => HandleDPadPress(4);
         }
 
         playerControls.Enable();
@@ -173,5 +176,13 @@ public class ManageInput : MonoBehaviour
     {
         clueManager.HandleCluePick();
         guessManager.HandleGuessMachine();
+    }
+
+    private void HandleDPadPress(int padDirection)
+    {
+        if(guessManager.guessScreenOpen)
+        {
+            guessManager.PlayerGuessSubmission(padDirection);
+        }
     }
 }

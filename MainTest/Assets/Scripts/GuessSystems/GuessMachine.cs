@@ -20,13 +20,14 @@ public class GuessMachine : MonoBehaviour
     public GameObject guessScreen;
 
     PlayerNearbyDetection playerDetection;
+    public bool guessScreenOpen;
 
     // Start is called before the first frame update
     void Awake()
     {
         playerDetection = GetComponent<PlayerNearbyDetection>();
         DisableGuessScreen();
-
+        guessScreenOpen = false;
     }
 
     // Update is called once per frame
@@ -36,6 +37,7 @@ public class GuessMachine : MonoBehaviour
         {
             prompt.SetActive(false);
             DisableGuessScreen();
+            guessScreenOpen = false;
         }
     }
 
@@ -46,6 +48,7 @@ public class GuessMachine : MonoBehaviour
             if(CheckClueCollection())
             {
                 guessScreen.SetActive(true);
+                guessScreenOpen = true;
             }
         }
     }
@@ -66,5 +69,20 @@ public class GuessMachine : MonoBehaviour
     private void DisableGuessScreen()
     {
         guessScreen.SetActive(false);
+    }
+
+    public void PlayerGuessSubmission(int guess)
+    {
+        if(CheckClueCollection())
+        {
+            if (guess == 1)
+            {
+                Debug.Log("Winner is you.");
+            }
+            else
+            {
+                Debug.Log("Do not pass go, do not collect $200");
+            }
+        }
     }
 }

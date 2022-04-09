@@ -57,22 +57,30 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Animation_Controls_Input\ResetBool.cs" />
+    <Compile Include="Assets\Scenes\UI\pick.cs" />
+    <Compile Include="Assets\Scenes\UI\uiTestScript.cs" />
     <Compile Include="Assets\Animation_Controls_Input\ManageInput.cs" />
+    <Compile Include="Assets\Scenes\UI\pauseMenu.cs" />
     <Compile Include="Assets\Monster-AI\Zombie_Master.cs" />
     <Compile Include="Assets\Animation_Controls_Input\ResetIsJumping.cs" />
     <Compile Include="Assets\Animation_Controls_Input\ControllingPlayer.cs" />
     <Compile Include="Assets\zzz_Documentation\SourceLinks.cs" />
     <Compile Include="Assets\Animation_Controls_Input\CameraManager.cs" />
+    <Compile Include="Assets\Weapons\BatCollision.cs" />
     <Compile Include="Assets\zzz_Documentation\GameControls.cs" />
     <Compile Include="Assets\Animation_Controls_Input\Locomotion.cs" />
     <Compile Include="Assets\Animation_Controls_Input\ManageAnimation.cs" />
+    <Compile Include="Assets\Scenes\UI\mainMenu.cs" />
     <Compile Include="Assets\Animation_Controls_Input\ManagePlayer.cs" />
     <Compile Include="Assets\Monster-AI\ZombineAnimationManager.cs" />
-    <Compile Include="Assets\Weapons\BatCollision.cs" />
+    <Compile Include="Assets\Scripts\ClueSystems\PlayerNearbyDetection.cs" />
+    <Compile Include="Assets\Scripts\ClueSystems\RandomSpawner.cs" />
+    <Compile Include="Assets\Scripts\ClueSystems\ClueManager.cs" />
+    <Compile Include="Assets\Scripts\GuessSystems\GuessMachine.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
-    <None Include="Assets\z_Import_Kenny_Characters\Animation-characters\License.txt" />
+    <None Include="Assets\z_Import_Kenny_Packs\Characters\Animation-characters\License.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
@@ -90,7 +98,9 @@
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\z_Import_Skyboxes\readme.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\PolygonHorrorMansion\Materials\Shaders\SyntyStudios_Ghost.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
+    <None Include="Assets\PolygonHorrorMansion\Materials\Shaders\SyntyStudios_Grunge.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />

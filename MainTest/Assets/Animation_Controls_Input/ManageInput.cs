@@ -8,7 +8,14 @@ public class ManageInput : MonoBehaviour
     ControllingPlayer playerControls;
     Locomotion playerLocomotion;
     ManageAnimation animatorManager;
-    
+
+    [Header("Clue System")]
+    public GameObject clueObject;
+    ClueManager clueManager;
+
+    [Header("Guess Machine")]
+    public GameObject guessObject;
+    GuessMachine guessManager;
 
     // Movement
     public Vector2 movementInput;
@@ -25,6 +32,9 @@ public class ManageInput : MonoBehaviour
     // Stealth
     public bool currentlySneaking = false;
 
+    // Object Interaction
+    public bool itemPickedUp;
+
     public float cameraInputX;
     public float cameraInputY;
 
@@ -32,6 +42,9 @@ public class ManageInput : MonoBehaviour
     {
         playerLocomotion = GetComponent<Locomotion>();
         animatorManager = GetComponent<ManageAnimation>();
+        // clueObject.GetComponent<ClueManager>();
+        clueManager = clueObject.GetComponent<ClueManager>();
+        guessManager = guessObject.GetComponent<GuessMachine>();
     }
 
     private void OnEnable()
@@ -57,6 +70,12 @@ public class ManageInput : MonoBehaviour
 
             // Melee Attack
             playerControls.PlayerAction.Attack.started += DoAttack;
+
+            // Object Interact
+            playerControls.PlayerAction.ObjectInteract.performed += i => HandleObjectInteraction();
+
+            // Menu Interaction
+            playerControls.MenuActions.NavUp
         }
 
         playerControls.Enable();
@@ -147,5 +166,12 @@ public class ManageInput : MonoBehaviour
         animatorManager.animator.speed = 3.0f;
         animatorManager.animator.SetTrigger("attack");
         animatorManager.animator.speed = 1.0f;
+    }
+
+    // Object Interact
+    private void HandleObjectInteraction()
+    {
+        clueManager.HandleCluePick();
+        guessManager.HandleGuessMachine();
     }
 }

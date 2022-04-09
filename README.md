@@ -15,3 +15,11 @@ The group project final for EMU Computer Game Programming.
 - Interact : F      -  West-Button
 - Attack   : LMB    -  Right Trigger
 - Navigate Menus : D-Pad
+
+## Known Bugs
+
+### Camera continues to rotate
+
+### Camera roatation doesn't work
+
+### Werewolf model sinks a few inches into some ground pieces

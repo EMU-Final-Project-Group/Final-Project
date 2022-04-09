@@ -14301,7 +14301,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 628779043}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.1193898, y: 5.008188, z: 20.524}
+  m_LocalPosition: {x: -5.35, y: 5.008188, z: 3.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1203460018}
@@ -21418,7 +21418,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 951388288}
-  m_LocalRotation: {x: 0.10348272, y: -0.3092081, z: 0.033869293, w: 0.9447405}
+  m_LocalRotation: {x: 0.10348275, y: -0.30920807, z: 0.033869304, w: 0.9447405}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -23455,6 +23455,11 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &1056482283 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2353979509582570424, guid: 97f84af3bd93a6c4d9fccaa6f13e0f8c, type: 3}
+  m_PrefabInstance: {fileID: 2353979508304677855}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1057776954
 GameObject:
   m_ObjectHideFlags: 0
@@ -24450,6 +24455,7 @@ MonoBehaviour:
   clue4: {fileID: 1191830073}
   prompt: {fileID: 2004063568}
   guessScreen: {fileID: 1317916830}
+  guessScreenOpen: 0
 --- !u!1 &1094664073
 GameObject:
   m_ObjectHideFlags: 0
@@ -27382,7 +27388,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4247533588952472, guid: cba37d692e4010142866a333e7a5a33d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.998187
+      value: -4.676
       objectReference: {fileID: 0}
     - target: {fileID: 4247533588952472, guid: cba37d692e4010142866a333e7a5a33d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -28347,7 +28353,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1253633195}
-  m_LocalRotation: {x: 0.06909678, y: -0.31023434, z: 0.022614978, w: 0.94787604}
+  m_LocalRotation: {x: 0.06909679, y: -0.3102343, z: 0.02261497, w: 0.947876}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -30672,7 +30678,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1364768520}
-  m_LocalRotation: {x: 0.08628126, y: -0.30977303, z: 0.028239364, w: 0.9464665}
+  m_LocalRotation: {x: 0.08628126, y: -0.30977306, z: 0.02823937, w: 0.94646645}
   m_LocalPosition: {x: -12.076814, y: 0.27812767, z: 13.470794}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -53773,6 +53779,10 @@ PrefabInstance:
       propertyPath: clueSystem
       value: 
       objectReference: {fileID: 431700556}
+    - target: {fileID: 2353979508343868103, guid: 97f84af3bd93a6c4d9fccaa6f13e0f8c, type: 3}
+      propertyPath: flashLight
+      value: 
+      objectReference: {fileID: 1056482283}
     - target: {fileID: 2353979508343868103, guid: 97f84af3bd93a6c4d9fccaa6f13e0f8c, type: 3}
       propertyPath: guessObject
       value: 

@@ -13,6 +13,10 @@ public class ManageInput : MonoBehaviour
     public GameObject clueObject;
     ClueManager clueManager;
 
+    [Header("Toggle Flashlight")]
+    public GameObject flashLight;
+    private bool flashLightOn;
+
     [Header("Guess Machine")]
     public GameObject guessObject;
     GuessMachine guessManager;
@@ -45,6 +49,7 @@ public class ManageInput : MonoBehaviour
         // clueObject.GetComponent<ClueManager>();
         clueManager = clueObject.GetComponent<ClueManager>();
         guessManager = guessObject.GetComponent<GuessMachine>();
+        flashLightOn = true;
     }
 
     private void OnEnable()
@@ -79,6 +84,9 @@ public class ManageInput : MonoBehaviour
             playerControls.MenuActions.NavDown.performed += i => HandleDPadPress(2);
             playerControls.MenuActions.NavLeft.performed += i => HandleDPadPress(3);
             playerControls.MenuActions.NavRight.performed += i => HandleDPadPress(4);
+
+            // Toggle Flashlight
+            playerControls.PlayerAction.FlashlightToggle.performed += i => HandleFlashLightStatus();
         }
 
         playerControls.Enable();
@@ -183,6 +191,20 @@ public class ManageInput : MonoBehaviour
         if(guessManager.guessScreenOpen)
         {
             guessManager.PlayerGuessSubmission(padDirection);
+        }
+    }
+
+    private void HandleFlashLightStatus()
+    {
+        if(flashLightOn)
+        {
+            flashLightOn = false;
+            flashLight.SetActive(false);
+        } 
+        else
+        {
+            flashLightOn = true;
+            flashLight.SetActive(true);
         }
     }
 }

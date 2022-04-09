@@ -273,6 +273,15 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FlashlightToggle"",
+                    ""type"": ""Button"",
+                    ""id"": ""d119f10c-bf78-4497-bed5-d5a25a939c35"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -383,6 +392,28 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""ObjectInteract"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9b79a62e-f50e-4342-9f5a-5856de0c1127"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FlashlightToggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""55d6c45c-f12d-4a44-81e6-dfd0876908e2"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FlashlightToggle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -534,6 +565,7 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
         m_PlayerAction_Sneak = m_PlayerAction.FindAction("Sneak", throwIfNotFound: true);
         m_PlayerAction_Attack = m_PlayerAction.FindAction("Attack", throwIfNotFound: true);
         m_PlayerAction_ObjectInteract = m_PlayerAction.FindAction("ObjectInteract", throwIfNotFound: true);
+        m_PlayerAction_FlashlightToggle = m_PlayerAction.FindAction("FlashlightToggle", throwIfNotFound: true);
         // MenuActions
         m_MenuActions = asset.FindActionMap("MenuActions", throwIfNotFound: true);
         m_MenuActions_NavUp = m_MenuActions.FindAction("NavUp", throwIfNotFound: true);
@@ -645,6 +677,7 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerAction_Sneak;
     private readonly InputAction m_PlayerAction_Attack;
     private readonly InputAction m_PlayerAction_ObjectInteract;
+    private readonly InputAction m_PlayerAction_FlashlightToggle;
     public struct PlayerActionActions
     {
         private @ControllingPlayer m_Wrapper;
@@ -654,6 +687,7 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
         public InputAction @Sneak => m_Wrapper.m_PlayerAction_Sneak;
         public InputAction @Attack => m_Wrapper.m_PlayerAction_Attack;
         public InputAction @ObjectInteract => m_Wrapper.m_PlayerAction_ObjectInteract;
+        public InputAction @FlashlightToggle => m_Wrapper.m_PlayerAction_FlashlightToggle;
         public InputActionMap Get() { return m_Wrapper.m_PlayerAction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -678,6 +712,9 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
                 @ObjectInteract.started -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnObjectInteract;
                 @ObjectInteract.performed -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnObjectInteract;
                 @ObjectInteract.canceled -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnObjectInteract;
+                @FlashlightToggle.started -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnFlashlightToggle;
+                @FlashlightToggle.performed -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnFlashlightToggle;
+                @FlashlightToggle.canceled -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnFlashlightToggle;
             }
             m_Wrapper.m_PlayerActionActionsCallbackInterface = instance;
             if (instance != null)
@@ -697,6 +734,9 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
                 @ObjectInteract.started += instance.OnObjectInteract;
                 @ObjectInteract.performed += instance.OnObjectInteract;
                 @ObjectInteract.canceled += instance.OnObjectInteract;
+                @FlashlightToggle.started += instance.OnFlashlightToggle;
+                @FlashlightToggle.performed += instance.OnFlashlightToggle;
+                @FlashlightToggle.canceled += instance.OnFlashlightToggle;
             }
         }
     }
@@ -770,6 +810,7 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
         void OnSneak(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnObjectInteract(InputAction.CallbackContext context);
+        void OnFlashlightToggle(InputAction.CallbackContext context);
     }
     public interface IMenuActionsActions
     {

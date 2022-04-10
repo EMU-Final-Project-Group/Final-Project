@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Animation_Controls_Input\ResetBool.cs" />
+<<<<<<< Updated upstream
     <Compile Include="Assets\Scripts\ClueSystems\ClueManager.cs" />
     <Compile Include="Assets\Scripts\GuessSystems\GuessMachine.cs" />
     <Compile Include="Assets\Scenes\UI\pick.cs" />
@@ -64,14 +65,27 @@
     <Compile Include="Assets\Animation_Controls_Input\ManageInput.cs" />
     <Compile Include="Assets\Scenes\UI\pauseMenu.cs" />
     <Compile Include="Assets\Scripts\ClueSystems\RandomSpawner.cs" />
+=======
+    <Compile Include="Assets\Scripts\UIScripts\clue.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\pick.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\uiTestScript.cs" />
+    <Compile Include="Assets\Animation_Controls_Input\ManageInput.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\pauseMenu.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\textTest.cs" />
+    <Compile Include="Assets\PiUi\Scripts\PiPiece.cs" />
+>>>>>>> Stashed changes
     <Compile Include="Assets\Monster-AI\Zombie_Master.cs" />
     <Compile Include="Assets\Animation_Controls_Input\ResetIsJumping.cs" />
     <Compile Include="Assets\Animation_Controls_Input\ControllingPlayer.cs" />
+    <Compile Include="Assets\PiUi\TestScene\Test.cs" />
     <Compile Include="Assets\zzz_Documentation\SourceLinks.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\clueInteraction.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\equipment.cs" />
     <Compile Include="Assets\Animation_Controls_Input\CameraManager.cs" />
     <Compile Include="Assets\Weapons\BatCollision.cs" />
     <Compile Include="Assets\zzz_Documentation\GameControls.cs" />
     <Compile Include="Assets\Animation_Controls_Input\Locomotion.cs" />
+<<<<<<< Updated upstream
     <Compile Include="Assets\Scripts\ClueSystems\PlayerNearbyDetection.cs" />
     <Compile Include="Assets\Animation_Controls_Input\ManageAnimation.cs" />
     <Compile Include="Assets\Scenes\UI\mainMenu.cs" />
@@ -81,6 +95,17 @@
     <Compile Include="Assets\Monster-AI\WerewolfAnimationManager.cs" />
     <Compile Include="Assets\Scripts\CombatSystems\PlayerWeapons.cs" />
     <Compile Include="Assets\Scripts\CombatSystems\ManageWeapons.cs" />
+=======
+    <Compile Include="Assets\Scripts\UIScripts\playerInventory.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\vanInteraction.cs" />
+    <Compile Include="Assets\Animation_Controls_Input\ManageAnimation.cs" />
+    <Compile Include="Assets\PiUi\TestScene\TestWorld.cs" />
+    <Compile Include="Assets\Scripts\UIScripts\mainMenu.cs" />
+    <Compile Include="Assets\PiUi\Scripts\PiUIManager.cs" />
+    <Compile Include="Assets\PiUi\Scripts\PiUI.cs" />
+    <Compile Include="Assets\Animation_Controls_Input\ManagePlayer.cs" />
+    <Compile Include="Assets\Monster-AI\ZombineAnimationManager.cs" />
+>>>>>>> Stashed changes
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

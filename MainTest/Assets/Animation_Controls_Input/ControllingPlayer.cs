@@ -264,6 +264,24 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ObjectInteract"",
+                    ""type"": ""Button"",
+                    ""id"": ""3bcd43e4-cdfc-496c-bb08-04f909d5028a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FlashlightToggle"",
+                    ""type"": ""Button"",
+                    ""id"": ""d119f10c-bf78-4497-bed5-d5a25a939c35"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -354,6 +372,182 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""482e362d-3799-4908-bde6-143f3f1c993d"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ObjectInteract"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a872e7e4-7f79-4f7c-bd1a-bbe8ea7fa516"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ObjectInteract"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9b79a62e-f50e-4342-9f5a-5856de0c1127"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FlashlightToggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""55d6c45c-f12d-4a44-81e6-dfd0876908e2"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FlashlightToggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""MenuActions"",
+            ""id"": ""e175a456-d391-4eaf-9bb5-6a8e22960758"",
+            ""actions"": [
+                {
+                    ""name"": ""NavUp"",
+                    ""type"": ""Button"",
+                    ""id"": ""7c42c1fb-4d73-4b01-a3ae-c8dafb0a9370"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NavDown"",
+                    ""type"": ""Button"",
+                    ""id"": ""7a7b9a6c-6163-4534-b5b6-198ab4f7221e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NavLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""43f75f73-a72b-42ee-9268-b3621bba8acf"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""NavRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""9bbe8487-0a3e-4f8e-adff-26ddd087e301"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""4aa03734-0e12-494a-838a-0e8c22475541"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NavUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""86eccd33-b7d8-4a88-9036-f44120e575b8"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NavUp"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ac0c5d2b-df03-4e47-a2a7-fe1f35103e8e"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NavDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""61e432a4-c1eb-4960-8e63-7983158f5b4a"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NavDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3b464d0b-1a24-495a-a6f4-0bedae52c68b"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NavLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dc7f1ce8-4f6d-4482-856c-52b3a71d7ad4"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NavLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f1f5273e-6662-4f15-8298-0f0384e30706"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NavRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5e50ec9f-a4d7-4a88-9295-c98bf2f1230a"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NavRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -370,6 +564,14 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
         m_PlayerAction_Jump = m_PlayerAction.FindAction("Jump", throwIfNotFound: true);
         m_PlayerAction_Sneak = m_PlayerAction.FindAction("Sneak", throwIfNotFound: true);
         m_PlayerAction_Attack = m_PlayerAction.FindAction("Attack", throwIfNotFound: true);
+        m_PlayerAction_ObjectInteract = m_PlayerAction.FindAction("ObjectInteract", throwIfNotFound: true);
+        m_PlayerAction_FlashlightToggle = m_PlayerAction.FindAction("FlashlightToggle", throwIfNotFound: true);
+        // MenuActions
+        m_MenuActions = asset.FindActionMap("MenuActions", throwIfNotFound: true);
+        m_MenuActions_NavUp = m_MenuActions.FindAction("NavUp", throwIfNotFound: true);
+        m_MenuActions_NavDown = m_MenuActions.FindAction("NavDown", throwIfNotFound: true);
+        m_MenuActions_NavLeft = m_MenuActions.FindAction("NavLeft", throwIfNotFound: true);
+        m_MenuActions_NavRight = m_MenuActions.FindAction("NavRight", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -474,6 +676,8 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerAction_Jump;
     private readonly InputAction m_PlayerAction_Sneak;
     private readonly InputAction m_PlayerAction_Attack;
+    private readonly InputAction m_PlayerAction_ObjectInteract;
+    private readonly InputAction m_PlayerAction_FlashlightToggle;
     public struct PlayerActionActions
     {
         private @ControllingPlayer m_Wrapper;
@@ -482,6 +686,8 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_PlayerAction_Jump;
         public InputAction @Sneak => m_Wrapper.m_PlayerAction_Sneak;
         public InputAction @Attack => m_Wrapper.m_PlayerAction_Attack;
+        public InputAction @ObjectInteract => m_Wrapper.m_PlayerAction_ObjectInteract;
+        public InputAction @FlashlightToggle => m_Wrapper.m_PlayerAction_FlashlightToggle;
         public InputActionMap Get() { return m_Wrapper.m_PlayerAction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -503,6 +709,12 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
                 @Attack.started -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnAttack;
+                @ObjectInteract.started -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnObjectInteract;
+                @ObjectInteract.performed -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnObjectInteract;
+                @ObjectInteract.canceled -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnObjectInteract;
+                @FlashlightToggle.started -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnFlashlightToggle;
+                @FlashlightToggle.performed -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnFlashlightToggle;
+                @FlashlightToggle.canceled -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnFlashlightToggle;
             }
             m_Wrapper.m_PlayerActionActionsCallbackInterface = instance;
             if (instance != null)
@@ -519,10 +731,73 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
+                @ObjectInteract.started += instance.OnObjectInteract;
+                @ObjectInteract.performed += instance.OnObjectInteract;
+                @ObjectInteract.canceled += instance.OnObjectInteract;
+                @FlashlightToggle.started += instance.OnFlashlightToggle;
+                @FlashlightToggle.performed += instance.OnFlashlightToggle;
+                @FlashlightToggle.canceled += instance.OnFlashlightToggle;
             }
         }
     }
     public PlayerActionActions @PlayerAction => new PlayerActionActions(this);
+
+    // MenuActions
+    private readonly InputActionMap m_MenuActions;
+    private IMenuActionsActions m_MenuActionsActionsCallbackInterface;
+    private readonly InputAction m_MenuActions_NavUp;
+    private readonly InputAction m_MenuActions_NavDown;
+    private readonly InputAction m_MenuActions_NavLeft;
+    private readonly InputAction m_MenuActions_NavRight;
+    public struct MenuActionsActions
+    {
+        private @ControllingPlayer m_Wrapper;
+        public MenuActionsActions(@ControllingPlayer wrapper) { m_Wrapper = wrapper; }
+        public InputAction @NavUp => m_Wrapper.m_MenuActions_NavUp;
+        public InputAction @NavDown => m_Wrapper.m_MenuActions_NavDown;
+        public InputAction @NavLeft => m_Wrapper.m_MenuActions_NavLeft;
+        public InputAction @NavRight => m_Wrapper.m_MenuActions_NavRight;
+        public InputActionMap Get() { return m_Wrapper.m_MenuActions; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(MenuActionsActions set) { return set.Get(); }
+        public void SetCallbacks(IMenuActionsActions instance)
+        {
+            if (m_Wrapper.m_MenuActionsActionsCallbackInterface != null)
+            {
+                @NavUp.started -= m_Wrapper.m_MenuActionsActionsCallbackInterface.OnNavUp;
+                @NavUp.performed -= m_Wrapper.m_MenuActionsActionsCallbackInterface.OnNavUp;
+                @NavUp.canceled -= m_Wrapper.m_MenuActionsActionsCallbackInterface.OnNavUp;
+                @NavDown.started -= m_Wrapper.m_MenuActionsActionsCallbackInterface.OnNavDown;
+                @NavDown.performed -= m_Wrapper.m_MenuActionsActionsCallbackInterface.OnNavDown;
+                @NavDown.canceled -= m_Wrapper.m_MenuActionsActionsCallbackInterface.OnNavDown;
+                @NavLeft.started -= m_Wrapper.m_MenuActionsActionsCallbackInterface.OnNavLeft;
+                @NavLeft.performed -= m_Wrapper.m_MenuActionsActionsCallbackInterface.OnNavLeft;
+                @NavLeft.canceled -= m_Wrapper.m_MenuActionsActionsCallbackInterface.OnNavLeft;
+                @NavRight.started -= m_Wrapper.m_MenuActionsActionsCallbackInterface.OnNavRight;
+                @NavRight.performed -= m_Wrapper.m_MenuActionsActionsCallbackInterface.OnNavRight;
+                @NavRight.canceled -= m_Wrapper.m_MenuActionsActionsCallbackInterface.OnNavRight;
+            }
+            m_Wrapper.m_MenuActionsActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @NavUp.started += instance.OnNavUp;
+                @NavUp.performed += instance.OnNavUp;
+                @NavUp.canceled += instance.OnNavUp;
+                @NavDown.started += instance.OnNavDown;
+                @NavDown.performed += instance.OnNavDown;
+                @NavDown.canceled += instance.OnNavDown;
+                @NavLeft.started += instance.OnNavLeft;
+                @NavLeft.performed += instance.OnNavLeft;
+                @NavLeft.canceled += instance.OnNavLeft;
+                @NavRight.started += instance.OnNavRight;
+                @NavRight.performed += instance.OnNavRight;
+                @NavRight.canceled += instance.OnNavRight;
+            }
+        }
+    }
+    public MenuActionsActions @MenuActions => new MenuActionsActions(this);
     public interface IPlayerMovementActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -534,5 +809,14 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnSneak(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+        void OnObjectInteract(InputAction.CallbackContext context);
+        void OnFlashlightToggle(InputAction.CallbackContext context);
+    }
+    public interface IMenuActionsActions
+    {
+        void OnNavUp(InputAction.CallbackContext context);
+        void OnNavDown(InputAction.CallbackContext context);
+        void OnNavLeft(InputAction.CallbackContext context);
+        void OnNavRight(InputAction.CallbackContext context);
     }
 }

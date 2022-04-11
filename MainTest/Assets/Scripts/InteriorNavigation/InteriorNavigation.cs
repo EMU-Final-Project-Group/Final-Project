@@ -21,6 +21,8 @@ public class InteriorNavigation : MonoBehaviour
     public GameObject desk;
     public GameObject hoverText;
     public GameObject selectionScreen;
+    public GameObject xToStartText;
+    public GameObject clueScreenDisable;
 
     [Header("Menu Buttons")]
     public Button urbanButton;
@@ -33,7 +35,6 @@ public class InteriorNavigation : MonoBehaviour
     PlayerInteraction toiletClosed;
     PlayerInteraction toiletOpen;
     PlayerInteraction deskDistanceCheck;
-    PlayerInteraction selectionScreenCheck;
 
     private int currentlySelected;
 
@@ -47,7 +48,6 @@ public class InteriorNavigation : MonoBehaviour
         toiletClosed = toiletCoverClosed.GetComponent<PlayerInteraction>();
         toiletOpen = toiletCoverOpen.GetComponent<PlayerInteraction>();
         deskDistanceCheck = desk.GetComponent<PlayerInteraction>();
-        selectionScreenCheck = selectionScreen.GetComponent<PlayerInteraction>();
 
         bathroomDoorClosed.SetActive(true);
         bathroomDoorOpen.SetActive(false);
@@ -55,6 +55,8 @@ public class InteriorNavigation : MonoBehaviour
         toiletCoverOpen.SetActive(false);
         hoverText.SetActive(false);
         selectionScreen.SetActive(false);
+        xToStartText.SetActive(false);
+        clueScreenDisable.SetActive(false);
 
         currentlySelected = 1;
         urbanButton.GetComponent<Image>().color = Color.red;
@@ -70,6 +72,8 @@ public class InteriorNavigation : MonoBehaviour
             playerControls = new ControllingPlayer();
 
             playerControls.PlayerAction.ObjectInteract.performed += i => HandleObjectInteraction();
+
+            playerControls.MenuActions.SelectWithY.performed += i => LaunchMap();
 
             playerControls.MenuActions.NavUp.performed += i => HandleDPadPress(1);
             playerControls.MenuActions.NavDown.performed += i => HandleDPadPress(2);
@@ -206,10 +210,7 @@ public class InteriorNavigation : MonoBehaviour
         if(hoverText.activeSelf)
         {
             selectionScreen.SetActive(true);
-        }
-        if(selectionScreen.activeSelf && currentlySelected == 1)
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            xToStartText.SetActive(true);
         }
     }
 
@@ -239,6 +240,14 @@ public class InteriorNavigation : MonoBehaviour
         {
             toiletCoverClosed.SetActive(true);
             toiletCoverOpen.SetActive(false);
+        }
+    }
+
+    private void LaunchMap()
+    {
+        if (selectionScreen.activeSelf && currentlySelected == 1)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 }

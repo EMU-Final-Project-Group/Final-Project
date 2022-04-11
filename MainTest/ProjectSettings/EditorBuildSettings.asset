@@ -8,10 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/StartScreen2.unity
     guid: d3cf21012499593439b25b2bd4309bea
-  - enabled: 0
-    path: Assets/Scenes/MonsterZombies.unity
-    guid: dd4a6c4ac50a86248bce6ffb28434270
   - enabled: 1
-    path: Assets/Scenes/Homebase.unity
-    guid: 70527efcbd57ff6438fced3fd3a1641a
+    path: Assets/Scenes/HomebaseRoom.unity
+    guid: 07178b57fb3c13442a9cb64c0b1e9540
+  - enabled: 1
+    path: Assets/Scenes/Deren-Monster-Map 1.unity
+    guid: 96297eef2fc9f8e42a5c95aaeb0fdbd8
   m_configObjects: {}

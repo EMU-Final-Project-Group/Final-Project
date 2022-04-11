@@ -288,7 +288,7 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""1cbd0e3d-0c24-4234-b6bd-3c068338033c"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -458,6 +458,24 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""aa6bdc5a-6a70-46b0-bd86-ec2b38560455"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectWithY"",
+                    ""type"": ""Button"",
+                    ""id"": ""5640480d-48ad-4bf6-a4ac-c6404da1ee97"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -548,6 +566,50 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
                     ""action"": ""NavRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c2111959-ed84-4f52-8717-098c109545d5"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""005378a4-4a96-4569-9e7b-f042330c525d"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1e626a18-3016-4a9e-a0b0-a921d31eb774"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectWithY"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""91afbbd3-f81b-4258-97ee-bcaeacaadf99"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectWithY"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -572,6 +634,8 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
         m_MenuActions_NavDown = m_MenuActions.FindAction("NavDown", throwIfNotFound: true);
         m_MenuActions_NavLeft = m_MenuActions.FindAction("NavLeft", throwIfNotFound: true);
         m_MenuActions_NavRight = m_MenuActions.FindAction("NavRight", throwIfNotFound: true);
+        m_MenuActions_Select = m_MenuActions.FindAction("Select", throwIfNotFound: true);
+        m_MenuActions_SelectWithY = m_MenuActions.FindAction("SelectWithY", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -749,6 +813,8 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
     private readonly InputAction m_MenuActions_NavDown;
     private readonly InputAction m_MenuActions_NavLeft;
     private readonly InputAction m_MenuActions_NavRight;
+    private readonly InputAction m_MenuActions_Select;
+    private readonly InputAction m_MenuActions_SelectWithY;
     public struct MenuActionsActions
     {
         private @ControllingPlayer m_Wrapper;
@@ -757,6 +823,8 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
         public InputAction @NavDown => m_Wrapper.m_MenuActions_NavDown;
         public InputAction @NavLeft => m_Wrapper.m_MenuActions_NavLeft;
         public InputAction @NavRight => m_Wrapper.m_MenuActions_NavRight;
+        public InputAction @Select => m_Wrapper.m_MenuActions_Select;
+        public InputAction @SelectWithY => m_Wrapper.m_MenuActions_SelectWithY;
         public InputActionMap Get() { return m_Wrapper.m_MenuActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -778,6 +846,12 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
                 @NavRight.started -= m_Wrapper.m_MenuActionsActionsCallbackInterface.OnNavRight;
                 @NavRight.performed -= m_Wrapper.m_MenuActionsActionsCallbackInterface.OnNavRight;
                 @NavRight.canceled -= m_Wrapper.m_MenuActionsActionsCallbackInterface.OnNavRight;
+                @Select.started -= m_Wrapper.m_MenuActionsActionsCallbackInterface.OnSelect;
+                @Select.performed -= m_Wrapper.m_MenuActionsActionsCallbackInterface.OnSelect;
+                @Select.canceled -= m_Wrapper.m_MenuActionsActionsCallbackInterface.OnSelect;
+                @SelectWithY.started -= m_Wrapper.m_MenuActionsActionsCallbackInterface.OnSelectWithY;
+                @SelectWithY.performed -= m_Wrapper.m_MenuActionsActionsCallbackInterface.OnSelectWithY;
+                @SelectWithY.canceled -= m_Wrapper.m_MenuActionsActionsCallbackInterface.OnSelectWithY;
             }
             m_Wrapper.m_MenuActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -794,6 +868,12 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
                 @NavRight.started += instance.OnNavRight;
                 @NavRight.performed += instance.OnNavRight;
                 @NavRight.canceled += instance.OnNavRight;
+                @Select.started += instance.OnSelect;
+                @Select.performed += instance.OnSelect;
+                @Select.canceled += instance.OnSelect;
+                @SelectWithY.started += instance.OnSelectWithY;
+                @SelectWithY.performed += instance.OnSelectWithY;
+                @SelectWithY.canceled += instance.OnSelectWithY;
             }
         }
     }
@@ -818,5 +898,7 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
         void OnNavDown(InputAction.CallbackContext context);
         void OnNavLeft(InputAction.CallbackContext context);
         void OnNavRight(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
+        void OnSelectWithY(InputAction.CallbackContext context);
     }
 }

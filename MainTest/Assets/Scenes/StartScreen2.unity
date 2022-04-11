@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 199732504}
   - component: {fileID: 199732503}
   m_Layer: 5
-  m_Name: Text
+  m_Name: exitText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -682,7 +682,7 @@ GameObject:
   - component: {fileID: 879519678}
   - component: {fileID: 879519677}
   m_Layer: 5
-  m_Name: Text
+  m_Name: optionsText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -839,7 +839,7 @@ GameObject:
   - component: {fileID: 982665627}
   - component: {fileID: 982665626}
   m_Layer: 5
-  m_Name: Text
+  m_Name: playText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1863,6 +1863,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35147de2c3922fb41aa0868afc1c7106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playText: {fileID: 982665626}
+  loadText: {fileID: 1878512647}
+  optionsText: {fileID: 879519677}
+  exitText: {fileID: 199732503}
 --- !u!222 &1727775589
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1883,7 +1887,7 @@ GameObject:
   - component: {fileID: 1878512648}
   - component: {fileID: 1878512647}
   m_Layer: 5
-  m_Name: Text
+  m_Name: loadText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

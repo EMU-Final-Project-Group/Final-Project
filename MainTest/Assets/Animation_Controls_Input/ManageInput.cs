@@ -50,7 +50,7 @@ public class ManageInput : MonoBehaviour
     {
         playerLocomotion = GetComponent<Locomotion>();
         animatorManager = GetComponent<ManageAnimation>();
-        // clueObject.GetComponent<ClueManager>();
+        
         clueManager = clueObject.GetComponent<ClueManager>();
         guessManager = guessObject.GetComponent<GuessMachine>();
         weaponManager = weaponObject.GetComponent<ManageWeapons>();

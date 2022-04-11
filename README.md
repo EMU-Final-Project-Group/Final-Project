@@ -19,14 +19,13 @@ The group project final for EMU Computer Game Programming.
 
 ## Known Bugs:
 
-### Camera continues to rotate
-- Camera will keep rotating to the right after player lets go of controls
-- How to fix : have to restart game
-- Status : Seems to be working, needs testing
-
 ### Camera roatation doesn't work
 - Camera rotation will be unresponsive from the start of the game
 - How to fix : have to restart game
+- Haven't seen in a while, possibly fixed
 
 ### Werewolf model sinks a few inches into some ground pieces
 - Model sinks into the concrete ground cube
+
+### Ambient light where it shouldn't be
+- Ground lights up with ambient light if there are too many lights nearby

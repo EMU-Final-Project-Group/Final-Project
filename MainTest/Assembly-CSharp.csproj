@@ -59,6 +59,7 @@
     <Compile Include="Assets\Animation_Controls_Input\ResetBool.cs" />
     <Compile Include="Assets\Scripts\ClueSystems\ClueManager.cs" />
     <Compile Include="Assets\Scripts\GuessSystems\GuessMachine.cs" />
+    <Compile Include="Assets\Scripts\InteriorNavigation\PlayerInteraction.cs" />
     <Compile Include="Assets\Scripts\UIScripts\clue.cs" />
     <Compile Include="Assets\Scripts\UIScripts\pick.cs" />
     <Compile Include="Assets\Scripts\UIScripts\uiTestScript.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Assets\Scripts\UIScripts\equipment.cs" />
     <Compile Include="Assets\Animation_Controls_Input\CameraManager.cs" />
     <Compile Include="Assets\Scripts\CombatSystems\BatCollision.cs" />
+    <Compile Include="Assets\Scripts\InteriorNavigation\InteriorNavigation.cs" />
     <Compile Include="Assets\zzz_Documentation\GameControls.cs" />
     <Compile Include="Assets\Animation_Controls_Input\Locomotion.cs" />
     <Compile Include="Assets\Scripts\ClueSystems\PlayerNearbyDetection.cs" />
@@ -92,8 +94,6 @@
     <Compile Include="Assets\UI_Elements\PiUi\Scripts\PiUI.cs" />
     <Compile Include="Assets\Animation_Controls_Input\ManagePlayer.cs" />
     <Compile Include="Assets\Monster-AI\ZombineAnimationManager.cs" />
-    <Compile Include="Assets\Scripts\InteriorNavigation\InteriorNavigation.cs" />
-    <Compile Include="Assets\Scripts\InteriorNavigation\PlayerInteraction.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\UI_Elements\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -103,6 +103,7 @@
     <None Include="Assets\UI_Elements\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\UI_Elements\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\UI_Elements\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\CompleteMonsterPlayerPacks\MonsterPackInstructions.txt" />
     <None Include="Assets\UI_Elements\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\UI_Elements\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\UI_Elements\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />

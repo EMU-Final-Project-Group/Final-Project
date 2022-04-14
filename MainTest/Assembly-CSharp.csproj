@@ -94,6 +94,7 @@
     <Compile Include="Assets\UI_Elements\PiUi\Scripts\PiUI.cs" />
     <Compile Include="Assets\Animation_Controls_Input\ManagePlayer.cs" />
     <Compile Include="Assets\Monster-AI\ZombineAnimationManager.cs" />
+    <Compile Include="Assets\Scripts\CombatSystems\PlayerCombat.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\UI_Elements\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -8,11 +8,12 @@ public class ManageWeapons : MonoBehaviour
     public GameObject weaponScreen;
     public GameObject combatScreen;
 
+    // Weapon Objects
     [Header("Weapon Selection")]
-    public GameObject bat;
-    public GameObject hatchet;
     public GameObject kitchenKnife;
-    public GameObject butcherKnife;
+    public GameObject butcherCleaver;
+    public GameObject axe;
+    public GameObject pitchFork;
 
     PlayerNearbyDetection playerDetection;
     public bool weaponScreenOpen;
@@ -63,35 +64,35 @@ public class ManageWeapons : MonoBehaviour
         switch (wepNum)
         {
             case 1:
-                // Baseball bat
-                bat.SetActive(true);
-                hatchet.SetActive(false);
-                kitchenKnife.SetActive(false);
-                butcherKnife.SetActive(false);
+                // Kitchen Knife
+                kitchenKnife.SetActive(true);
+                butcherCleaver.SetActive(false);
+                axe.SetActive(false);
+                pitchFork.SetActive(false);
                 equippedWeapon = 1;
                 break;
             case 2:
-                // Kitchen Knife
-                bat.SetActive(false);
-                hatchet.SetActive(false);
-                kitchenKnife.SetActive(true);
-                butcherKnife.SetActive(false);
+                // Butcher Cleaver
+                kitchenKnife.SetActive(false);
+                butcherCleaver.SetActive(true);
+                axe.SetActive(false);
+                pitchFork.SetActive(false);
                 equippedWeapon = 2;
                 break;
             case 3:
-                // Butcher Knife
-                bat.SetActive(false);
-                hatchet.SetActive(false);
+                // Axe
                 kitchenKnife.SetActive(false);
-                butcherKnife.SetActive(true);
+                butcherCleaver.SetActive(false);
+                axe.SetActive(true);
+                pitchFork.SetActive(false);
                 equippedWeapon = 3;
                 break;
             case 4:
-                // Hatchet
-                bat.SetActive(false);
-                hatchet.SetActive(true);
+                // PitchFork
                 kitchenKnife.SetActive(false);
-                butcherKnife.SetActive(false);
+                butcherCleaver.SetActive(false);
+                axe.SetActive(false);
+                pitchFork.SetActive(true);
                 equippedWeapon = 4;
                 break;
             default:

@@ -8,6 +8,7 @@ public class ManageInput : MonoBehaviour
     ControllingPlayer playerControls;
     Locomotion playerLocomotion;
     ManageAnimation animatorManager;
+    PlayerCombat playerCombat;
 
     [Header("Clue System")]
     public GameObject clueObject;
@@ -50,11 +51,12 @@ public class ManageInput : MonoBehaviour
     {
         playerLocomotion = GetComponent<Locomotion>();
         animatorManager = GetComponent<ManageAnimation>();
+        playerCombat = GetComponent<PlayerCombat>();
         
         clueManager = clueObject.GetComponent<ClueManager>();
         guessManager = guessObject.GetComponent<GuessMachine>();
         weaponManager = weaponObject.GetComponent<ManageWeapons>();
-        flashLightOn = true;
+        flashLightOn = false;
     }
 
     private void OnEnable()
@@ -86,9 +88,10 @@ public class ManageInput : MonoBehaviour
 
             // Menu Interaction
             playerControls.MenuActions.NavUp.performed += i => HandleDPadPress(1);
-            playerControls.MenuActions.NavDown.performed += i => HandleDPadPress(2);
-            playerControls.MenuActions.NavLeft.performed += i => HandleDPadPress(3);
-            playerControls.MenuActions.NavRight.performed += i => HandleDPadPress(4);
+            playerControls.MenuActions.NavRight.performed += i => HandleDPadPress(2);
+            playerControls.MenuActions.NavDown.performed += i => HandleDPadPress(3);
+            playerControls.MenuActions.NavLeft.performed += i => HandleDPadPress(4);
+
 
             // Toggle Flashlight
             playerControls.PlayerAction.FlashlightToggle.performed += i => HandleFlashLightStatus();
@@ -180,49 +183,27 @@ public class ManageInput : MonoBehaviour
     private void DoAttack(InputAction.CallbackContext obj)
     {
         int weaponAttack = weaponManager.equippedWeapon;
-        if(weaponAttack == 0)
-        {
-            animatorManager.animator.SetTrigger("punchAttack");
-        }
-        else if(weaponAttack == 1 || weaponAttack == 4)
-        {
-            animatorManager.animator.SetTrigger("twoHandAttack");
-        }
-        else if(weaponAttack == 2)
+        if(weaponAttack == 1)
         {
             animatorManager.animator.SetTrigger("knifeAttack");
         }
-        else
-        {
-            animatorManager.animator.SetTrigger("attack");
-        }
-
-        /*
-        if(weaponAttack == 0)
-        {
-            animatorManager.animator.SetTrigger("punchAttack");
-        }
-        else if(weaponAttack == 1)
-        {
-            animatorManager.animator.SetTrigger("baseBallBatAttack");
-        }
         else if(weaponAttack == 2)
-        {
-            animatorManager.animator.SetTrigger("knifeAttack");
-        }
-        else if(weaponAttack == 3)
         {
             animatorManager.animator.SetTrigger("butcherAttack");
         }
+        else if(weaponAttack == 3)
+        {
+            animatorManager.animator.SetTrigger("axeAttack");
+        }
         else if(weaponAttack == 4)
         {
-            animatorManager.animator.SetTrigger("hatchetAttack");
+            animatorManager.animator.SetTrigger("spearAttack");
         }
         else
         {
-            animatorManager.animator.SetTrigger("attack");
+            animatorManager.animator.SetTrigger("punchAttack");
         }
-        */
+        playerCombat.StartAttack(weaponAttack);
     }
 
     // Object Interact

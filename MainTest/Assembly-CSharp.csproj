@@ -79,7 +79,6 @@
     <Compile Include="Assets\Scripts\UIScripts\equipment.cs" />
     <Compile Include="Assets\Animation_Controls_Input\CameraManager.cs" />
     <Compile Include="Assets\Scripts\CombatSystems\BatCollision.cs" />
-    <Compile Include="Assets\Scripts\InteriorNavigation\InteriorNavigation.cs" />
     <Compile Include="Assets\zzz_Documentation\GameControls.cs" />
     <Compile Include="Assets\Animation_Controls_Input\Locomotion.cs" />
     <Compile Include="Assets\Scripts\ClueSystems\PlayerNearbyDetection.cs" />
@@ -94,6 +93,9 @@
     <Compile Include="Assets\UI_Elements\PiUi\Scripts\PiUI.cs" />
     <Compile Include="Assets\Animation_Controls_Input\ManagePlayer.cs" />
     <Compile Include="Assets\Monster-AI\ZombineAnimationManager.cs" />
+    <Compile Include="Assets\Scripts\CombatSystems\PlayerCombat.cs" />
+    <Compile Include="Assets\Scripts\InteriorNavigation\HomeBaseInteractions.cs" />
+    <Compile Include="Assets\Scripts\InteriorNavigation\PlayerAccessoryManagement.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\UI_Elements\TextMesh Pro\Shaders\TMPro.cginc" />

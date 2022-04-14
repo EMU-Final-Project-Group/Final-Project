@@ -8,7 +8,7 @@ public class BatCollision : MonoBehaviour
     {
         if(other.gameObject.tag == "Enemy")
         {
-            print("Enemy Hit");
+            // print("Enemy Hit");
         }
     }
 }

@@ -11,6 +11,7 @@ public class PlayerInteraction : MonoBehaviour
     // Distance to player
     public float distanceToTarget;
     public float interactDistance = 2.0f;
+    public float farDistance = 25f;
     public bool playerCloseEnough;
     public bool playerFartherEnough;
 
@@ -31,6 +32,18 @@ public class PlayerInteraction : MonoBehaviour
         else
         {
             playerCloseEnough = false;
+        }
+    }
+
+    private void PlayerFarDistanceCheck()
+    {
+        if(distanceToTarget > farDistance)
+        {
+            playerFartherEnough = true;
+        }
+        else
+        {
+            playerFartherEnough = false;
         }
     }
 }

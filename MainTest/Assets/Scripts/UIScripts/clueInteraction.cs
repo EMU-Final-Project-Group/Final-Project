@@ -59,14 +59,10 @@ public class clueInteraction : MonoBehaviour
                 }
                     
             }
-
             //detroy self
             Destroy(collision.gameObject);
-
         }
     }
-
-
 }
 
 

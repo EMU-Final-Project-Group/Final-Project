@@ -145,7 +145,7 @@ public class Locomotion : MonoBehaviour
             if (!playerManager.isInteracting)
             {
                 //Debug.Log("animate - - - fall");
-                animationManager.PlayTargetAnimation("Falling", true);
+                animationManager.PlayTargetAnimation("newFallingIdle", true);
             }
 
             inAirTime = inAirTime + Time.deltaTime;
@@ -159,7 +159,7 @@ public class Locomotion : MonoBehaviour
             if(!isGrounded && !playerManager.isInteracting)
             {
                 //Debug.Log("animate - - - land");
-                animationManager.PlayTargetAnimation("Land", true);
+                animationManager.PlayTargetAnimation("newLanding", true);
             }
 
             Vector3 rayCastHitPoint = hit.point;
@@ -208,14 +208,14 @@ public class Locomotion : MonoBehaviour
             if(isSneak)
             {
                 animationManager.animator.SetBool("isSneaking", true);
-                capsuleCollider.height = 2.55f;
-                capsuleCollider.center = new Vector3(0, 1.7f, 0);
+                capsuleCollider.height = 1.2f;
+                capsuleCollider.center = new Vector3(0, 0.9f, 0);
             }
             else
             {
                 animationManager.animator.SetBool("isSneaking", false);
-                capsuleCollider.height = 3.4f;
-                capsuleCollider.center = new Vector3(0, 2.1f, 0);
+                capsuleCollider.height = 1.65f;
+                capsuleCollider.center = new Vector3(0, 1.1f, 0);
             }
             
         }

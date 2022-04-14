@@ -6,63 +6,81 @@ using UnityEngine.SceneManagement;
 
 public class InteriorNavigation : MonoBehaviour
 {
-    ControllingPlayer playerControls;
+    ControllingPlayer playerControls; //
 
     [Header("Player")]
-    public GameObject player;
+    public GameObject player; //
 
     [Header("Bathroom Objects")]
-    public GameObject bathroomDoorClosed;
-    public GameObject bathroomDoorOpen;
-    public GameObject toiletCoverClosed;
-    public GameObject toiletCoverOpen;
+    public GameObject bathroomDoorClosed; //
+    public GameObject bathroomDoorOpen; //
+    public GameObject toiletCoverClosed; //
+    public GameObject toiletCoverOpen; //
 
     [Header("Map Hover Text")]
-    public GameObject desk;
-    public GameObject hoverText;
-    public GameObject selectionScreen;
-    public GameObject xToStartText;
-    public GameObject clueScreenDisable;
+    public GameObject desk; //
+    public GameObject hoverText; //
+    public GameObject selectionScreen; // 
+    public GameObject xToStartText; //
+    public GameObject clueScreenDisable; //
 
     [Header("Menu Buttons")]
-    public Button urbanButton;
-    public Button suburbButton;
-    public Button graveyardButton;
-    public Button tbdButton;
+    public Button urbanButton; //
+    public Button suburbButton; //
+    public Button graveyardButton; //
+    public Button tbdButton; //
 
-    PlayerInteraction doorInteractionClosed;
-    PlayerInteraction doorInteractionOpen;
-    PlayerInteraction toiletClosed;
-    PlayerInteraction toiletOpen;
-    PlayerInteraction deskDistanceCheck;
+    [Header("Gender Option Items")]
+    public GameObject genderSelectionDisplay; //
+    public GameObject genderScreenDetectionCube; //
+    public Button maleButton; //
+    public Button femaleButton; //
 
-    private int currentlySelected;
+    [Header("Map Spawn Points")]
+    public GameObject urbanSpawn; // 
+    private Vector3 urbanSpawnPoint; //
+
+    PlayerInteraction doorInteractionClosed; //
+    PlayerInteraction doorInteractionOpen; //
+    PlayerInteraction toiletClosed; //
+    PlayerInteraction toiletOpen; //
+    PlayerInteraction deskDistanceCheck; //
+
+    private int currentlySelected; //
 
     // Distance to player
-    public float distanceToTarget;
+    public float distanceToTarget; //
 
     private void Start()
     {
-        doorInteractionClosed = bathroomDoorClosed.GetComponent<PlayerInteraction>();
-        doorInteractionOpen = bathroomDoorOpen.GetComponent<PlayerInteraction>();
-        toiletClosed = toiletCoverClosed.GetComponent<PlayerInteraction>();
-        toiletOpen = toiletCoverOpen.GetComponent<PlayerInteraction>();
-        deskDistanceCheck = desk.GetComponent<PlayerInteraction>();
+        doorInteractionClosed = bathroomDoorClosed.GetComponent<PlayerInteraction>(); //
+        doorInteractionOpen = bathroomDoorOpen.GetComponent<PlayerInteraction>(); //
+        toiletClosed = toiletCoverClosed.GetComponent<PlayerInteraction>(); //
+        toiletOpen = toiletCoverOpen.GetComponent<PlayerInteraction>(); //
 
-        bathroomDoorClosed.SetActive(true);
-        bathroomDoorOpen.SetActive(false);
-        toiletCoverClosed.SetActive(true);
-        toiletCoverOpen.SetActive(false);
-        hoverText.SetActive(false);
-        selectionScreen.SetActive(false);
-        xToStartText.SetActive(false);
-        clueScreenDisable.SetActive(false);
+        deskDistanceCheck = desk.GetComponent<PlayerInteraction>(); //
+        bathroomDoorClosed.SetActive(true); //
+        bathroomDoorOpen.SetActive(false); //
+        toiletCoverClosed.SetActive(true); //
+        toiletCoverOpen.SetActive(false); //
 
-        currentlySelected = 1;
-        urbanButton.GetComponent<Image>().color = Color.red;
-        suburbButton.GetComponent<Image>().color = Color.white;
-        graveyardButton.GetComponent<Image>().color = Color.white;
-        tbdButton.GetComponent<Image>().color = Color.white;
+
+        hoverText.SetActive(false); //
+        selectionScreen.SetActive(false); //
+        xToStartText.SetActive(false); //
+        clueScreenDisable.SetActive(false); //
+
+        currentlySelected = 1; //
+        urbanButton.GetComponent<Image>().color = Color.red; //
+        suburbButton.GetComponent<Image>().color = Color.white; //
+        graveyardButton.GetComponent<Image>().color = Color.white; //
+        tbdButton.GetComponent<Image>().color = Color.white; //
+
+
+        // Gender Options
+        genderSelectionDisplay.SetActive(false); //
+
+        urbanSpawnPoint = urbanSpawn.transform.position; // 
     }
 
     private void OnEnable()
@@ -247,7 +265,10 @@ public class InteriorNavigation : MonoBehaviour
     {
         if (selectionScreen.activeSelf && currentlySelected == 1)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            Debug.Log("Player Transported to: " + urbanSpawnPoint);
+            clueScreenDisable.SetActive(true);
+            player.transform.position = urbanSpawnPoint;
         }
     }
 }

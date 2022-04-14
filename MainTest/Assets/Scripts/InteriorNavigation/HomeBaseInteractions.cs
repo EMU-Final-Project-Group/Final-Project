@@ -7,6 +7,7 @@ public class HomeBaseInteractions : MonoBehaviour
 {
     // Gets the controls input
     ControllingPlayer playerControls;
+    PlayerAccessoryManagement playerAccessoryManagement;
 
     [Header("Player")]
     public GameObject player;
@@ -38,6 +39,12 @@ public class HomeBaseInteractions : MonoBehaviour
     public GameObject maleModel;
     public GameObject femaleModel;
 
+    [Header("Player Accessory Choice")]
+    public GameObject accDetectionCube;
+    public GameObject accDisplayToggle;
+    public GameObject accDisplayPrompt;
+    public GameObject accSelectText;
+
     [Header("Map Spawn Points")]
     public GameObject urbanSpawn;
     private Vector3 urbanSpawnPoint;
@@ -54,6 +61,7 @@ public class HomeBaseInteractions : MonoBehaviour
     // Player Map Interactive Items
     PlayerInteraction mapSelectionDistanceCheck;
     PlayerInteraction genderSelectionDistanceCheck;
+    PlayerInteraction accSelectionDistanceCheck;
 
     // Distance to player
     public float distanceToTarget;
@@ -61,9 +69,12 @@ public class HomeBaseInteractions : MonoBehaviour
     // Map Starting Selections
     private int mapCurrentlySelected;
     private int genderCurrentlySelected;
+    private int accCursonLocation;
 
     private void Start()
     {
+        playerAccessoryManagement = GetComponent<PlayerAccessoryManagement>();
+
         #region Bathroom Items
         // Gets the Bathroom player detection Items
         doorInteractionClosed = bathroomDoorClosed.GetComponent<PlayerInteraction>();
@@ -108,6 +119,16 @@ public class HomeBaseInteractions : MonoBehaviour
         femaleModel.SetActive(false);
         #endregion
 
+        #region Accessory Selection Items
+        // Turns off the acc display
+        accDisplayToggle.SetActive(false);
+        accSelectText.SetActive(false);
+        accDisplayPrompt.SetActive(true);
+
+        accSelectionDistanceCheck = accDetectionCube.GetComponent<PlayerInteraction>();
+        accCursonLocation = 1;
+        #endregion
+
         #region Disable Game UI Items
         clueScreenDisable.SetActive(false);
         #endregion
@@ -132,6 +153,14 @@ public class HomeBaseInteractions : MonoBehaviour
             genderDisplayToggle.SetActive(false);
             genderSelectText.SetActive(false);
             genderDisplayPrompt.SetActive(true);
+        }
+
+        // Accessory Display Turn Off
+        if(!accSelectionDistanceCheck.playerCloseEnough)
+        {
+            accDisplayToggle.SetActive(false);
+            accSelectText.SetActive(false);
+            accDisplayPrompt.SetActive(true);
         }
     }
 
@@ -189,6 +218,14 @@ public class HomeBaseInteractions : MonoBehaviour
             genderDisplayToggle.SetActive(true);
             genderSelectText.SetActive(true);
             genderDisplayPrompt.SetActive(false);
+        }
+
+        // Interact with the Accessory Selection Display
+        if(accSelectionDistanceCheck.playerCloseEnough)
+        {
+            accDisplayToggle.SetActive(true);
+            accSelectText.SetActive(true);
+            accDisplayPrompt.SetActive(false);
         }
     }
 
@@ -270,6 +307,33 @@ public class HomeBaseInteractions : MonoBehaviour
                 }
             }
         }
+        else if(accDisplayToggle.activeSelf)
+        {
+            if(direction == 4)
+            {
+                if(accCursonLocation == 14)
+                {
+                    accCursonLocation = 1;
+                } 
+                else
+                {
+                    accCursonLocation++;
+                }
+            }
+            else if (direction == 3)
+            {
+                if(accCursonLocation == 1)
+                {
+                    accCursonLocation = 14;
+                }
+                else
+                {
+                    accCursonLocation--;
+                }
+
+            }
+            playerAccessoryManagement.HandleCursor(accCursonLocation);
+        }
     }
 
     private void HandleMenuSelection()
@@ -295,6 +359,10 @@ public class HomeBaseInteractions : MonoBehaviour
                 maleModel.SetActive(false);
                 femaleModel.SetActive(true);
             }
+        }
+        else if(accDisplayToggle.activeSelf)
+        {
+            playerAccessoryManagement.HandleButtonColorsAndObjects(accCursonLocation);
         }
     }
 

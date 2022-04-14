@@ -18,9 +18,13 @@ public class HomeBaseInteractions : MonoBehaviour
     public GameObject toiletCoverClosed;
     public GameObject toiletCoverOpen;
 
+    [Header("Controller Instructions")]
+    public GameObject controllerPrompt;
+
     [Header("Map Selection Display")]
     public GameObject mapDetectionCube;
     public GameObject mapDisplayToggle;
+    public GameObject mapPrompt;
     public GameObject mapStartText;
     public Button urbanButton;
     public Button suburbButton;
@@ -43,6 +47,7 @@ public class HomeBaseInteractions : MonoBehaviour
     public GameObject accDetectionCube;
     public GameObject accDisplayToggle;
     public GameObject accDisplayPrompt;
+    public GameObject accDPadSelect;
     public GameObject accSelectText;
 
     [Header("Map Spawn Points")]
@@ -74,6 +79,7 @@ public class HomeBaseInteractions : MonoBehaviour
     private void Start()
     {
         playerAccessoryManagement = GetComponent<PlayerAccessoryManagement>();
+        controllerPrompt.SetActive(true);
 
         #region Bathroom Items
         // Gets the Bathroom player detection Items
@@ -93,6 +99,7 @@ public class HomeBaseInteractions : MonoBehaviour
         // Turns off the map display
         mapDisplayToggle.SetActive(false);
         mapStartText.SetActive(true);
+        mapPrompt.SetActive(true );
         mapCurrentlySelected = 1;
 
         mapSelectionDistanceCheck = mapDetectionCube.GetComponent<PlayerInteraction>();
@@ -123,6 +130,7 @@ public class HomeBaseInteractions : MonoBehaviour
         // Turns off the acc display
         accDisplayToggle.SetActive(false);
         accSelectText.SetActive(false);
+        accDPadSelect.SetActive(false);
         accDisplayPrompt.SetActive(true);
 
         accSelectionDistanceCheck = accDetectionCube.GetComponent<PlayerInteraction>();
@@ -160,7 +168,17 @@ public class HomeBaseInteractions : MonoBehaviour
         {
             accDisplayToggle.SetActive(false);
             accSelectText.SetActive(false);
+            accDPadSelect.SetActive(false);
             accDisplayPrompt.SetActive(true);
+        }
+
+        // Turns off prompt when leaving home base
+        if(mapSelectionDistanceCheck.playerFartherEnough)
+        {
+            mapPrompt.SetActive(false);
+            accDisplayPrompt.SetActive(false);
+            controllerPrompt.SetActive(false);
+            genderDisplayPrompt.SetActive(false);
         }
     }
 
@@ -225,6 +243,7 @@ public class HomeBaseInteractions : MonoBehaviour
         {
             accDisplayToggle.SetActive(true);
             accSelectText.SetActive(true);
+            accDPadSelect.SetActive(true);
             accDisplayPrompt.SetActive(false);
         }
     }

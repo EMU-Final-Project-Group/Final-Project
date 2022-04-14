@@ -79,7 +79,6 @@
     <Compile Include="Assets\Scripts\UIScripts\equipment.cs" />
     <Compile Include="Assets\Animation_Controls_Input\CameraManager.cs" />
     <Compile Include="Assets\Scripts\CombatSystems\BatCollision.cs" />
-    <Compile Include="Assets\Scripts\InteriorNavigation\InteriorNavigation.cs" />
     <Compile Include="Assets\zzz_Documentation\GameControls.cs" />
     <Compile Include="Assets\Animation_Controls_Input\Locomotion.cs" />
     <Compile Include="Assets\Scripts\ClueSystems\PlayerNearbyDetection.cs" />

@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/StartScreen2.unity
     guid: d3cf21012499593439b25b2bd4309bea
   - enabled: 1
-    path: Assets/Scenes/HomebaseRoom.unity
+    path: Assets/Scenes/OldTestScenes/HomebaseRoom.unity
     guid: 07178b57fb3c13442a9cb64c0b1e9540
   - enabled: 1
     path: Assets/Scenes/Deren-Monster-Map 1.unity

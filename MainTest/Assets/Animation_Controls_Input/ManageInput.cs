@@ -56,7 +56,7 @@ public class ManageInput : MonoBehaviour
         clueManager = clueObject.GetComponent<ClueManager>();
         guessManager = guessObject.GetComponent<GuessMachine>();
         weaponManager = weaponObject.GetComponent<ManageWeapons>();
-        flashLightOn = true;
+        flashLightOn = false;
     }
 
     private void OnEnable()

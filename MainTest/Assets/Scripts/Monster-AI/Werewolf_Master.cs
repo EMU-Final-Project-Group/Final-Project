@@ -22,6 +22,7 @@ public class Werewolf_Master : MonoBehaviour
     int playerStance;
 
     // Animation
+    public Animator animator;
     WerewolfAnimationManager animationManager;
 
     // AI Navigation System
@@ -45,7 +46,7 @@ public class Werewolf_Master : MonoBehaviour
     private void Start()
     {
         // Combat Setup
-        healthPoints = 20;
+        healthPoints = 1;
     }
 
     // Update is called once per frame
@@ -65,6 +66,7 @@ public class Werewolf_Master : MonoBehaviour
         {
             Debug.Log("THE MONSTER HAS BEEN DEFEATED");
             _agent.isStopped = true;
+            animator.SetTrigger("deathTrigger");
             StartCoroutine(DespawnMonster());
         }
         else
@@ -142,7 +144,7 @@ public class Werewolf_Master : MonoBehaviour
     // Despawns the monster after 30 seconds
     IEnumerator DespawnMonster()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(30);
         monsterSelf.SetActive(false);
     }
 }

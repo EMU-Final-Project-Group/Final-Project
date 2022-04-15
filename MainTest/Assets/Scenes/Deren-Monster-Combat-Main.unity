@@ -80089,6 +80089,7 @@ MonoBehaviour:
   distanceToTarget: 0
   engageDistance: 0
   isAngered: 0
+  animator: {fileID: 3581293212031100429}
   _agent: {fileID: 3581293212031100464}
   moveSpeed: 0
   rotationSpeed: 200
@@ -85566,7 +85567,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3581293212623507682}
-  m_LocalRotation: {x: 0.08631425, y: 0.000000017669743, z: -0.0000000015308635, w: 0.996268}
+  m_LocalRotation: {x: 0.08631425, y: -0.00000001766974, z: 0.0000000015308632, w: 0.996268}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -86366,7 +86367,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3581293212745109014}
-  m_LocalRotation: {x: 0.10437381, y: 0.000000017116905, z: -0.0000000017954281, w: 0.9945382}
+  m_LocalRotation: {x: 0.10437381, y: 0.000000017116873, z: -0.0000000017951052, w: 0.9945382}
   m_LocalPosition: {x: 93.46543, y: 8.086101, z: -54.69637}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []

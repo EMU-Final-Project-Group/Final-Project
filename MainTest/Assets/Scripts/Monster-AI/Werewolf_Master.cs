@@ -8,6 +8,7 @@ public class Werewolf_Master : MonoBehaviour
     // Targets the Player
     [Header("Chase Target")]
     public GameObject player;
+    public GameObject monsterSelf;
     Locomotion getPlayerStance;
 
     // Distance to the Target
@@ -26,23 +27,25 @@ public class Werewolf_Master : MonoBehaviour
     // AI Navigation System
     public NavMeshAgent _agent;
 
-    
     // Wandering Variables
     [Header("Wandering Values")]
     public float moveSpeed = 3f;
     public float rotationSpeed = 200f;
 
-    /*
-    private bool isWandering = false;
-    private bool isRotatingLeft = false;
-    private bool isRotatingRight = false;
-    private bool isWalking = false;
-    */
+    // Combat Variables
+    [Header("Combat Stats")]
+    private int healthPoints;
 
     private void Awake()
     {
         getPlayerStance = player.GetComponent<Locomotion>();
-        animationManager = GetComponent<WerewolfAnimationManager>();
+        animationManager = GetComponent<WerewolfAnimationManager>(); 
+    }
+
+    private void Start()
+    {
+        // Combat Setup
+        healthPoints = 20;
     }
 
     // Update is called once per frame
@@ -58,23 +61,32 @@ public class Werewolf_Master : MonoBehaviour
         // Criteria to engage the player
         EngagePlayer();
 
-        // Moves towards the player
-        if(isAngered)
+        if(IsMonsterDead())
         {
-            // isWalking = false;
-            _agent.isStopped = false;
-            moveSpeed = 3f;
-            transform.position += transform.forward * moveSpeed * Time.deltaTime;
-            _agent.SetDestination(player.transform.position);
-            animationManager.UpdateAnimatorValues(0,1.0f);
+            Debug.Log("THE MONSTER HAS BEEN DEFEATED");
+            _agent.isStopped = true;
+            StartCoroutine(DespawnMonster());
         }
         else
         {
-            // isWalking=true;
-            moveSpeed = 1.5f;
-            animationManager.UpdateAnimatorValues(0, 0.5f);
-            _agent.isStopped = true;
-            // WanderingMode();
+            // Moves towards the player
+            if (isAngered)
+            {
+                // isWalking = false;
+                _agent.isStopped = false;
+                moveSpeed = 3f;
+                transform.position += transform.forward * moveSpeed * Time.deltaTime;
+                _agent.SetDestination(player.transform.position);
+                animationManager.UpdateAnimatorValues(0, 1.0f);
+            }
+            else
+            {
+                // isWalking=true;
+                moveSpeed = 1.5f;
+                animationManager.UpdateAnimatorValues(0, 0.5f);
+                _agent.isStopped = true;
+                // WanderingMode();
+            }
         }
     }
 
@@ -110,58 +122,27 @@ public class Werewolf_Master : MonoBehaviour
         }
     }
 
-    /*
-    private void WanderingMode()
+    public void MonsterTookDamage()
     {
-        if(!isWandering)
+        healthPoints--;
+    }
+
+    private bool IsMonsterDead()
+    {
+        if(healthPoints <= 0)
         {
-            StartCoroutine(Wander());
+            return true;
         }
-        if(isRotatingRight)
+        else
         {
-            animationManager.UpdateAnimatorValues(0, 0);
-            transform.Rotate(transform.up * Time.deltaTime * rotationSpeed);
-        }
-        if(isRotatingLeft)
-        {
-            animationManager.UpdateAnimatorValues(0, 0);
-            transform.Rotate(transform.up * Time.deltaTime * -rotationSpeed);
-        }
-        if(isWalking)
-        {
-            animationManager.UpdateAnimatorValues(0, 0.5f);
-            transform.position += transform.forward * moveSpeed * Time.deltaTime;
+            return false;
         }
     }
 
-    IEnumerator Wander()
+    // Despawns the monster after 30 seconds
+    IEnumerator DespawnMonster()
     {
-        int rotTime = Random.Range(1, 3);
-        int rotateWait = Random.Range(1, 4);
-        int rotateLorR = Random.Range(1, 2);
-        int walkWait = Random.Range(1, 5);
-        int walkTime = Random.Range(1, 6);
-
-        isWandering = true;
-
-        yield return new WaitForSeconds(walkWait);
-        isWalking = true;
-        yield return new WaitForSeconds(walkTime);
-        isWalking = false;
-        yield return new WaitForSeconds(rotateWait);
-        if (rotateLorR == 1)
-        {
-            isRotatingRight = true;
-            yield return new WaitForSeconds(rotTime);
-            isRotatingRight = false;
-        }
-        if (rotateLorR == 2)
-        {
-            isRotatingLeft = true;
-            yield return new WaitForSeconds(rotTime);
-            isRotatingLeft = false;
-        }
-        isWandering = false;
+        yield return new WaitForSeconds(5);
+        monsterSelf.SetActive(false);
     }
-    */
 }

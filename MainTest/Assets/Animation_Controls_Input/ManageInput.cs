@@ -26,6 +26,11 @@ public class ManageInput : MonoBehaviour
     public GameObject weaponObject;
     ManageWeapons weaponManager;
 
+    [Header("Pause Menu")]
+    public GameObject pauseMenu;
+    PauseMenuManagement pauseManager;
+    private int pauseMenuCursorLocation;
+
     // Movement
     public Vector2 movementInput;
     public Vector2 cameraInput;
@@ -56,7 +61,12 @@ public class ManageInput : MonoBehaviour
         clueManager = clueObject.GetComponent<ClueManager>();
         guessManager = guessObject.GetComponent<GuessMachine>();
         weaponManager = weaponObject.GetComponent<ManageWeapons>();
+
+
         flashLightOn = false;
+        pauseMenu.SetActive(false);
+        pauseManager = pauseMenu.GetComponent<PauseMenuManagement>();
+        pauseMenuCursorLocation = 1;
     }
 
     private void OnEnable()
@@ -92,9 +102,12 @@ public class ManageInput : MonoBehaviour
             playerControls.MenuActions.NavDown.performed += i => HandleDPadPress(3);
             playerControls.MenuActions.NavLeft.performed += i => HandleDPadPress(4);
 
-
             // Toggle Flashlight
             playerControls.PlayerAction.FlashlightToggle.performed += i => HandleFlashLightStatus();
+
+            // Toggle Pause Menu
+            playerControls.MenuActions.Pause.performed += i => OpenPauseMenu();
+            playerControls.MenuActions.Select.performed += i => PauseMenuSelection();
         }
 
         playerControls.Enable();
@@ -216,10 +229,38 @@ public class ManageInput : MonoBehaviour
 
     private void HandleDPadPress(int padDirection)
     {
+        if(pauseMenu.activeSelf)
+        {
+            if(padDirection == 1)
+            {
+                if(pauseMenuCursorLocation == 1)
+                {
+                    pauseMenuCursorLocation = 3;
+                }
+                else
+                {
+                    pauseMenuCursorLocation--;
+                }
+            }
+            else if(padDirection == 3)
+            {
+                if(pauseMenuCursorLocation == 3)
+                {
+                    pauseMenuCursorLocation = 1;
+                }
+                else
+                {
+                    pauseMenuCursorLocation++;
+                }
+            }
+            pauseManager.HandleDirectionInput(padDirection);
+        }
+
         if(guessManager.guessScreenOpen)
         {
             guessManager.PlayerGuessSubmission(padDirection);
         }
+
         if(weaponManager.weaponScreenOpen)
         {
             weaponManager.HandleWeaponRack(padDirection);
@@ -237,6 +278,30 @@ public class ManageInput : MonoBehaviour
         {
             flashLightOn = true;
             flashLight.SetActive(true);
+        }
+    }
+
+    private void OpenPauseMenu()
+    {
+        if(pauseMenu.activeSelf)
+        {
+            pauseMenu.SetActive(false);
+        }
+        else
+        {
+            pauseMenu.SetActive(true);
+        }
+    }
+
+    private void PauseMenuSelection()
+    {
+        if(pauseMenuCursorLocation == 1)
+        {
+            pauseMenu.SetActive(false);
+        }
+        else
+        {
+            pauseManager.PauseMenuSeleciton();
         }
     }
 }

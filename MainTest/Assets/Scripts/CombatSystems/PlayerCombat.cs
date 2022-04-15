@@ -60,10 +60,12 @@ public class PlayerCombat : MonoBehaviour
     private void AttackCommands(Collider weapon)
     {
         weapon.enabled = true;
-        Attack(weapon);
+        // Attack(weapon);
+        OnTriggerEnter(weapon);
         StartCoroutine(DisableDelay(1, weapon));
     }
 
+    /*
     private void Attack(Collider weapon)
     {
         // Detect Enemy
@@ -72,6 +74,7 @@ public class PlayerCombat : MonoBehaviour
         // Damage the enemies
 
     }
+    */
 
     // Detect the enemy
     private void OnTriggerEnter(Collider other)

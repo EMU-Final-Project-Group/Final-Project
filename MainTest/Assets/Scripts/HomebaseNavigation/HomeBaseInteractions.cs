@@ -57,6 +57,12 @@ public class HomeBaseInteractions : MonoBehaviour
     [Header("UI Elements to Disable in Homebase")]
     public GameObject clueScreenDisable;
 
+    [Header("Homebase Elements to Disable when leaving homebase")]
+    public GameObject controlsPanel;
+    public GameObject genderPanel;
+    public GameObject accessoriesPanel;
+    public GameObject mapPanel;
+
     // Player Bathroom Interaction Items
     PlayerInteraction doorInteractionClosed;
     PlayerInteraction doorInteractionOpen;
@@ -359,12 +365,7 @@ public class HomeBaseInteractions : MonoBehaviour
     {
         if (mapDisplayToggle.activeSelf)
         {
-            if(mapCurrentlySelected == 1)
-            {
-                Debug.Log("Player Transported to: " + urbanSpawnPoint);
-                clueScreenDisable.SetActive(true);
-                player.transform.position = urbanSpawnPoint;
-            }
+            LaunchMap();
         }
         else if(genderDisplayToggle.activeSelf)
         {
@@ -451,11 +452,28 @@ public class HomeBaseInteractions : MonoBehaviour
 
     private void LaunchMap()
     {
-        if(mapDisplayToggle.activeSelf && mapCurrentlySelected == 1)
+        if (mapDisplayToggle.activeSelf && mapCurrentlySelected == 1)
         {
             Debug.Log("Player Transported to: " + urbanSpawnPoint);
+            DisableHomebaseItems();
             clueScreenDisable.SetActive(true);
             player.transform.position = urbanSpawnPoint;
         }
+    }
+
+    private void DisableHomebaseItems()
+    {
+        controlsPanel.SetActive(false);
+        genderPanel.SetActive(false);
+        accessoriesPanel.SetActive(false);
+        mapPanel.SetActive(false);
+    }
+
+    public void EnableHomebaseItems()
+    {
+        controlsPanel.SetActive(true);
+        genderPanel.SetActive(true);
+        accessoriesPanel.SetActive(true);
+        mapPanel.SetActive(true);
     }
 }

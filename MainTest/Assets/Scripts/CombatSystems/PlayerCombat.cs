@@ -24,6 +24,7 @@ public class PlayerCombat : MonoBehaviour
 
     // Combat stats
     private bool availableToAttackAgain;
+    private int currentWeapon;
 
     private void Awake()
     {
@@ -35,6 +36,8 @@ public class PlayerCombat : MonoBehaviour
 
         // Gets the Monster Scripts
         werewolfMasterScript = werewolf.GetComponent<Werewolf_Master>();
+
+        currentWeapon = 0;
     }
 
     private void Start()
@@ -50,8 +53,10 @@ public class PlayerCombat : MonoBehaviour
     }
 
     // Starts the attack process
-    public void StartAttack(int currentWeapon)
+    public void StartAttack(int weapon)
     {
+        currentWeapon = weapon;
+
         if(availableToAttackAgain)
         {
             if (currentWeapon == 1)
@@ -89,26 +94,32 @@ public class PlayerCombat : MonoBehaviour
         StartCoroutine(DisableDelay(1, weapon));
     }
 
-    /*
-    private void Attack(Collider weapon)
-    {
-        // Detect Enemy
-        OnTriggerEnter(weapon);
-
-        // Damage the enemies
-
-    }
-    */
-
     // Detect the enemy
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Enemy")
         {
-            Debug.Log("You have hit the werewolf with");
-            werewolfMasterScript.MonsterTookDamage();
+            Debug.Log("You have hit an enemy");
+            werewolfMasterScript.MonsterTookDamage(1);
             availableToAttackAgain = false;
-            StartCoroutine(PauseAttack());
+            StartCoroutine(PauseAttack(3));
+        }
+        else if(other.gameObject.tag == "Werewolf")
+        {
+            if(currentWeapon == 3)
+            {
+                Debug.Log("You hit with an Axe");
+                werewolfMasterScript.MonsterTookDamage(3);
+                availableToAttackAgain = false;
+                StartCoroutine(PauseAttack(4));
+            }
+            else
+            {
+                Debug.Log("You hit with the wrong weapon");
+                werewolfMasterScript.MonsterTookDamage(1);
+                availableToAttackAgain = false;
+                StartCoroutine(PauseAttack(2));
+            }
         }
     }
 
@@ -120,9 +131,9 @@ public class PlayerCombat : MonoBehaviour
     }
 
     // Disables the ability to attack for X seconds
-    IEnumerator PauseAttack()
+    IEnumerator PauseAttack(int pauseLength)
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(pauseLength);
         availableToAttackAgain = true;
     }
 }

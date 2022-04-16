@@ -59,15 +59,16 @@
     <Compile Include="Assets\Animation_Controls_Input\ResetBool.cs" />
     <Compile Include="Assets\Scripts\ClueSystems\ClueManager.cs" />
     <Compile Include="Assets\Scripts\GuessSystems\GuessMachine.cs" />
-    <Compile Include="Assets\Scripts\InteriorNavigation\PlayerInteraction.cs" />
+    <Compile Include="Assets\Scripts\HomebaseNavigation\PlayerInteraction.cs" />
     <Compile Include="Assets\Scripts\UIScripts\clue.cs" />
     <Compile Include="Assets\Scripts\UIScripts\pick.cs" />
-    <Compile Include="Assets\Scripts\InteriorNavigation\HomeBaseInteractions.cs" />
+    <Compile Include="Assets\Scripts\HomebaseNavigation\HomeBaseInteractions.cs" />
     <Compile Include="Assets\Scripts\UIScripts\uiTestScript.cs" />
     <Compile Include="Assets\Animation_Controls_Input\ManageInput.cs" />
     <Compile Include="Assets\Scripts\Monster-AI\WerewolfAnimationManager.cs" />
     <Compile Include="Assets\Scripts\UIScripts\pauseMenu.cs" />
     <Compile Include="Assets\Scripts\UIScripts\textTest.cs" />
+    <Compile Include="Assets\Scripts\HomebaseNavigation\ReturnToBase.cs" />
     <Compile Include="Assets\UI_Elements\PiUi\Scripts\PiPiece.cs" />
     <Compile Include="Assets\Scripts\ClueSystems\RandomSpawner.cs" />
     <Compile Include="Assets\Scripts\Monster-AI\Zombie_Master.cs" />
@@ -80,14 +81,14 @@
     <Compile Include="Assets\Scripts\UIScripts\equipment.cs" />
     <Compile Include="Assets\Animation_Controls_Input\CameraManager.cs" />
     <Compile Include="Assets\Scripts\CombatSystems\BatCollision.cs" />
-    <Compile Include="Assets\Scripts\InteriorNavigation\PauseMenuManagement.cs" />
+    <Compile Include="Assets\Scripts\HomebaseNavigation\PauseMenuManagement.cs" />
     <Compile Include="Assets\zzz_Documentation\GameControls.cs" />
     <Compile Include="Assets\Animation_Controls_Input\Locomotion.cs" />
     <Compile Include="Assets\Scripts\ClueSystems\PlayerNearbyDetection.cs" />
     <Compile Include="Assets\Scripts\UIScripts\playerInventory.cs" />
     <Compile Include="Assets\Scripts\UIScripts\vanInteraction.cs" />
     <Compile Include="Assets\Animation_Controls_Input\ManageAnimation.cs" />
-    <Compile Include="Assets\Scripts\InteriorNavigation\PlayerAccessoryManagement.cs" />
+    <Compile Include="Assets\Scripts\HomebaseNavigation\PlayerAccessoryManagement.cs" />
     <Compile Include="Assets\Scripts\CombatSystems\ManageWeapons.cs" />
     <Compile Include="Assets\UI_Elements\PiUi\TestScene\TestWorld.cs" />
     <Compile Include="Assets\Scripts\UIScripts\mainMenu.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Assets\UI_Elements\PiUi\Scripts\PiUI.cs" />
     <Compile Include="Assets\Animation_Controls_Input\ManagePlayer.cs" />
     <Compile Include="Assets\Scripts\Monster-AI\ZombineAnimationManager.cs" />
+    <Compile Include="Assets\Scripts\Master-Monster-Scripts\MainMonsterManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\UI_Elements\TextMesh Pro\Shaders\TMPro.cginc" />

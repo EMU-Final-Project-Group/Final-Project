@@ -1,0 +1,305 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using Random = UnityEngine.Random;
+
+public class MainMonsterManager : MonoBehaviour
+{
+    #region Urban Map Coordinates
+    // Game Objects for the Spawn Cubes
+    [Header("Urban Map Spawn Locations")]
+    public GameObject UrbanMonsterSpawn;
+    public GameObject UrbanClue1Spawn;
+    public GameObject UrbanClue2Spawn;
+    public GameObject UrbanClue3Spawn;
+    public GameObject UrbanClue4Spawn;
+
+    // Coordinates for the Spawn Cubes
+    private Vector3 UrbanMonsterSpawnCoordinates;
+    private Vector3 UrbanClue1SpawnCoordinates;
+    private Vector3 UrbanClue2SpawnCoordinates;
+    private Vector3 UrbanClue3SpawnCoordinates;
+    private Vector3 UrbanClue4SpawnCoordinates;
+    #endregion
+
+    #region Suburb Map Coordinates
+    // Game Objects for the Spawn Cubes
+    [Header("Urban Map Spawn Locations")]
+    public GameObject SuburbMonsterSpawn;
+    public GameObject SuburbClue1Spawn;
+    public GameObject SuburbClue2Spawn;
+    public GameObject SuburbClue3Spawn;
+    public GameObject SuburbClue4Spawn;
+
+    // Coordinates for the Spawn Cubes
+    private Vector3 SuburbMonsterSpawnCoordinates;
+    private Vector3 SuburbClue1SpawnCoordinates;
+    private Vector3 SuburbClue2SpawnCoordinates;
+    private Vector3 SuburbClue3SpawnCoordinates;
+    private Vector3 SuburbClue4SpawnCoordinates;
+    #endregion
+
+    #region Map3 Map Coordinates
+    // Game Objects for the Spawn Cubes
+    [Header("Urban Map Spawn Locations")]
+    public GameObject Map3MonsterSpawn;
+    public GameObject Map3Clue1Spawn;
+    public GameObject Map3Clue2Spawn;
+    public GameObject Map3Clue3Spawn;
+    public GameObject Map3Clue4Spawn;
+
+    // Coordinates for the Spawn Cubes
+    private Vector3 Map3MonsterSpawnCoordinates;
+    private Vector3 Map3Clue1SpawnCoordinates;
+    private Vector3 Map3Clue2SpawnCoordinates;
+    private Vector3 Map3Clue3SpawnCoordinates;
+    private Vector3 Map3Clue4SpawnCoordinates;
+    #endregion
+
+    #region Map4 Map Coordinates
+    // Game Objects for the Spawn Cubes
+    [Header("Urban Map Spawn Locations")]
+    public GameObject Map4MonsterSpawn;
+    public GameObject Map4Clue1Spawn;
+    public GameObject Map4Clue2Spawn;
+    public GameObject Map4Clue3Spawn;
+    public GameObject Map4Clue4Spawn;
+
+    // Coordinates for the Spawn Cubes
+    private Vector3 Map4MonsterSpawnCoordinates;
+    private Vector3 Map4Clue1SpawnCoordinates;
+    private Vector3 Map4Clue2SpawnCoordinates;
+    private Vector3 Map4Clue3SpawnCoordinates;
+    private Vector3 Map4Clue4SpawnCoordinates;
+    #endregion
+
+    #region Werewolf Objects
+    // (1) Werewolf Game Objects
+    [Header("Werewolf Game Objects")]
+    public GameObject werewolfMonsterMain;
+    public GameObject werewolfClue1;
+    public GameObject werewolfClue2;
+    public GameObject werewolfClue3;
+    public GameObject werewolfClue4;
+    #endregion
+
+    #region Vampire Objects
+    // (2) Vampire Game Objects
+    [Header("Werewolf Game Objects")]
+    public GameObject vampirefMonsterMain;
+    public GameObject vampireClue1;
+    public GameObject vampireClue2;
+    public GameObject vampireClue3;
+    public GameObject vampireClue4;
+    #endregion
+
+    #region Witch Objects
+    // (3) Witch Game Objects
+    [Header("Witch Game Objects")]
+    public GameObject witchMonsterMain;
+    public GameObject witchClue1;
+    public GameObject witchClue2;
+    public GameObject witchClue3;
+    public GameObject witchClue4;
+    #endregion
+
+    #region Demon Objects
+    // (4) Demon Game Objects
+    [Header("Demon Game Objects")]
+    public GameObject demonMonsterMain;
+    public GameObject demonClue1;
+    public GameObject demonClue2;
+    public GameObject demonClue3;
+    public GameObject demonClue4;
+    #endregion
+
+    // Randomize Lists
+    private List<int> listRandom = new List<int>() { 1, 2, 3, 4 };
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        #region Set the Spawn Points
+        #region Set Urban Spawn Coordinates
+        UrbanMonsterSpawnCoordinates = UrbanMonsterSpawn.transform.position;
+        UrbanClue1SpawnCoordinates = UrbanClue1Spawn.transform.position;
+        UrbanClue2SpawnCoordinates = UrbanClue2Spawn.transform.position;
+        UrbanClue3SpawnCoordinates = UrbanClue3Spawn.transform.position;
+        UrbanClue4SpawnCoordinates = UrbanClue4Spawn.transform.position;
+        #endregion
+
+        #region Set Suburb Spawn Coordinates
+        SuburbMonsterSpawnCoordinates = SuburbMonsterSpawn.transform.position;
+        SuburbClue1SpawnCoordinates = SuburbClue1Spawn.transform.position;
+        SuburbClue2SpawnCoordinates = SuburbClue2Spawn.transform.position;
+        SuburbClue3SpawnCoordinates = SuburbClue3Spawn.transform.position;
+        SuburbClue4SpawnCoordinates = SuburbClue4Spawn.transform.position;
+        #endregion
+
+        #region Set Map3 Spawn Coordinates
+        Map3MonsterSpawnCoordinates = Map3MonsterSpawn.transform.position;
+        Map3Clue1SpawnCoordinates = Map3Clue1Spawn.transform.position;
+        Map3Clue2SpawnCoordinates = Map3Clue2Spawn.transform.position;
+        Map3Clue3SpawnCoordinates = Map3Clue3Spawn.transform.position;
+        Map3Clue4SpawnCoordinates = Map3Clue4Spawn.transform.position;
+        #endregion
+
+        #region Set Map4 Spawn Coordinates
+        Map4MonsterSpawnCoordinates = Map4MonsterSpawn.transform.position;
+        Map4Clue1SpawnCoordinates = Map4Clue1Spawn.transform.position;
+        Map4Clue2SpawnCoordinates = Map4Clue2Spawn.transform.position;
+        Map4Clue3SpawnCoordinates = Map4Clue3Spawn.transform.position;
+        Map4Clue4SpawnCoordinates = Map4Clue4Spawn.transform.position;
+        #endregion
+        #endregion
+
+        // Randomize the Spawn Locations
+        RandomizeTheList();
+
+        // Sets the Spawn location objects
+        SetSpawnObjects();
+    }
+
+
+
+    private void RandomizeTheList()
+    {
+        // Randomly Sorts the list
+        for(int i = 0; i < listRandom.Count; i++)
+        {
+            int temp = listRandom[i];
+            int randomIndex = Random.Range(i, listRandom.Count);
+            listRandom[i] = listRandom[randomIndex];
+            listRandom[randomIndex] = temp;
+        }
+    }
+
+    private void SetSpawnObjects()
+    {
+        SetUrbanSpawnObjects();
+        SetSuburbSpawnObjects();
+        SetMap3SpawnObjects();
+        SetMap4SpawnObjects();
+    }
+
+    #region Set Map Spawn Objects
+    private void SetUrbanSpawnObjects()
+    {
+        if (listRandom[0] == 1)
+        {
+            SetWerewolfSpawns(UrbanMonsterSpawnCoordinates, UrbanClue1SpawnCoordinates, UrbanClue2SpawnCoordinates, UrbanClue3SpawnCoordinates, UrbanClue4SpawnCoordinates);
+        }
+        else if (listRandom[0] == 2)
+        {
+            SetVampireSpawns(UrbanMonsterSpawnCoordinates, UrbanClue1SpawnCoordinates, UrbanClue2SpawnCoordinates, UrbanClue3SpawnCoordinates, UrbanClue4SpawnCoordinates);
+        }
+        else if(listRandom[0] == 3)
+        {
+            SetWitchSpawns(UrbanMonsterSpawnCoordinates, UrbanClue1SpawnCoordinates, UrbanClue2SpawnCoordinates, UrbanClue3SpawnCoordinates, UrbanClue4SpawnCoordinates);
+        }
+        else if (listRandom[0] == 4)
+        {
+            SetDemonSpawns(UrbanMonsterSpawnCoordinates, UrbanClue1SpawnCoordinates, UrbanClue2SpawnCoordinates, UrbanClue3SpawnCoordinates, UrbanClue4SpawnCoordinates);
+        }
+    }
+
+    private void SetSuburbSpawnObjects()
+    {
+        if (listRandom[1] == 1)
+        {
+            SetWerewolfSpawns(SuburbMonsterSpawnCoordinates, SuburbClue1SpawnCoordinates, SuburbClue2SpawnCoordinates, SuburbClue3SpawnCoordinates, SuburbClue4SpawnCoordinates);
+        }
+        else if (listRandom[1] == 2)
+        {
+            SetVampireSpawns(SuburbMonsterSpawnCoordinates, SuburbClue1SpawnCoordinates, SuburbClue2SpawnCoordinates, SuburbClue3SpawnCoordinates, SuburbClue4SpawnCoordinates);
+        }
+        else if (listRandom[1] == 3)
+        {
+            SetWitchSpawns(SuburbMonsterSpawnCoordinates, SuburbClue1SpawnCoordinates, SuburbClue2SpawnCoordinates, SuburbClue3SpawnCoordinates, SuburbClue4SpawnCoordinates);
+        }
+        else if (listRandom[1] == 4)
+        {
+            SetDemonSpawns(SuburbMonsterSpawnCoordinates, SuburbClue1SpawnCoordinates, SuburbClue2SpawnCoordinates, SuburbClue3SpawnCoordinates, SuburbClue4SpawnCoordinates);
+        }
+    }
+
+    private void SetMap3SpawnObjects()
+    {
+        if (listRandom[2] == 1)
+        {
+            SetWerewolfSpawns(Map3MonsterSpawnCoordinates, Map3Clue1SpawnCoordinates, Map3Clue2SpawnCoordinates, Map3Clue3SpawnCoordinates, Map3Clue4SpawnCoordinates);
+        }
+        else if (listRandom[2] == 2)
+        {
+            SetVampireSpawns(Map3MonsterSpawnCoordinates, Map3Clue1SpawnCoordinates, Map3Clue2SpawnCoordinates, Map3Clue3SpawnCoordinates, Map3Clue4SpawnCoordinates);
+        }
+        else if (listRandom[2] == 3)
+        {
+            SetWitchSpawns(Map3MonsterSpawnCoordinates, Map3Clue1SpawnCoordinates, Map3Clue2SpawnCoordinates, Map3Clue3SpawnCoordinates, Map3Clue4SpawnCoordinates);
+        }
+        else if (listRandom[2] == 4)
+        {
+            SetDemonSpawns(Map3MonsterSpawnCoordinates, Map3Clue1SpawnCoordinates, Map3Clue2SpawnCoordinates, Map3Clue3SpawnCoordinates, Map3Clue4SpawnCoordinates);
+        }
+    }
+
+    private void SetMap4SpawnObjects()
+    {
+        if (listRandom[3] == 1)
+        {
+            SetWerewolfSpawns(Map4MonsterSpawnCoordinates, Map4Clue1SpawnCoordinates, Map4Clue2SpawnCoordinates, Map4Clue3SpawnCoordinates, Map4Clue4SpawnCoordinates);
+        }
+        else if (listRandom[3] == 2)
+        {
+            SetVampireSpawns(Map4MonsterSpawnCoordinates, Map4Clue1SpawnCoordinates, Map4Clue2SpawnCoordinates, Map4Clue3SpawnCoordinates, Map4Clue4SpawnCoordinates);
+        }
+        else if (listRandom[3] == 3)
+        {
+            SetWitchSpawns(Map4MonsterSpawnCoordinates, Map4Clue1SpawnCoordinates, Map4Clue2SpawnCoordinates, Map4Clue3SpawnCoordinates, Map4Clue4SpawnCoordinates);
+        }
+        else if(listRandom[3] == 4)
+        {
+            SetDemonSpawns(Map4MonsterSpawnCoordinates, Map4Clue1SpawnCoordinates, Map4Clue2SpawnCoordinates, Map4Clue3SpawnCoordinates, Map4Clue4SpawnCoordinates);
+        }
+    }
+    #endregion
+
+    #region Set Monster Spawns
+    private void SetWerewolfSpawns(Vector3 monsterCoords, Vector3 clue1Coords, Vector3 clue2Coords, Vector3 clue3Coords, Vector3 clue4Coords)
+    {
+        werewolfMonsterMain.transform.position = monsterCoords;
+        werewolfClue1.transform.position = clue1Coords;
+        werewolfClue2.transform.position = clue2Coords;
+        werewolfClue3.transform.position = clue3Coords;
+        werewolfClue4.transform.position = clue4Coords;
+    }
+
+    private void SetVampireSpawns(Vector3 monsterCoords, Vector3 clue1Coords, Vector3 clue2Coords, Vector3 clue3Coords, Vector3 clue4Coords)
+    {
+        vampirefMonsterMain.transform.position = monsterCoords;
+        vampireClue1.transform.position = clue1Coords;
+        vampireClue2.transform.position = clue2Coords;
+        vampireClue3.transform.position = clue3Coords;
+        vampireClue4.transform.position = clue4Coords;
+    }
+
+    private void SetWitchSpawns(Vector3 monsterCoords, Vector3 clue1Coords, Vector3 clue2Coords, Vector3 clue3Coords, Vector3 clue4Coords)
+    {
+        witchMonsterMain.transform.position = monsterCoords;
+        witchClue1.transform.position = clue1Coords;
+        witchClue2.transform.position = clue2Coords;
+        witchClue3.transform.position = clue3Coords;
+        witchClue4.transform.position = clue4Coords;
+    }
+
+    private void SetDemonSpawns(Vector3 monsterCoords, Vector3 clue1Coords, Vector3 clue2Coords, Vector3 clue3Coords, Vector3 clue4Coords)
+    {
+        demonMonsterMain.transform.position = monsterCoords;
+        demonClue1.transform.position = clue1Coords;
+        demonClue2.transform.position = clue2Coords;
+        demonClue3.transform.position = clue3Coords;
+        demonClue4.transform.position = clue4Coords;
+    }
+    #endregion
+}

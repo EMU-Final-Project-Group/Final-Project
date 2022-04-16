@@ -15,14 +15,14 @@ public class clueInteraction : MonoBehaviour
     public string Cluename;
     public bool hasGoo;
     public List<string> objects;
-    bool isOpen;
+    //bool isOpen;
     public GameObject journal;
     public void Start()
     {
         clue.SetActive(false);
         hasGoo = false;
         journal.SetActive(false);
-        isOpen = false;
+        //isOpen = false;
 
     }
 

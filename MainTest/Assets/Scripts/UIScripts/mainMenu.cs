@@ -18,20 +18,20 @@ public class mainMenu : MonoBehaviour
     // Keeps track of the currently selected menu item
     private int currentlySelectedItem;
 
-    private bool playActive;
-    private bool loadActive;
-    private bool optionsActive;
-    private bool exitActive;
+    //private bool playActive;
+    //private bool loadActive;
+    //private bool optionsActive;
+    //private bool exitActive;
 
     // Preset for default red color
     private Color redPreset = new Color(0.5568628f,0f,0f);
 
     private void Awake()
     {
-        playActive = true;
-        loadActive = false;
-        optionsActive = false;
-        exitActive = false;
+        //playActive = true;
+        //loadActive = false;
+        //optionsActive = false;
+        //exitActive = false;
 
         // Sets started default items
         currentlySelectedItem = 1;

@@ -7,6 +7,7 @@ public class ManageWeapons : MonoBehaviour
     [Header("Weapon Screen")]
     public GameObject weaponScreen;
     public GameObject combatScreen;
+    public GameObject denyText;
 
     // Weapon Objects
     [Header("Weapon Selection")]
@@ -25,6 +26,7 @@ public class ManageWeapons : MonoBehaviour
         playerDetection = GetComponent<PlayerNearbyDetection>();
         DisableWeaponScreen();
         weaponScreenOpen = false;
+        denyText.SetActive(false);
         equippedWeapon = 0;
     }
 
@@ -35,6 +37,7 @@ public class ManageWeapons : MonoBehaviour
         {
             DisableWeaponScreen();
             weaponScreenOpen=false;
+            denyText.SetActive(false);
         }
     }
 
@@ -50,6 +53,10 @@ public class ManageWeapons : MonoBehaviour
                 {
                     WeaponSelectionValue(weaponSelection);
                 }
+            }
+            else
+            {
+                denyText.SetActive(true);
             }
         }
     }

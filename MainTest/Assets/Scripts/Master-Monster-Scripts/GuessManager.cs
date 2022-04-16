@@ -7,6 +7,9 @@ public class GuessManager : MonoBehaviour
     [Header("Warning Display")]
     public GameObject popUpTip;
     public GameObject guessScreen;
+    public GameObject combatScreen;
+    public GameObject monsterMaster;
+    ClueDisplayManager monsterClueDisplay;
 
     private GameObject clue1;
     private GameObject clue2;
@@ -36,6 +39,9 @@ public class GuessManager : MonoBehaviour
         popUpTip.SetActive(false);
         spawnMonster = false;
         guessScreen.SetActive(false);
+        combatScreen.SetActive(false);
+
+        monsterClueDisplay = monsterMaster.GetComponent<ClueDisplayManager>();
     }
 
     private void Update()
@@ -109,22 +115,37 @@ public class GuessManager : MonoBehaviour
         {
             Debug.Log("Correct Guess");
             spawnMonster = true;
+            CorrectGuess();
         }
         else if(isVampire && guessValue == 2)
         {
             Debug.Log("Correct Guess");
             spawnMonster = true;
+            CorrectGuess();
         }
         else if(isWitch && guessValue == 3)
         {
             Debug.Log("Correct Guess");
             spawnMonster = true;
+            CorrectGuess();
         }
         else if(isDemon && guessValue == 4)
         {
             Debug.Log("Correct Guess");
             spawnMonster = true;
+            CorrectGuess();
         }
+        else
+        {
+            Debug.Log("WRONG");
+        }
+    }
+
+    private void CorrectGuess()
+    {
+        guessScreen.SetActive(false);
+        combatScreen.SetActive(true);
+        monsterClueDisplay.DisableAllDisplays();
     }
 
     public bool CheckIfAllCluesCollected()

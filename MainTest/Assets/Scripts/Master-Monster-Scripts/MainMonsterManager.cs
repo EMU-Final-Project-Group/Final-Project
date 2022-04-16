@@ -115,6 +115,7 @@ public class MainMonsterManager : MonoBehaviour
     #endregion
 
     #region Guess Machines
+    [Header("Guess Machine Objects")]
     public GameObject urbanGuessMachine;
     public GameObject suburbGuessMachine;
     public GameObject map3GuessMachine;
@@ -123,6 +124,16 @@ public class MainMonsterManager : MonoBehaviour
     GuessManager suburbGuessObjects;
     GuessManager map3GuessObjects;
     GuessManager map4GuessObjects;
+    #endregion
+
+    #region Return Machines
+    [Header("Return Machine Objects")]
+    public GameObject urbanReturnMachine;
+    ReturnToBase urbanReturn;
+    #endregion
+
+    #region Monster AI Scripts
+    Werewolf_Master werewolfAI;
     #endregion
 
     public int urbanMonsterSpawn;
@@ -177,6 +188,14 @@ public class MainMonsterManager : MonoBehaviour
         map4GuessObjects = map4GuessMachine.GetComponent<GuessManager>();
         #endregion
 
+        #region Return Components
+        urbanReturn = urbanReturnMachine.GetComponent<ReturnToBase>();
+        #endregion
+
+        #region AI Components
+        werewolfAI = werewolfMonsterMain.GetComponent<Werewolf_Master>();
+        #endregion
+
         #region Other Items
         // Randomize the Spawn Locations
         RandomizeTheList();
@@ -215,6 +234,14 @@ public class MainMonsterManager : MonoBehaviour
         if(map4GuessObjects.spawnMonster)
         {
             SpawnMap4Monster();
+        }
+
+        if(werewolfAI.werewolfIsDefeated)
+        {
+            if(listRandom[0] == 1)
+            {
+                urbanReturn.LocalMonsterDefeated = true;
+            }
         }
     }
 

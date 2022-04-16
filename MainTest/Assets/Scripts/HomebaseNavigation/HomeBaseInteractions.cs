@@ -542,5 +542,6 @@ public class HomeBaseInteractions : MonoBehaviour
         genderPanel.SetActive(true);
         accessoriesPanel.SetActive(true);
         mapPanel.SetActive(true);
+        Debug.Log("Map is now: " + currentActiveMap);
     }
 }

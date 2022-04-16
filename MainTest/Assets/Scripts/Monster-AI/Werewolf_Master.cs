@@ -36,6 +36,7 @@ public class Werewolf_Master : MonoBehaviour
     // Combat Variables
     [Header("Combat Stats")]
     private int currentHealth;
+    public bool werewolfIsDefeated;
 
     private void Awake()
     {
@@ -47,6 +48,7 @@ public class Werewolf_Master : MonoBehaviour
     {
         // Combat Setup
         currentHealth = 15;
+        werewolfIsDefeated = false;
     }
 
     // Update is called once per frame
@@ -64,10 +66,7 @@ public class Werewolf_Master : MonoBehaviour
 
         if(IsMonsterDead())
         {
-            // Debug.Log("THE MONSTER HAS BEEN DEFEATED");
             _agent.isStopped = true;
-            animator.SetTrigger("deathTrigger");
-            StartCoroutine(DespawnMonster());
         }
         else
         {
@@ -127,6 +126,13 @@ public class Werewolf_Master : MonoBehaviour
     public void MonsterTookDamage(int damageTaken)
     {
         currentHealth -= damageTaken;
+        if (IsMonsterDead())
+        {
+            Debug.Log("THE MONSTER HAS BEEN DEFEATED");
+            werewolfIsDefeated = true;
+            animator.SetTrigger("deathTrigger");
+            StartCoroutine(DespawnMonster());
+        }
     }
 
     private bool IsMonsterDead()

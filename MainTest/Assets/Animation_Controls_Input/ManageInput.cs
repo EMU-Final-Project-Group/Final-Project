@@ -11,8 +11,6 @@ public class ManageInput : MonoBehaviour
     PlayerCombat playerCombat;
 
     [Header("Clue System")]
-    // public GameObject clueObject;
-    // ClueManager clueManager;
     public GameObject clueSystem;
     CluePickUpManager cluePickUpManager;
 
@@ -21,8 +19,6 @@ public class ManageInput : MonoBehaviour
     private bool flashLightOn;
 
     [Header("Guess Machine")]
-    //public GameObject guessObject;
-    //GuessMachine guessManager;
     public GameObject urbanGuess;
     public GameObject suburbGuess;
     public GameObject map3Guess;
@@ -32,9 +28,11 @@ public class ManageInput : MonoBehaviour
     GuessManager map3GuessManager;
     GuessManager map4GuessManager;
 
-    [Header("Weapon Selection Rack")]
-    public GameObject weaponObject;
-    ManageWeapons weaponManager;
+    [Header("Weapon Selection Racko")]
+    // public GameObject weaponObject;
+    // ManageWeapons weaponManager;
+    public GameObject urbanWeaponObject;
+    ManageWeapons urbanWeaponsManager;
 
     [Header("Pause Menu")]
     public GameObject pauseMenu;
@@ -72,9 +70,6 @@ public class ManageInput : MonoBehaviour
         animatorManager = GetComponent<ManageAnimation>();
         playerCombat = GetComponent<PlayerCombat>();
 
-        // clueManager = clueObject.GetComponent<ClueManager>();
-        // guessManager = guessObject.GetComponent<GuessMachine>();
-
         cluePickUpManager = clueSystem.GetComponent<CluePickUpManager>();
 
         urbanGuessManager = urbanGuess.GetComponent<GuessManager>();
@@ -82,7 +77,8 @@ public class ManageInput : MonoBehaviour
         map3GuessManager = map3Guess.GetComponent<GuessManager>();
         map4GuessManager = map4Guess.GetComponent<GuessManager>();
 
-        weaponManager = weaponObject.GetComponent<ManageWeapons>();
+        // weaponManager = weaponObject.GetComponent<ManageWeapons>();
+        urbanWeaponsManager = urbanWeaponObject.GetComponent<ManageWeapons>();
 
         flashLightOn = false;
         pauseMenu.SetActive(false);
@@ -218,7 +214,7 @@ public class ManageInput : MonoBehaviour
     // Melee Attack
     private void DoAttack(InputAction.CallbackContext obj)
     {
-        int weaponAttack = weaponManager.equippedWeapon;
+        int weaponAttack = urbanWeaponsManager.equippedWeapon;
         if(weaponAttack == 1)
         {
             animatorManager.animator.SetTrigger("knifeAttack");
@@ -245,8 +241,6 @@ public class ManageInput : MonoBehaviour
     // Object Interact
     private void HandleObjectInteraction()
     {
-        // clueManager.HandleCluePick();
-        // guessManager.HandleGuessMachine();
         cluePickUpManager.HandleClueInteraction();
 
         urbanGuessManager.HandleGuessInteraction();
@@ -254,7 +248,11 @@ public class ManageInput : MonoBehaviour
         map3GuessManager.HandleGuessInteraction();
         map4GuessManager.HandleGuessInteraction();
 
-        weaponManager.HandleWeaponRack(0);
+        // weaponManager.HandleWeaponRack(0);
+        if(homeBaseInteractions.currentActiveMap == 1)
+        {
+            urbanWeaponsManager.HandleWeaponRack(0);
+        }
     }
 
     private void HandleDPadPress(int padDirection)
@@ -289,7 +287,14 @@ public class ManageInput : MonoBehaviour
         #region Monster Guess Submission
         if(homeBaseInteractions.currentActiveMap == 1)
         {
-            urbanGuessManager.PlayerGuessSubmission(padDirection);
+            if (urbanWeaponsManager.weaponScreenOpen)
+            {
+                urbanWeaponsManager.HandleWeaponRack(padDirection);
+            }
+            else
+            {
+                urbanGuessManager.PlayerGuessSubmission(padDirection);
+            }  
         }
         else if(homeBaseInteractions.currentActiveMap == 2)
         {
@@ -303,31 +308,9 @@ public class ManageInput : MonoBehaviour
         {
             map4GuessManager.PlayerGuessSubmission(padDirection);
         }
-
-        /*
-        if (urbanGuessManager.guessScreen.activeSelf)
-        {
-            urbanGuessManager.PlayerGuessSubmission(padDirection);
-        }
-        else if (suburbGuessManager.guessScreen.activeSelf)
-        {
-            suburbGuessManager.PlayerGuessSubmission(padDirection);
-        }
-        else if (map3GuessManager.guessScreen.activeSelf)
-        {
-            map3GuessManager.PlayerGuessSubmission(padDirection);
-        }
-        else if (map4GuessManager.guessScreen.activeSelf)
-        {
-            map4GuessManager.PlayerGuessSubmission(padDirection);
-        }
-        */
         #endregion
 
-        if (weaponManager.weaponScreenOpen)
-        {
-            weaponManager.HandleWeaponRack(padDirection);
-        }
+        
     }
 
     private void HandleFlashLightStatus()

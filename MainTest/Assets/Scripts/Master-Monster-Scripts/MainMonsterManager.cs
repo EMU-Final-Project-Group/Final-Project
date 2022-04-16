@@ -114,6 +114,22 @@ public class MainMonsterManager : MonoBehaviour
     public GameObject demonClue4;
     #endregion
 
+    #region Guess Machines
+    public GameObject urbanGuessMachine;
+    public GameObject suburbGuessMachine;
+    public GameObject map3GuessMachine;
+    public GameObject map4GuessMachine;
+    GuessManager urbanGuessObjects;
+    GuessManager suburbGuessObjects;
+    GuessManager map3GuessObjects;
+    GuessManager map4GuessObjects;
+    #endregion
+
+    public int urbanMonsterSpawn;
+    public int suburbMonsterSpawn;
+    public int map3MonsterSpawn;
+    public int map4MonsterSpawn;
+
     // Randomize Lists
     private List<int> listRandom = new List<int>() { 1, 2, 3, 4 };
 
@@ -154,14 +170,53 @@ public class MainMonsterManager : MonoBehaviour
         #endregion
         #endregion
 
+        #region Guess Components
+        urbanGuessObjects = urbanGuessMachine.GetComponent<GuessManager>();
+        suburbGuessObjects = suburbGuessMachine.GetComponent<GuessManager>();
+        map3GuessObjects = map3GuessMachine.GetComponent<GuessManager>();
+        map4GuessObjects = map4GuessMachine.GetComponent<GuessManager>();
+        #endregion
+
+        #region Other Items
         // Randomize the Spawn Locations
         RandomizeTheList();
 
+        // Gets the monster spawn int values
+        urbanMonsterSpawn = listRandom[0];
+        suburbMonsterSpawn = listRandom[1];
+        map3MonsterSpawn = listRandom[2];
+        map4MonsterSpawn = listRandom[3];
+
         // Sets the Spawn location objects
         SetSpawnObjects();
+
+        // Disables Monsters on Load
+        werewolfMonsterMain.SetActive(false);
+        vampirefMonsterMain.SetActive(false);
+        witchMonsterMain.SetActive(false);
+        demonMonsterMain.SetActive(false);
+        #endregion
     }
 
-
+    private void Update()
+    {
+        if(urbanGuessObjects.spawnMonster)
+        {
+            SpawnUrbanMonster();
+        }
+        if(suburbGuessObjects.spawnMonster)
+        {
+            SpawnSuburbMonster();
+        }
+        if(map3GuessObjects.spawnMonster)
+        {
+            SpawnMap3Monster();
+        }
+        if(map4GuessObjects.spawnMonster)
+        {
+            SpawnMap4Monster();
+        }
+    }
 
     private void RandomizeTheList()
     {
@@ -189,18 +244,22 @@ public class MainMonsterManager : MonoBehaviour
         if (listRandom[0] == 1)
         {
             SetWerewolfSpawns(UrbanMonsterSpawnCoordinates, UrbanClue1SpawnCoordinates, UrbanClue2SpawnCoordinates, UrbanClue3SpawnCoordinates, UrbanClue4SpawnCoordinates);
+            urbanGuessObjects.SetClueObjects(1, werewolfClue1, werewolfClue2, werewolfClue3, werewolfClue4);
         }
         else if (listRandom[0] == 2)
         {
             SetVampireSpawns(UrbanMonsterSpawnCoordinates, UrbanClue1SpawnCoordinates, UrbanClue2SpawnCoordinates, UrbanClue3SpawnCoordinates, UrbanClue4SpawnCoordinates);
+            urbanGuessObjects.SetClueObjects(2, vampireClue1, vampireClue2, vampireClue3,vampireClue4);
         }
         else if(listRandom[0] == 3)
         {
             SetWitchSpawns(UrbanMonsterSpawnCoordinates, UrbanClue1SpawnCoordinates, UrbanClue2SpawnCoordinates, UrbanClue3SpawnCoordinates, UrbanClue4SpawnCoordinates);
+            urbanGuessObjects.SetClueObjects(3, witchClue1, witchClue2,witchClue3,witchClue4);
         }
         else if (listRandom[0] == 4)
         {
             SetDemonSpawns(UrbanMonsterSpawnCoordinates, UrbanClue1SpawnCoordinates, UrbanClue2SpawnCoordinates, UrbanClue3SpawnCoordinates, UrbanClue4SpawnCoordinates);
+            urbanGuessObjects.SetClueObjects(4, demonClue1, demonClue2,demonClue3,demonClue4);
         }
     }
 
@@ -209,18 +268,22 @@ public class MainMonsterManager : MonoBehaviour
         if (listRandom[1] == 1)
         {
             SetWerewolfSpawns(SuburbMonsterSpawnCoordinates, SuburbClue1SpawnCoordinates, SuburbClue2SpawnCoordinates, SuburbClue3SpawnCoordinates, SuburbClue4SpawnCoordinates);
+            suburbGuessObjects.SetClueObjects(1, werewolfClue1, werewolfClue2, werewolfClue3, werewolfClue4);
         }
         else if (listRandom[1] == 2)
         {
             SetVampireSpawns(SuburbMonsterSpawnCoordinates, SuburbClue1SpawnCoordinates, SuburbClue2SpawnCoordinates, SuburbClue3SpawnCoordinates, SuburbClue4SpawnCoordinates);
+            suburbGuessObjects.SetClueObjects(2, vampireClue1, vampireClue2, vampireClue3, vampireClue4);
         }
         else if (listRandom[1] == 3)
         {
             SetWitchSpawns(SuburbMonsterSpawnCoordinates, SuburbClue1SpawnCoordinates, SuburbClue2SpawnCoordinates, SuburbClue3SpawnCoordinates, SuburbClue4SpawnCoordinates);
+            suburbGuessObjects.SetClueObjects(3, witchClue1, witchClue2, witchClue3, witchClue4);
         }
         else if (listRandom[1] == 4)
         {
             SetDemonSpawns(SuburbMonsterSpawnCoordinates, SuburbClue1SpawnCoordinates, SuburbClue2SpawnCoordinates, SuburbClue3SpawnCoordinates, SuburbClue4SpawnCoordinates);
+            suburbGuessObjects.SetClueObjects(4, demonClue1, demonClue2, demonClue3, demonClue4);
         }
     }
 
@@ -229,18 +292,22 @@ public class MainMonsterManager : MonoBehaviour
         if (listRandom[2] == 1)
         {
             SetWerewolfSpawns(Map3MonsterSpawnCoordinates, Map3Clue1SpawnCoordinates, Map3Clue2SpawnCoordinates, Map3Clue3SpawnCoordinates, Map3Clue4SpawnCoordinates);
+            map3GuessObjects.SetClueObjects(1, werewolfClue1, werewolfClue2, werewolfClue3, werewolfClue4);
         }
         else if (listRandom[2] == 2)
         {
             SetVampireSpawns(Map3MonsterSpawnCoordinates, Map3Clue1SpawnCoordinates, Map3Clue2SpawnCoordinates, Map3Clue3SpawnCoordinates, Map3Clue4SpawnCoordinates);
+            map3GuessObjects.SetClueObjects(2, vampireClue1, vampireClue2, vampireClue3, vampireClue4);
         }
         else if (listRandom[2] == 3)
         {
             SetWitchSpawns(Map3MonsterSpawnCoordinates, Map3Clue1SpawnCoordinates, Map3Clue2SpawnCoordinates, Map3Clue3SpawnCoordinates, Map3Clue4SpawnCoordinates);
+            map3GuessObjects.SetClueObjects(3, witchClue1, witchClue2, witchClue3, witchClue4);
         }
         else if (listRandom[2] == 4)
         {
             SetDemonSpawns(Map3MonsterSpawnCoordinates, Map3Clue1SpawnCoordinates, Map3Clue2SpawnCoordinates, Map3Clue3SpawnCoordinates, Map3Clue4SpawnCoordinates);
+            map3GuessObjects.SetClueObjects(4, demonClue1, demonClue2, demonClue3, demonClue4);
         }
     }
 
@@ -249,18 +316,22 @@ public class MainMonsterManager : MonoBehaviour
         if (listRandom[3] == 1)
         {
             SetWerewolfSpawns(Map4MonsterSpawnCoordinates, Map4Clue1SpawnCoordinates, Map4Clue2SpawnCoordinates, Map4Clue3SpawnCoordinates, Map4Clue4SpawnCoordinates);
+            map4GuessObjects.SetClueObjects(1, werewolfClue1, werewolfClue2, werewolfClue3, werewolfClue4);
         }
         else if (listRandom[3] == 2)
         {
             SetVampireSpawns(Map4MonsterSpawnCoordinates, Map4Clue1SpawnCoordinates, Map4Clue2SpawnCoordinates, Map4Clue3SpawnCoordinates, Map4Clue4SpawnCoordinates);
+            map4GuessObjects.SetClueObjects(2, vampireClue1, vampireClue2, vampireClue3, vampireClue4);
         }
         else if (listRandom[3] == 3)
         {
             SetWitchSpawns(Map4MonsterSpawnCoordinates, Map4Clue1SpawnCoordinates, Map4Clue2SpawnCoordinates, Map4Clue3SpawnCoordinates, Map4Clue4SpawnCoordinates);
+            map4GuessObjects.SetClueObjects(3, witchClue1, witchClue2, witchClue3, witchClue4);
         }
         else if(listRandom[3] == 4)
         {
             SetDemonSpawns(Map4MonsterSpawnCoordinates, Map4Clue1SpawnCoordinates, Map4Clue2SpawnCoordinates, Map4Clue3SpawnCoordinates, Map4Clue4SpawnCoordinates);
+            map4GuessObjects.SetClueObjects(4, demonClue1, demonClue2, demonClue3, demonClue4);
         }
     }
     #endregion
@@ -300,6 +371,48 @@ public class MainMonsterManager : MonoBehaviour
         demonClue2.transform.position = clue2Coords;
         demonClue3.transform.position = clue3Coords;
         demonClue4.transform.position = clue4Coords;
+    }
+    #endregion
+
+    #region Start Monster Fight
+    private void SpawnUrbanMonster()
+    {
+        StartMonsterFight(listRandom[0]);
+    }
+
+    private void SpawnSuburbMonster()
+    {
+        StartMonsterFight(listRandom[1]);
+    }
+
+    private void SpawnMap3Monster()
+    {
+        StartMonsterFight(listRandom[2]);
+    }
+
+    private void SpawnMap4Monster()
+    {
+        StartMonsterFight(listRandom[3]);
+    }
+
+    private void StartMonsterFight(int monster)
+    {
+        if (monster == 1)
+        {
+            werewolfMonsterMain.SetActive(true);
+        }
+        else if (monster == 2)
+        {
+            vampirefMonsterMain.SetActive(true);
+        }
+        else if (monster == 3)
+        {
+            witchMonsterMain.SetActive(true);
+        }
+        else if (monster == 4)
+        {
+            demonMonsterMain.SetActive(true);
+        }
     }
     #endregion
 }

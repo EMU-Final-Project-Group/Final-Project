@@ -56,6 +56,7 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Master-Monster-Scripts\MainMonsterManager.cs" />
     <Compile Include="Assets\Animation_Controls_Input\ResetBool.cs" />
     <Compile Include="Assets\Scripts\ClueSystems\ClueManager.cs" />
     <Compile Include="Assets\Scripts\GuessSystems\GuessMachine.cs" />
@@ -84,7 +85,8 @@
     <Compile Include="Assets\Scripts\HomebaseNavigation\PauseMenuManagement.cs" />
     <Compile Include="Assets\zzz_Documentation\GameControls.cs" />
     <Compile Include="Assets\Animation_Controls_Input\Locomotion.cs" />
-    <Compile Include="Assets\Scripts\ClueSystems\PlayerNearbyDetection.cs" />
+    <Compile Include="Assets\Scripts\Master-Monster-Scripts\CluePickUpManager.cs" />
+    <Compile Include="Assets\Scripts\Master-Monster-Scripts\PlayerNearbyDetection.cs" />
     <Compile Include="Assets\Scripts\UIScripts\playerInventory.cs" />
     <Compile Include="Assets\Scripts\UIScripts\vanInteraction.cs" />
     <Compile Include="Assets\Animation_Controls_Input\ManageAnimation.cs" />
@@ -94,11 +96,12 @@
     <Compile Include="Assets\Scripts\UIScripts\mainMenu.cs" />
     <Compile Include="Assets\Scripts\CombatSystems\PlayerCombat.cs" />
     <Compile Include="Assets\Scripts\CombatSystems\PlayerWeapons.cs" />
+    <Compile Include="Assets\Scripts\Master-Monster-Scripts\ClueDisplayManager.cs" />
     <Compile Include="Assets\UI_Elements\PiUi\Scripts\PiUIManager.cs" />
     <Compile Include="Assets\UI_Elements\PiUi\Scripts\PiUI.cs" />
     <Compile Include="Assets\Animation_Controls_Input\ManagePlayer.cs" />
     <Compile Include="Assets\Scripts\Monster-AI\ZombineAnimationManager.cs" />
-    <Compile Include="Assets\Scripts\Master-Monster-Scripts\MainMonsterManager.cs" />
+    <Compile Include="Assets\Scripts\Master-Monster-Scripts\GuessManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\UI_Elements\TextMesh Pro\Shaders\TMPro.cginc" />

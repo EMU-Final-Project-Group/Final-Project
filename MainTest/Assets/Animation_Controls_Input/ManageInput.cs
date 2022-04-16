@@ -11,16 +11,26 @@ public class ManageInput : MonoBehaviour
     PlayerCombat playerCombat;
 
     [Header("Clue System")]
-    public GameObject clueObject;
-    ClueManager clueManager;
+    // public GameObject clueObject;
+    // ClueManager clueManager;
+    public GameObject clueSystem;
+    CluePickUpManager cluePickUpManager;
 
     [Header("Toggle Flashlight")]
     public GameObject flashLight;
     private bool flashLightOn;
 
     [Header("Guess Machine")]
-    public GameObject guessObject;
-    GuessMachine guessManager;
+    //public GameObject guessObject;
+    //GuessMachine guessManager;
+    public GameObject urbanGuess;
+    public GameObject suburbGuess;
+    public GameObject map3Guess;
+    public GameObject map4Guess;
+    GuessManager urbanGuessManager;
+    GuessManager suburbGuessManager;
+    GuessManager map3GuessManager;
+    GuessManager map4GuessManager;
 
     [Header("Weapon Selection Rack")]
     public GameObject weaponObject;
@@ -57,9 +67,17 @@ public class ManageInput : MonoBehaviour
         playerLocomotion = GetComponent<Locomotion>();
         animatorManager = GetComponent<ManageAnimation>();
         playerCombat = GetComponent<PlayerCombat>();
-        
-        clueManager = clueObject.GetComponent<ClueManager>();
-        guessManager = guessObject.GetComponent<GuessMachine>();
+
+        // clueManager = clueObject.GetComponent<ClueManager>();
+        // guessManager = guessObject.GetComponent<GuessMachine>();
+
+        cluePickUpManager = clueSystem.GetComponent<CluePickUpManager>();
+        urbanGuessManager = urbanGuess.GetComponent<GuessManager>();
+        suburbGuessManager = suburbGuess.GetComponent<GuessManager>();
+        map3GuessManager = map3Guess.GetComponent<GuessManager>();
+        map4GuessManager = map4Guess.GetComponent<GuessManager>();
+
+
         weaponManager = weaponObject.GetComponent<ManageWeapons>();
 
 
@@ -222,8 +240,15 @@ public class ManageInput : MonoBehaviour
     // Object Interact
     private void HandleObjectInteraction()
     {
-        clueManager.HandleCluePick();
-        guessManager.HandleGuessMachine();
+        // clueManager.HandleCluePick();
+        // guessManager.HandleGuessMachine();
+        cluePickUpManager.HandleClueInteraction();
+
+        urbanGuessManager.HandleGuessInteraction();
+        suburbGuessManager.HandleGuessInteraction();
+        map3GuessManager.HandleGuessInteraction();
+        map4GuessManager.HandleGuessInteraction();
+
         weaponManager.HandleWeaponRack(0);
     }
 
@@ -256,12 +281,26 @@ public class ManageInput : MonoBehaviour
             pauseManager.HandleDirectionInput(padDirection);
         }
 
-        if(guessManager.guessScreenOpen)
+        #region Monster Guess Submission
+        if (urbanGuessManager.guessScreen.activeSelf)
         {
-            guessManager.PlayerGuessSubmission(padDirection);
+            urbanGuessManager.PlayerGuessSubmission(padDirection);
         }
+        else if (suburbGuessManager.guessScreen.activeSelf)
+        {
+            suburbGuessManager.PlayerGuessSubmission(padDirection);
+        }
+        else if (map3GuessManager.guessScreen.activeSelf)
+        {
+            map3GuessManager.PlayerGuessSubmission(padDirection);
+        }
+        else if (map4GuessManager.guessScreen.activeSelf)
+        {
+            map4GuessManager.PlayerGuessSubmission(padDirection);
+        }
+        #endregion
 
-        if(weaponManager.weaponScreenOpen)
+        if (weaponManager.weaponScreenOpen)
         {
             weaponManager.HandleWeaponRack(padDirection);
         }

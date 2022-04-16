@@ -11,6 +11,7 @@ public class HomeBaseInteractions : MonoBehaviour
 
     [Header("Player")]
     public GameObject player;
+    public int currentActiveMap;
 
     [Header("Bathroom Objects")]
     public GameObject bathroomDoorClosed;
@@ -97,6 +98,7 @@ public class HomeBaseInteractions : MonoBehaviour
     {
         playerAccessoryManagement = GetComponent<PlayerAccessoryManagement>();
         controllerPrompt.SetActive(true);
+        currentActiveMap = 0;
 
         #region Bathroom Items
         // Gets the Bathroom player detection Items
@@ -474,6 +476,7 @@ public class HomeBaseInteractions : MonoBehaviour
     {
         if (mapDisplayToggle.activeSelf && mapCurrentlySelected == 1)
         {
+            currentActiveMap = 1;
             HandleDisplayEnable(mainMonsterManager.urbanMonsterSpawn);
             DisableHomebaseItems();
             // clueScreenDisable.SetActive(true);
@@ -481,6 +484,7 @@ public class HomeBaseInteractions : MonoBehaviour
         }
         else if(mapDisplayToggle.activeSelf && mapCurrentlySelected == 2)
         {
+            currentActiveMap = 2;
             HandleDisplayEnable(mainMonsterManager.suburbMonsterSpawn);
             DisableHomebaseItems();
             // clueScreenDisable.SetActive(true);
@@ -488,6 +492,7 @@ public class HomeBaseInteractions : MonoBehaviour
         }
         else if(mapDisplayToggle.activeSelf && mapCurrentlySelected == 3)
         {
+            currentActiveMap = 3;
             HandleDisplayEnable(mainMonsterManager.map3MonsterSpawn);
             DisableHomebaseItems();
             // clueScreenDisable.SetActive(true);
@@ -495,6 +500,7 @@ public class HomeBaseInteractions : MonoBehaviour
         }
         else if(mapDisplayToggle.activeSelf && mapCurrentlySelected == 4)
         {
+            currentActiveMap = 4;
             HandleDisplayEnable(mainMonsterManager.map4MonsterSpawn);
             DisableHomebaseItems();
             // clueScreenDisable.SetActive(true);

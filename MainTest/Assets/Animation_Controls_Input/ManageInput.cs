@@ -41,6 +41,10 @@ public class ManageInput : MonoBehaviour
     PauseMenuManagement pauseManager;
     private int pauseMenuCursorLocation;
 
+    [Header("Home Base Interaction")]
+    public GameObject homeBase;
+    HomeBaseInteractions homeBaseInteractions;
+
     // Movement
     public Vector2 movementInput;
     public Vector2 cameraInput;
@@ -72,19 +76,20 @@ public class ManageInput : MonoBehaviour
         // guessManager = guessObject.GetComponent<GuessMachine>();
 
         cluePickUpManager = clueSystem.GetComponent<CluePickUpManager>();
+
         urbanGuessManager = urbanGuess.GetComponent<GuessManager>();
         suburbGuessManager = suburbGuess.GetComponent<GuessManager>();
         map3GuessManager = map3Guess.GetComponent<GuessManager>();
         map4GuessManager = map4Guess.GetComponent<GuessManager>();
 
-
         weaponManager = weaponObject.GetComponent<ManageWeapons>();
-
 
         flashLightOn = false;
         pauseMenu.SetActive(false);
         pauseManager = pauseMenu.GetComponent<PauseMenuManagement>();
         pauseMenuCursorLocation = 1;
+
+        homeBaseInteractions = homeBase.GetComponent<HomeBaseInteractions>();
     }
 
     private void OnEnable()
@@ -282,6 +287,24 @@ public class ManageInput : MonoBehaviour
         }
 
         #region Monster Guess Submission
+        if(homeBaseInteractions.currentActiveMap == 1)
+        {
+            urbanGuessManager.PlayerGuessSubmission(padDirection);
+        }
+        else if(homeBaseInteractions.currentActiveMap == 2)
+        {
+            suburbGuessManager.PlayerGuessSubmission(padDirection);
+        }
+        else if(homeBaseInteractions.currentActiveMap == 3)
+        {
+            map3GuessManager.PlayerGuessSubmission(padDirection);
+        }
+        else if(homeBaseInteractions.currentActiveMap == 4)
+        {
+            map4GuessManager.PlayerGuessSubmission(padDirection);
+        }
+
+        /*
         if (urbanGuessManager.guessScreen.activeSelf)
         {
             urbanGuessManager.PlayerGuessSubmission(padDirection);
@@ -298,6 +321,7 @@ public class ManageInput : MonoBehaviour
         {
             map4GuessManager.PlayerGuessSubmission(padDirection);
         }
+        */
         #endregion
 
         if (weaponManager.weaponScreenOpen)

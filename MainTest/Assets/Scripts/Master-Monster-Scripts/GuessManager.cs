@@ -57,37 +57,33 @@ public class GuessManager : MonoBehaviour
         clue3Detection = clue3.GetComponent<PlayerNearbyDetection>();
         clue4Detection = clue4.GetComponent<PlayerNearbyDetection>();
 
-        if(monsterType == 0)
+        if(monsterType == 1)
         {
             isWerewolf = true;
             isVampire = false;
             isWitch = false;
             isDemon = false;
-            Debug.Log("Monster clue " + clue1 + " should be Werewolf");
         }
-        else if(monsterType == 1)
+        else if(monsterType == 2)
         {
             isWerewolf = false;
             isVampire = true;
             isWitch = false;
             isDemon = false;
-            Debug.Log("Monster clue " + clue1 + " should be Vampire");
-        }
-        else if(monsterType == 2)
-        {
-            isWerewolf = false;
-            isVampire = false;
-            isWitch = true;
-            isDemon = false;
-            Debug.Log("Monster clue " + clue1 + " should be Witch");
         }
         else if(monsterType == 3)
         {
             isWerewolf = false;
             isVampire = false;
+            isWitch = true;
+            isDemon = false;
+        }
+        else if(monsterType == 4)
+        {
+            isWerewolf = false;
+            isVampire = false;
             isWitch = false;
             isDemon = true;
-            Debug.Log("Monster clue " + clue1 + " should be Demon");
         }
     }
 
@@ -98,22 +94,6 @@ public class GuessManager : MonoBehaviour
             if(CheckIfAllCluesCollected())
             {
                 guessScreen.SetActive(true);
-                if(isWerewolf)
-                {
-                    Debug.Log("Answer is Werewolf");
-                }
-                else if(isVampire)
-                {
-                    Debug.Log("Answer is Vampire");
-                }
-                else if(isWitch)
-                {
-                    Debug.Log("Answer is Witch");
-                }
-                else if(isDemon)
-                {
-                    Debug.Log("Answer is Demon");
-                }
             }
             else
             {
@@ -145,38 +125,6 @@ public class GuessManager : MonoBehaviour
             Debug.Log("Correct Guess");
             spawnMonster = true;
         }
-        else
-        {
-            Debug.Log("Incorrect Guess");
-            Debug.Log("Correct num: " + guessValue);
-            if (isWerewolf)
-            {
-                Debug.Log("Real Answer is Werewolf");
-            }
-            else if (isVampire)
-            {
-                Debug.Log("Real Answer is Vampire");
-            }
-            else if (isWitch)
-            {
-                Debug.Log("Real Answer is Witch");
-            }
-            else if (isDemon)
-            {
-                Debug.Log("Real Answer is Demon");
-            }
-        }
-
-        /*
-        if(guessValue == correctMonster)
-        {
-            
-        }
-        else
-        {
-            Debug.Log("Incorrect Guess");
-        }
-        */
     }
 
     public bool CheckIfAllCluesCollected()

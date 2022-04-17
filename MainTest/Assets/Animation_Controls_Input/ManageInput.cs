@@ -33,6 +33,12 @@ public class ManageInput : MonoBehaviour
     // ManageWeapons weaponManager;
     public GameObject urbanWeaponObject;
     ManageWeapons urbanWeaponsManager;
+    public GameObject suburbWeaponObject;
+    ManageWeapons suburbWeaponsManager;
+    public GameObject map3WeaponObject;
+    ManageWeapons map3WeaponsManager;
+    public GameObject map4WeaponObject;
+    ManageWeapons map4WeaponsManager;
 
     [Header("Pause Menu")]
     public GameObject pauseMenu;
@@ -79,6 +85,9 @@ public class ManageInput : MonoBehaviour
 
         // weaponManager = weaponObject.GetComponent<ManageWeapons>();
         urbanWeaponsManager = urbanWeaponObject.GetComponent<ManageWeapons>();
+        suburbWeaponsManager = suburbWeaponObject.GetComponent<ManageWeapons>();
+        map3WeaponsManager = map3WeaponObject.GetComponent<ManageWeapons>();
+        map4WeaponsManager = map4WeaponObject.GetComponent<ManageWeapons>();
 
         flashLightOn = false;
         pauseMenu.SetActive(false);
@@ -214,8 +223,28 @@ public class ManageInput : MonoBehaviour
     // Melee Attack
     private void DoAttack(InputAction.CallbackContext obj)
     {
-        int weaponAttack = urbanWeaponsManager.equippedWeapon;
-        if(weaponAttack == 1)
+        int weaponAttack = 0;
+        #region Get Equipped Weapon
+        if (homeBaseInteractions.currentActiveMap == 1)
+        {
+            weaponAttack = urbanWeaponsManager.equippedWeapon;
+        }
+        else if(homeBaseInteractions.currentActiveMap == 2)
+        {
+            weaponAttack = suburbWeaponsManager.equippedWeapon;
+        }
+        else if(homeBaseInteractions.currentActiveMap == 3)
+        {
+            weaponAttack = map3WeaponsManager.equippedWeapon;
+        }
+        else if(homeBaseInteractions.currentActiveMap == 3)
+        {
+            weaponAttack = map4WeaponsManager.equippedWeapon;
+        }
+        #endregion
+
+        #region Weapon Attack Animation
+        if (weaponAttack == 1)
         {
             animatorManager.animator.SetTrigger("knifeAttack");
         }
@@ -235,6 +264,8 @@ public class ManageInput : MonoBehaviour
         {
             animatorManager.animator.SetTrigger("punchAttack");
         }
+        #endregion
+
         playerCombat.StartAttack(weaponAttack);
     }
 
@@ -248,11 +279,24 @@ public class ManageInput : MonoBehaviour
         map3GuessManager.HandleGuessInteraction();
         map4GuessManager.HandleGuessInteraction();
 
-        // weaponManager.HandleWeaponRack(0);
-        if(homeBaseInteractions.currentActiveMap == 1)
+        #region Weapon Rack Interaction
+        if (homeBaseInteractions.currentActiveMap == 1)
         {
             urbanWeaponsManager.HandleWeaponRack(0);
         }
+        else if (homeBaseInteractions.currentActiveMap == 2)
+        {
+            suburbWeaponsManager.HandleWeaponRack(0);
+        }
+        else if (homeBaseInteractions.currentActiveMap == 3)
+        {
+            map3WeaponsManager.HandleWeaponRack(0);
+        }
+        else if (homeBaseInteractions.currentActiveMap == 4)
+        {
+            map4WeaponsManager.HandleWeaponRack(0);
+        }
+        #endregion
     }
 
     private void HandleDPadPress(int padDirection)
@@ -298,15 +342,35 @@ public class ManageInput : MonoBehaviour
         }
         else if(homeBaseInteractions.currentActiveMap == 2)
         {
-            suburbGuessManager.PlayerGuessSubmission(padDirection);
+            if(suburbWeaponsManager.weaponScreenOpen)
+            {
+                suburbWeaponsManager.HandleWeaponRack(padDirection);
+            }
+            else
+            {
+                suburbGuessManager.PlayerGuessSubmission(padDirection);
+            }
         }
         else if(homeBaseInteractions.currentActiveMap == 3)
         {
-            map3GuessManager.PlayerGuessSubmission(padDirection);
+            if(map3WeaponsManager.weaponScreenOpen)
+            {
+                map3WeaponsManager.HandleWeaponRack(padDirection);
+            } else
+            {
+                map3GuessManager.PlayerGuessSubmission(padDirection);
+            }  
         }
         else if(homeBaseInteractions.currentActiveMap == 4)
         {
-            map4GuessManager.PlayerGuessSubmission(padDirection);
+            if(map4WeaponsManager.weaponScreenOpen)
+            {
+                map4WeaponsManager.HandleWeaponRack(padDirection);
+            }
+            else
+            {
+                map4GuessManager.PlayerGuessSubmission(padDirection);
+            } 
         }
         #endregion
 

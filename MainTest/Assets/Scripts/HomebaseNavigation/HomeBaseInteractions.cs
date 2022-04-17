@@ -385,26 +385,29 @@ public class HomeBaseInteractions : MonoBehaviour
 
     private void HandleMenuSelection()
     {
-        if (mapDisplayToggle.activeSelf)
+        if(currentActiveMap == 0)
         {
-            LaunchMap();
-        }
-        else if(genderDisplayToggle.activeSelf)
-        {
-            if(genderCurrentlySelected == 1)
+            if (mapDisplayToggle.activeSelf)
             {
-                maleModel.SetActive(true);
-                femaleModel.SetActive(false);
+                LaunchMap();
             }
-            else
+            else if (genderDisplayToggle.activeSelf)
             {
-                maleModel.SetActive(false);
-                femaleModel.SetActive(true);
+                if (genderCurrentlySelected == 1)
+                {
+                    maleModel.SetActive(true);
+                    femaleModel.SetActive(false);
+                }
+                else
+                {
+                    maleModel.SetActive(false);
+                    femaleModel.SetActive(true);
+                }
             }
-        }
-        else if(accDisplayToggle.activeSelf)
-        {
-            playerAccessoryManagement.HandleButtonColorsAndObjects(accCursonLocation);
+            else if (accDisplayToggle.activeSelf)
+            {
+                playerAccessoryManagement.HandleButtonColorsAndObjects(accCursonLocation);
+            }
         }
     }
 

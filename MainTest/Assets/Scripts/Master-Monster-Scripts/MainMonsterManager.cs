@@ -130,10 +130,19 @@ public class MainMonsterManager : MonoBehaviour
     [Header("Return Machine Objects")]
     public GameObject urbanReturnMachine;
     ReturnToBase urbanReturn;
+    public GameObject suburbReturnMachine;
+    ReturnToBase suburbReturn;
+    public GameObject map3ReturnMachine;
+    ReturnToBase map3Return;
+    public GameObject map4ReturnMachine;
+    ReturnToBase map4Return;
     #endregion
 
     #region Monster AI Scripts
     Werewolf_Master werewolfAI;
+    Vampire_Master vampireAI;
+    Witch_Master witchAI;
+    Demon_Master demonAI;
     #endregion
 
     public int urbanMonsterSpawn;
@@ -190,10 +199,16 @@ public class MainMonsterManager : MonoBehaviour
 
         #region Return Components
         urbanReturn = urbanReturnMachine.GetComponent<ReturnToBase>();
+        suburbReturn = suburbReturnMachine.GetComponent<ReturnToBase>();
+        map3Return = map3ReturnMachine.GetComponent<ReturnToBase>();
+        map4Return = map4ReturnMachine.GetComponent<ReturnToBase>();
         #endregion
 
         #region AI Components
         werewolfAI = werewolfMonsterMain.GetComponent<Werewolf_Master>();
+        vampireAI = vampirefMonsterMain.GetComponent<Vampire_Master>();
+        witchAI = witchMonsterMain.GetComponent<Witch_Master>();
+        demonAI = demonMonsterMain.GetComponent<Demon_Master>();
         #endregion
 
         #region Other Items
@@ -236,13 +251,84 @@ public class MainMonsterManager : MonoBehaviour
             SpawnMap4Monster();
         }
 
-        if(werewolfAI.werewolfIsDefeated)
+        #region Check if Monsters Defeated
+        if (werewolfAI.werewolfIsDefeated)
         {
             if(listRandom[0] == 1)
             {
                 urbanReturn.LocalMonsterDefeated = true;
             }
+            else if(listRandom[1] == 1)
+            {
+                suburbReturn.LocalMonsterDefeated = true;
+            }
+            else if(listRandom[2] == 1)
+            {
+                map3Return.LocalMonsterDefeated = true;
+            }
+            else if(listRandom[3] == 1)
+            {
+                map4Return.LocalMonsterDefeated = true;
+            }
         }
+        if (vampireAI.vampireIsDefeated)
+        {
+            if (listRandom[0] == 2)
+            {
+                urbanReturn.LocalMonsterDefeated = true;
+            }
+            else if (listRandom[1] == 2)
+            {
+                suburbReturn.LocalMonsterDefeated = true;
+            }
+            else if (listRandom[2] == 2)
+            {
+                map3Return.LocalMonsterDefeated = true;
+            }
+            else if (listRandom[3] == 2)
+            {
+                map4Return.LocalMonsterDefeated = true;
+            }
+        }
+        if (witchAI.witchIsDefeated)
+        {
+            if (listRandom[0] == 3)
+            {
+                urbanReturn.LocalMonsterDefeated = true;
+            }
+            else if (listRandom[1] == 3)
+            {
+                suburbReturn.LocalMonsterDefeated = true;
+            }
+            else if (listRandom[2] == 3)
+            {
+                map3Return.LocalMonsterDefeated = true;
+            }
+            else if (listRandom[3] == 3)
+            {
+                map4Return.LocalMonsterDefeated = true;
+            }
+        }
+        if (demonAI.demnonIsDefeated)
+        {
+            if (listRandom[0] == 4)
+            {
+                urbanReturn.LocalMonsterDefeated = true;
+            }
+            else if (listRandom[1] == 4)
+            {
+                suburbReturn.LocalMonsterDefeated = true;
+            }
+            else if (listRandom[2] == 4)
+            {
+                map3Return.LocalMonsterDefeated = true;
+            }
+            else if (listRandom[3] == 4)
+            {
+                map4Return.LocalMonsterDefeated = true;
+            }
+        }
+        #endregion
     }
 
     private void RandomizeTheList()

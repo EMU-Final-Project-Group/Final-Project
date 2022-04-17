@@ -15,6 +15,12 @@ public class PlayerCombat : MonoBehaviour
     [Header("Enemies")]
     public GameObject werewolf;
     Werewolf_Master werewolfMasterScript;
+    public GameObject vampire;
+    Vampire_Master vampireMasterScript;
+    public GameObject witch;
+    Witch_Master witchMasterScript;
+    public GameObject demon;
+    Demon_Master demonMasterScript;
 
     // Objects for the weapon colliders
     private Collider knifeCollider;
@@ -36,6 +42,9 @@ public class PlayerCombat : MonoBehaviour
 
         // Gets the Monster Scripts
         werewolfMasterScript = werewolf.GetComponent<Werewolf_Master>();
+        vampireMasterScript = vampire.GetComponent<Vampire_Master>();
+        witchMasterScript = witch.GetComponent<Witch_Master>();
+        demonMasterScript = demon.GetComponent<Demon_Master>();
 
         currentWeapon = 0;
     }
@@ -111,7 +120,7 @@ public class PlayerCombat : MonoBehaviour
                 Debug.Log("You hit with an Axe");
                 werewolfMasterScript.MonsterTookDamage(3);
                 availableToAttackAgain = false;
-                StartCoroutine(PauseAttack(4));
+                StartCoroutine(PauseAttack(3));
             }
             else
             {
@@ -119,6 +128,57 @@ public class PlayerCombat : MonoBehaviour
                 werewolfMasterScript.MonsterTookDamage(1);
                 availableToAttackAgain = false;
                 StartCoroutine(PauseAttack(2));
+            }
+        }
+        else if(other.gameObject.tag == "Vampire")
+        {
+            if(currentWeapon == 1)
+            {
+                Debug.Log("You hit with a Knife");
+                vampireMasterScript.MonsterTookDamage(2);
+                availableToAttackAgain=false;
+                StartCoroutine(PauseAttack(2));
+            }
+            else
+            {
+                Debug.Log("You hit with the wrong weapon");
+                vampireMasterScript.MonsterTookDamage(1);
+                availableToAttackAgain = false;
+                StartCoroutine(PauseAttack(4));
+            }
+        }
+        else if(other.gameObject.tag == "Witch")
+        {
+            if(currentWeapon == 4)
+            {
+                Debug.Log("You hit with a Pitch Fork");
+                witchMasterScript.MonsterTookDamage(4);
+                availableToAttackAgain = false;
+                StartCoroutine(PauseAttack(3));
+            }
+            else
+            {
+                Debug.Log("You hit with the wrong weapon");
+                witchMasterScript.MonsterTookDamage(1);
+                availableToAttackAgain = false;
+                StartCoroutine(PauseAttack(4));
+            }
+        }
+        else if(other.gameObject.tag == "Demon")
+        {
+            if(currentWeapon == 2)
+            {
+                Debug.Log("You hit with a Butcher Cleaver");
+                demonMasterScript.MonsterTookDamage(2);
+                availableToAttackAgain = false;
+                StartCoroutine(PauseAttack(2));
+            }
+            else
+            {
+                Debug.Log("You hit with the wrong weapon");
+                demonMasterScript.MonsterTookDamage(1);
+                availableToAttackAgain = false;
+                StartCoroutine(PauseAttack(4));
             }
         }
     }

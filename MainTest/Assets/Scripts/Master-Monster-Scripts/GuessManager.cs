@@ -11,6 +11,16 @@ public class GuessManager : MonoBehaviour
     public GameObject monsterMaster;
     ClueDisplayManager monsterClueDisplay;
 
+    [Header("Guess Machine Distance")]
+    public GameObject urbanGuessDetection;
+    public GameObject suburbGuessDetection;
+    public GameObject map3GuessDetection;
+    public GameObject map4GuessDetection;
+    PlayerNearbyDetection urbanGuessMachineDistanceCheck;
+    PlayerNearbyDetection suburbGuessMachineDistanceCheck;
+    PlayerNearbyDetection map3GuessMachineDistanceCheck;
+    PlayerNearbyDetection map4GuessMachineDistanceCheck;
+
     private GameObject clue1;
     private GameObject clue2;
     private GameObject clue3;
@@ -42,6 +52,11 @@ public class GuessManager : MonoBehaviour
         combatScreen.SetActive(false);
 
         monsterClueDisplay = monsterMaster.GetComponent<ClueDisplayManager>();
+
+        urbanGuessMachineDistanceCheck = urbanGuessDetection.GetComponent<PlayerNearbyDetection>();
+        suburbGuessMachineDistanceCheck = suburbGuessDetection.GetComponent<PlayerNearbyDetection>();
+        map3GuessMachineDistanceCheck = map3GuessDetection.GetComponent<PlayerNearbyDetection>();
+        map4GuessMachineDistanceCheck = map4GuessDetection.GetComponent<PlayerNearbyDetection>();
     }
 
     private void Update()
@@ -49,6 +64,16 @@ public class GuessManager : MonoBehaviour
         if(!playerDetection.PlayerDistanceFarCheck())
         {
             popUpTip.SetActive(false);
+        }
+
+        DisableDistanceCheck();
+    }
+
+    private void DisableDistanceCheck()
+    {
+        if(!urbanGuessMachineDistanceCheck.PlayerDistanceCheck() && !suburbGuessMachineDistanceCheck.PlayerDistanceCheck() && !map3GuessMachineDistanceCheck.PlayerDistanceCheck() && !map4GuessMachineDistanceCheck.PlayerDistanceCheck())
+        {
+            guessScreen.SetActive(false);
         }
     }
 

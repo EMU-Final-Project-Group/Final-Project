@@ -17,17 +17,16 @@ public class ManageWeapons : MonoBehaviour
     public GameObject pitchFork;
 
     PlayerNearbyDetection playerDetection;
-    public bool weaponScreenOpen;
     public int equippedWeapon;
+    public bool weaponScreenOpen;
 
     // Start is called before the first frame update
     void Awake()
     {
         playerDetection = GetComponent<PlayerNearbyDetection>();
-        DisableWeaponScreen();
-        weaponScreenOpen = false;
         denyText.SetActive(false);
         equippedWeapon = 0;
+        weaponScreenOpen = false;
     }
 
     // Update is called once per frame
@@ -35,8 +34,6 @@ public class ManageWeapons : MonoBehaviour
     {
         if(!playerDetection.PlayerDistanceFarCheck())
         {
-            DisableWeaponScreen();
-            weaponScreenOpen=false;
             denyText.SetActive(false);
         }
     }
@@ -49,21 +46,17 @@ public class ManageWeapons : MonoBehaviour
             {
                 weaponScreen.SetActive(true);
                 weaponScreenOpen = true;
-                if(weaponSelection > 0)
+                if (weaponSelection > 0)
                 {
                     WeaponSelectionValue(weaponSelection);
                 }
             }
             else
             {
+                weaponScreenOpen = false;
                 denyText.SetActive(true);
             }
         }
-    }
-
-    private void DisableWeaponScreen()
-    {
-        weaponScreen.SetActive(false);
     }
 
     public void WeaponSelectionValue(int wepNum)

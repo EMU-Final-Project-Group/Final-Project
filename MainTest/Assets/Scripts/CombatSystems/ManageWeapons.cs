@@ -16,6 +16,16 @@ public class ManageWeapons : MonoBehaviour
     public GameObject axe;
     public GameObject pitchFork;
 
+    [Header("Weapon Boxes")]
+    public GameObject urbanWeapons;
+    public GameObject suburbWeapons;
+    public GameObject map3Weapons;
+    public GameObject map4Weapons;
+    PlayerNearbyDetection urbanBoxDetection;
+    PlayerNearbyDetection suburbBoxDetection;
+    PlayerNearbyDetection map3BoxDetection;
+    PlayerNearbyDetection map4BoxDetection;
+
     PlayerNearbyDetection playerDetection;
     public int equippedWeapon;
     public bool weaponScreenOpen;
@@ -27,6 +37,11 @@ public class ManageWeapons : MonoBehaviour
         denyText.SetActive(false);
         equippedWeapon = 0;
         weaponScreenOpen = false;
+
+        urbanBoxDetection = urbanWeapons.GetComponent<PlayerNearbyDetection>();
+        suburbBoxDetection = suburbWeapons.GetComponent<PlayerNearbyDetection>();
+        map3BoxDetection = map3Weapons.GetComponent<PlayerNearbyDetection>();
+        map4BoxDetection = map4Weapons.GetComponent<PlayerNearbyDetection>();
     }
 
     // Update is called once per frame
@@ -36,6 +51,7 @@ public class ManageWeapons : MonoBehaviour
         {
             denyText.SetActive(false);
         }
+        DisableWeaponScreen();
     }
 
     public void HandleWeaponRack(int weaponSelection)
@@ -56,6 +72,14 @@ public class ManageWeapons : MonoBehaviour
                 weaponScreenOpen = false;
                 denyText.SetActive(true);
             }
+        }
+    }
+
+    private void DisableWeaponScreen()
+    {
+        if(!urbanBoxDetection.PlayerDistanceCheck() && !suburbBoxDetection.PlayerDistanceCheck() && !map3BoxDetection.PlayerDistanceCheck() && !map4BoxDetection.PlayerDistanceCheck())
+        {
+            weaponScreen.SetActive(false);
         }
     }
 

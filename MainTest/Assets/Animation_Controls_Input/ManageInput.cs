@@ -237,7 +237,7 @@ public class ManageInput : MonoBehaviour
         {
             weaponAttack = map3WeaponsManager.equippedWeapon;
         }
-        else if(homeBaseInteractions.currentActiveMap == 3)
+        else if(homeBaseInteractions.currentActiveMap == 4)
         {
             weaponAttack = map4WeaponsManager.equippedWeapon;
         }

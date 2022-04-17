@@ -87,6 +87,7 @@ public class PlayerCombat : MonoBehaviour
             else
             {
                 Debug.Log("Uhh, I'll Punch");
+                Debug.Log("My weapon: " + currentWeapon);
             }
         }
         else

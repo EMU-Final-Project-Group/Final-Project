@@ -9,7 +9,7 @@ public class PlayerNearbyDetection : MonoBehaviour
     public GameObject player;
 
     // Text Object
-    [Header("Text")]
+    [Header("Floating Text")]
     public GameObject floatingText;
 
     // Distance to player
@@ -20,9 +20,9 @@ public class PlayerNearbyDetection : MonoBehaviour
     public bool displayText;
 
     // Clue Found
-    public bool playerPickedUpClue;
     [Header("HUD Element")]
     public GameObject hudItem;
+    public bool playerPickedUpClue;
 
     private void Start()
     {
@@ -46,7 +46,8 @@ public class PlayerNearbyDetection : MonoBehaviour
         if(PlayerDistanceCheck() && !playerPickedUpClue)
         {
             displayText = true;
-        } else
+        } 
+        else
         {
             displayText = false;
         }
@@ -79,7 +80,6 @@ public class PlayerNearbyDetection : MonoBehaviour
     public bool PlayerDistanceFarCheck()
     {
         var farDistance = enableDistance * 2;
-
         if(distanceToTarget <= farDistance)
         {
             return true;
@@ -99,5 +99,4 @@ public class PlayerNearbyDetection : MonoBehaviour
             hudItem.SetActive(true);
         }
     }
-
 }

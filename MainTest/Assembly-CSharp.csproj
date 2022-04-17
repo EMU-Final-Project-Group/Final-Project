@@ -4,7 +4,7 @@
     <LangVersion>latest</LangVersion>
     <CscToolPath>C:\Program Files\Unity\Hub\Editor\2020.3.25f1\Editor\Data\Tools\RoslynScripts</CscToolPath>
     <CscToolExe>unity_csc.bat</CscToolExe>
-  </PropertyGroup>
+  </PropertyGroup> 
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -46,6 +46,7 @@
     <ImplicitlyExpandNETStandardFacades>false</ImplicitlyExpandNETStandardFacades>
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
+
   <ItemGroup>
      <Compile Include="Assets\Animation_Controls_Input\ResetBool.cs" />
      <Compile Include="Assets\Scripts\ClueSystems\ClueManager.cs" />

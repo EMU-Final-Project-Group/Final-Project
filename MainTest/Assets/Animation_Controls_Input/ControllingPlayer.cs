@@ -476,6 +476,15 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""eed1d9c0-9081-4c73-b3df-df941cc5f7d2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -610,6 +619,28 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
                     ""action"": ""SelectWithY"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2103bcf6-7845-4919-bfec-8c974b84e61f"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c273068d-516d-495e-bdd4-f5199d39b440"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -636,6 +667,7 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
         m_MenuActions_NavRight = m_MenuActions.FindAction("NavRight", throwIfNotFound: true);
         m_MenuActions_Select = m_MenuActions.FindAction("Select", throwIfNotFound: true);
         m_MenuActions_SelectWithY = m_MenuActions.FindAction("SelectWithY", throwIfNotFound: true);
+        m_MenuActions_Pause = m_MenuActions.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -815,6 +847,7 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
     private readonly InputAction m_MenuActions_NavRight;
     private readonly InputAction m_MenuActions_Select;
     private readonly InputAction m_MenuActions_SelectWithY;
+    private readonly InputAction m_MenuActions_Pause;
     public struct MenuActionsActions
     {
         private @ControllingPlayer m_Wrapper;
@@ -825,6 +858,7 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
         public InputAction @NavRight => m_Wrapper.m_MenuActions_NavRight;
         public InputAction @Select => m_Wrapper.m_MenuActions_Select;
         public InputAction @SelectWithY => m_Wrapper.m_MenuActions_SelectWithY;
+        public InputAction @Pause => m_Wrapper.m_MenuActions_Pause;
         public InputActionMap Get() { return m_Wrapper.m_MenuActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -852,6 +886,9 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
                 @SelectWithY.started -= m_Wrapper.m_MenuActionsActionsCallbackInterface.OnSelectWithY;
                 @SelectWithY.performed -= m_Wrapper.m_MenuActionsActionsCallbackInterface.OnSelectWithY;
                 @SelectWithY.canceled -= m_Wrapper.m_MenuActionsActionsCallbackInterface.OnSelectWithY;
+                @Pause.started -= m_Wrapper.m_MenuActionsActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_MenuActionsActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_MenuActionsActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_MenuActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -874,6 +911,9 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
                 @SelectWithY.started += instance.OnSelectWithY;
                 @SelectWithY.performed += instance.OnSelectWithY;
                 @SelectWithY.canceled += instance.OnSelectWithY;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -900,5 +940,6 @@ public partial class @ControllingPlayer : IInputActionCollection2, IDisposable
         void OnNavRight(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
         void OnSelectWithY(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }

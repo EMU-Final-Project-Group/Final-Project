@@ -11,6 +11,7 @@ public class HomeBaseInteractions : MonoBehaviour
 
     [Header("Player")]
     public GameObject player;
+    public int currentActiveMap;
 
     [Header("Bathroom Objects")]
     public GameObject bathroomDoorClosed;
@@ -53,9 +54,26 @@ public class HomeBaseInteractions : MonoBehaviour
     [Header("Map Spawn Points")]
     public GameObject urbanSpawn;
     private Vector3 urbanSpawnPoint;
+    public GameObject suburbSpawn;
+    private Vector3 suburbSpawnPoint;
+    public GameObject map3Spawn;
+    private Vector3 map3SpawnPoint;
+    public GameObject map4Spawn;
+    private Vector3 map4SpawnPoint;
 
     [Header("UI Elements to Disable in Homebase")]
     public GameObject clueScreenDisable;
+
+    [Header("Homebase Elements to Disable when leaving homebase")]
+    public GameObject controlsPanel;
+    public GameObject genderPanel;
+    public GameObject accessoriesPanel;
+    public GameObject mapPanel;
+
+    [Header("Monster Items")]
+    public GameObject monsterManager;
+    MainMonsterManager mainMonsterManager;
+    ClueDisplayManager clueDisplayManager;
 
     // Player Bathroom Interaction Items
     PlayerInteraction doorInteractionClosed;
@@ -80,6 +98,7 @@ public class HomeBaseInteractions : MonoBehaviour
     {
         playerAccessoryManagement = GetComponent<PlayerAccessoryManagement>();
         controllerPrompt.SetActive(true);
+        currentActiveMap = 0;
 
         #region Bathroom Items
         // Gets the Bathroom player detection Items
@@ -141,8 +160,17 @@ public class HomeBaseInteractions : MonoBehaviour
         clueScreenDisable.SetActive(false);
         #endregion
 
-        #region
+        #region Spawn Coordinates
         urbanSpawnPoint = urbanSpawn.transform.position;
+        suburbSpawnPoint = suburbSpawn.transform.position;
+        map3SpawnPoint = map3Spawn.transform.position;
+        map4SpawnPoint = map4Spawn.transform.position;
+        #endregion
+
+        #region Get Monster Scripts
+        mainMonsterManager = monsterManager.GetComponent<MainMonsterManager>();
+        clueDisplayManager = monsterManager.GetComponent<ClueDisplayManager>();
+        clueDisplayManager.DisableAllDisplays();
         #endregion
     }
 
@@ -357,31 +385,29 @@ public class HomeBaseInteractions : MonoBehaviour
 
     private void HandleMenuSelection()
     {
-        if (mapDisplayToggle.activeSelf)
+        if(currentActiveMap == 0)
         {
-            if(mapCurrentlySelected == 1)
+            if (mapDisplayToggle.activeSelf)
             {
-                Debug.Log("Player Transported to: " + urbanSpawnPoint);
-                clueScreenDisable.SetActive(true);
-                player.transform.position = urbanSpawnPoint;
+                LaunchMap();
             }
-        }
-        else if(genderDisplayToggle.activeSelf)
-        {
-            if(genderCurrentlySelected == 1)
+            else if (genderDisplayToggle.activeSelf)
             {
-                maleModel.SetActive(true);
-                femaleModel.SetActive(false);
+                if (genderCurrentlySelected == 1)
+                {
+                    maleModel.SetActive(true);
+                    femaleModel.SetActive(false);
+                }
+                else
+                {
+                    maleModel.SetActive(false);
+                    femaleModel.SetActive(true);
+                }
             }
-            else
+            else if (accDisplayToggle.activeSelf)
             {
-                maleModel.SetActive(false);
-                femaleModel.SetActive(true);
+                playerAccessoryManagement.HandleButtonColorsAndObjects(accCursonLocation);
             }
-        }
-        else if(accDisplayToggle.activeSelf)
-        {
-            playerAccessoryManagement.HandleButtonColorsAndObjects(accCursonLocation);
         }
     }
 
@@ -451,11 +477,74 @@ public class HomeBaseInteractions : MonoBehaviour
 
     private void LaunchMap()
     {
-        if(mapDisplayToggle.activeSelf && mapCurrentlySelected == 1)
+        if (mapDisplayToggle.activeSelf && mapCurrentlySelected == 1)
         {
-            Debug.Log("Player Transported to: " + urbanSpawnPoint);
-            clueScreenDisable.SetActive(true);
+            currentActiveMap = 1;
+            HandleDisplayEnable(mainMonsterManager.urbanMonsterSpawn);
+            DisableHomebaseItems();
+            // clueScreenDisable.SetActive(true);
             player.transform.position = urbanSpawnPoint;
         }
+        else if(mapDisplayToggle.activeSelf && mapCurrentlySelected == 2)
+        {
+            currentActiveMap = 2;
+            HandleDisplayEnable(mainMonsterManager.suburbMonsterSpawn);
+            DisableHomebaseItems();
+            // clueScreenDisable.SetActive(true);
+            player.transform.position = suburbSpawnPoint;
+        }
+        else if(mapDisplayToggle.activeSelf && mapCurrentlySelected == 3)
+        {
+            currentActiveMap = 3;
+            HandleDisplayEnable(mainMonsterManager.map3MonsterSpawn);
+            DisableHomebaseItems();
+            // clueScreenDisable.SetActive(true);
+            player.transform.position = map3SpawnPoint;
+        }
+        else if(mapDisplayToggle.activeSelf && mapCurrentlySelected == 4)
+        {
+            currentActiveMap = 4;
+            HandleDisplayEnable(mainMonsterManager.map4MonsterSpawn);
+            DisableHomebaseItems();
+            // clueScreenDisable.SetActive(true);
+            player.transform.position = map4SpawnPoint;
+        }
+    }
+
+    private void HandleDisplayEnable(int monster)
+    {
+        if(monster == 1)
+        {
+            clueDisplayManager.OnSceneLoad(monster);
+        }
+        else if(monster == 2)
+        {
+            clueDisplayManager.OnSceneLoad(monster);
+        }
+        else if(monster == 3)
+        {
+            clueDisplayManager.OnSceneLoad(monster);
+        }
+        else if(monster == 4)
+        {
+            clueDisplayManager.OnSceneLoad(monster);
+        }
+    }
+
+    private void DisableHomebaseItems()
+    {
+        controlsPanel.SetActive(false);
+        genderPanel.SetActive(false);
+        accessoriesPanel.SetActive(false);
+        mapPanel.SetActive(false);
+    }
+
+    public void EnableHomebaseItems()
+    {
+        controlsPanel.SetActive(true);
+        genderPanel.SetActive(true);
+        accessoriesPanel.SetActive(true);
+        mapPanel.SetActive(true);
+        Debug.Log("Map is now: " + currentActiveMap);
     }
 }

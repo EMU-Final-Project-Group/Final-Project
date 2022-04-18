@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class ManageInput : MonoBehaviour
@@ -17,6 +18,12 @@ public class ManageInput : MonoBehaviour
     [Header("Toggle Flashlight")]
     public GameObject flashLight;
     private bool flashLightOn;
+
+    [Header("Sprint Items")]
+    public Text sprintDisplay;
+    private float sprintCharge;
+    private bool isSprinting;
+    private bool sprintAvailable;
 
     [Header("Guess Machine")]
     public GameObject urbanGuess;
@@ -95,6 +102,42 @@ public class ManageInput : MonoBehaviour
         pauseMenuCursorLocation = 1;
 
         homeBaseInteractions = homeBase.GetComponent<HomeBaseInteractions>();
+
+        // Sprint Items
+        sprintCharge = 100;
+        sprintDisplay.color = Color.white;
+        isSprinting = false;
+        sprintAvailable = true;
+    }
+
+    private void Update()
+    {
+        // Handle Sprint charge and display the charge
+        HandleSprintCharge();
+        sprintDisplay.text = Mathf.RoundToInt(sprintCharge).ToString();
+    }
+
+    private void HandleSprintCharge()
+    {
+        if(isSprinting && sprintCharge > 0)
+        {
+            sprintCharge -= 0.08f;
+        }
+        else if (!isSprinting && sprintCharge < 100)
+        {
+            sprintCharge += 0.07f;
+        }
+        else if(sprintCharge <= 0)
+        {
+            sprintAvailable = false;
+            sprintDisplay.color = Color.red;
+        }
+        else if(sprintCharge >= 100)
+        {
+            sprintCharge = 100;
+            sprintAvailable = true;
+            sprintDisplay.color = Color.white;
+        }
     }
 
     private void OnEnable()
@@ -173,13 +216,15 @@ public class ManageInput : MonoBehaviour
 
     private void HandleSprintInput()
     {
-        if(b_input && moveAmount > 0.5f)
+        if (b_input && moveAmount > 0.5f && sprintAvailable)
         {
             playerLocomotion.isSprinting = true;
+            isSprinting = true;
         }
         else
         {
             playerLocomotion.isSprinting = false;
+            isSprinting = false;
         }
     }
 

@@ -7,6 +7,7 @@ public class ManageWeapons : MonoBehaviour
     [Header("Weapon Screen")]
     public GameObject weaponScreen;
     public GameObject combatScreen;
+    public GameObject denyText;
 
     // Weapon Objects
     [Header("Weapon Selection")]
@@ -15,17 +16,32 @@ public class ManageWeapons : MonoBehaviour
     public GameObject axe;
     public GameObject pitchFork;
 
+    [Header("Weapon Boxes")]
+    public GameObject urbanWeapons;
+    public GameObject suburbWeapons;
+    public GameObject map3Weapons;
+    public GameObject map4Weapons;
+    PlayerNearbyDetection urbanBoxDetection;
+    PlayerNearbyDetection suburbBoxDetection;
+    PlayerNearbyDetection map3BoxDetection;
+    PlayerNearbyDetection map4BoxDetection;
+
     PlayerNearbyDetection playerDetection;
-    public bool weaponScreenOpen;
     public int equippedWeapon;
+    public bool weaponScreenOpen;
 
     // Start is called before the first frame update
     void Awake()
     {
         playerDetection = GetComponent<PlayerNearbyDetection>();
-        DisableWeaponScreen();
-        weaponScreenOpen = false;
+        denyText.SetActive(false);
         equippedWeapon = 0;
+        weaponScreenOpen = false;
+
+        urbanBoxDetection = urbanWeapons.GetComponent<PlayerNearbyDetection>();
+        suburbBoxDetection = suburbWeapons.GetComponent<PlayerNearbyDetection>();
+        map3BoxDetection = map3Weapons.GetComponent<PlayerNearbyDetection>();
+        map4BoxDetection = map4Weapons.GetComponent<PlayerNearbyDetection>();
     }
 
     // Update is called once per frame
@@ -33,9 +49,9 @@ public class ManageWeapons : MonoBehaviour
     {
         if(!playerDetection.PlayerDistanceFarCheck())
         {
-            DisableWeaponScreen();
-            weaponScreenOpen=false;
+            denyText.SetActive(false);
         }
+        DisableWeaponScreen();
     }
 
     public void HandleWeaponRack(int weaponSelection)
@@ -46,17 +62,25 @@ public class ManageWeapons : MonoBehaviour
             {
                 weaponScreen.SetActive(true);
                 weaponScreenOpen = true;
-                if(weaponSelection > 0)
+                if (weaponSelection > 0)
                 {
                     WeaponSelectionValue(weaponSelection);
                 }
+            }
+            else
+            {
+                weaponScreenOpen = false;
+                denyText.SetActive(true);
             }
         }
     }
 
     private void DisableWeaponScreen()
     {
-        weaponScreen.SetActive(false);
+        if(!urbanBoxDetection.PlayerDistanceCheck() && !suburbBoxDetection.PlayerDistanceCheck() && !map3BoxDetection.PlayerDistanceCheck() && !map4BoxDetection.PlayerDistanceCheck())
+        {
+            weaponScreen.SetActive(false);
+        }
     }
 
     public void WeaponSelectionValue(int wepNum)

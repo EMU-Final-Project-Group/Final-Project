@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Enemy
   - clue
+  - Werewolf
+  - Vampire
+  - Witch
+  - Demon
   layers:
   - Default
   - TransparentFX

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class ManageInput : MonoBehaviour
@@ -11,20 +12,49 @@ public class ManageInput : MonoBehaviour
     PlayerCombat playerCombat;
 
     [Header("Clue System")]
-    public GameObject clueObject;
-    ClueManager clueManager;
+    public GameObject clueSystem;
+    CluePickUpManager cluePickUpManager;
 
     [Header("Toggle Flashlight")]
     public GameObject flashLight;
     private bool flashLightOn;
 
-    [Header("Guess Machine")]
-    public GameObject guessObject;
-    GuessMachine guessManager;
+    [Header("Sprint Items")]
+    public Text sprintDisplay;
+    private float sprintCharge;
+    private bool isSprinting;
+    private bool sprintAvailable;
 
-    [Header("Weapon Selection Rack")]
-    public GameObject weaponObject;
-    ManageWeapons weaponManager;
+    [Header("Guess Machine")]
+    public GameObject urbanGuess;
+    public GameObject suburbGuess;
+    public GameObject map3Guess;
+    public GameObject map4Guess;
+    GuessManager urbanGuessManager;
+    GuessManager suburbGuessManager;
+    GuessManager map3GuessManager;
+    GuessManager map4GuessManager;
+
+    [Header("Weapon Selection Racko")]
+    // public GameObject weaponObject;
+    // ManageWeapons weaponManager;
+    public GameObject urbanWeaponObject;
+    ManageWeapons urbanWeaponsManager;
+    public GameObject suburbWeaponObject;
+    ManageWeapons suburbWeaponsManager;
+    public GameObject map3WeaponObject;
+    ManageWeapons map3WeaponsManager;
+    public GameObject map4WeaponObject;
+    ManageWeapons map4WeaponsManager;
+
+    [Header("Pause Menu")]
+    public GameObject pauseMenu;
+    PauseMenuManagement pauseManager;
+    private int pauseMenuCursorLocation;
+
+    [Header("Home Base Interaction")]
+    public GameObject homeBase;
+    HomeBaseInteractions homeBaseInteractions;
 
     // Movement
     public Vector2 movementInput;
@@ -52,11 +82,62 @@ public class ManageInput : MonoBehaviour
         playerLocomotion = GetComponent<Locomotion>();
         animatorManager = GetComponent<ManageAnimation>();
         playerCombat = GetComponent<PlayerCombat>();
-        
-        clueManager = clueObject.GetComponent<ClueManager>();
-        guessManager = guessObject.GetComponent<GuessMachine>();
-        weaponManager = weaponObject.GetComponent<ManageWeapons>();
+
+        cluePickUpManager = clueSystem.GetComponent<CluePickUpManager>();
+
+        urbanGuessManager = urbanGuess.GetComponent<GuessManager>();
+        suburbGuessManager = suburbGuess.GetComponent<GuessManager>();
+        map3GuessManager = map3Guess.GetComponent<GuessManager>();
+        map4GuessManager = map4Guess.GetComponent<GuessManager>();
+
+        // weaponManager = weaponObject.GetComponent<ManageWeapons>();
+        urbanWeaponsManager = urbanWeaponObject.GetComponent<ManageWeapons>();
+        suburbWeaponsManager = suburbWeaponObject.GetComponent<ManageWeapons>();
+        map3WeaponsManager = map3WeaponObject.GetComponent<ManageWeapons>();
+        map4WeaponsManager = map4WeaponObject.GetComponent<ManageWeapons>();
+
         flashLightOn = false;
+        pauseMenu.SetActive(false);
+        pauseManager = pauseMenu.GetComponent<PauseMenuManagement>();
+        pauseMenuCursorLocation = 1;
+
+        homeBaseInteractions = homeBase.GetComponent<HomeBaseInteractions>();
+
+        // Sprint Items
+        sprintCharge = 100;
+        sprintDisplay.color = Color.white;
+        isSprinting = false;
+        sprintAvailable = true;
+    }
+
+    private void Update()
+    {
+        // Handle Sprint charge and display the charge
+        HandleSprintCharge();
+        sprintDisplay.text = Mathf.RoundToInt(sprintCharge).ToString();
+    }
+
+    private void HandleSprintCharge()
+    {
+        if(isSprinting && sprintCharge > 0)
+        {
+            sprintCharge -= 0.08f;
+        }
+        else if (!isSprinting && sprintCharge < 100)
+        {
+            sprintCharge += 0.07f;
+        }
+        else if(sprintCharge <= 0)
+        {
+            sprintAvailable = false;
+            sprintDisplay.color = Color.red;
+        }
+        else if(sprintCharge >= 100)
+        {
+            sprintCharge = 100;
+            sprintAvailable = true;
+            sprintDisplay.color = Color.white;
+        }
     }
 
     private void OnEnable()
@@ -92,9 +173,12 @@ public class ManageInput : MonoBehaviour
             playerControls.MenuActions.NavDown.performed += i => HandleDPadPress(3);
             playerControls.MenuActions.NavLeft.performed += i => HandleDPadPress(4);
 
-
             // Toggle Flashlight
             playerControls.PlayerAction.FlashlightToggle.performed += i => HandleFlashLightStatus();
+
+            // Toggle Pause Menu
+            playerControls.MenuActions.Pause.performed += i => OpenPauseMenu();
+            playerControls.MenuActions.Select.performed += i => PauseMenuSelection();
         }
 
         playerControls.Enable();
@@ -132,13 +216,15 @@ public class ManageInput : MonoBehaviour
 
     private void HandleSprintInput()
     {
-        if(b_input && moveAmount > 0.5f)
+        if (b_input && moveAmount > 0.5f && sprintAvailable)
         {
             playerLocomotion.isSprinting = true;
+            isSprinting = true;
         }
         else
         {
             playerLocomotion.isSprinting = false;
+            isSprinting = false;
         }
     }
 
@@ -182,8 +268,28 @@ public class ManageInput : MonoBehaviour
     // Melee Attack
     private void DoAttack(InputAction.CallbackContext obj)
     {
-        int weaponAttack = weaponManager.equippedWeapon;
-        if(weaponAttack == 1)
+        int weaponAttack = 0;
+        #region Get Equipped Weapon
+        if (homeBaseInteractions.currentActiveMap == 1)
+        {
+            weaponAttack = urbanWeaponsManager.equippedWeapon;
+        }
+        else if(homeBaseInteractions.currentActiveMap == 2)
+        {
+            weaponAttack = suburbWeaponsManager.equippedWeapon;
+        }
+        else if(homeBaseInteractions.currentActiveMap == 3)
+        {
+            weaponAttack = map3WeaponsManager.equippedWeapon;
+        }
+        else if(homeBaseInteractions.currentActiveMap == 4)
+        {
+            weaponAttack = map4WeaponsManager.equippedWeapon;
+        }
+        #endregion
+
+        #region Weapon Attack Animation
+        if (weaponAttack == 1)
         {
             animatorManager.animator.SetTrigger("knifeAttack");
         }
@@ -203,27 +309,117 @@ public class ManageInput : MonoBehaviour
         {
             animatorManager.animator.SetTrigger("punchAttack");
         }
+        #endregion
+
         playerCombat.StartAttack(weaponAttack);
     }
 
     // Object Interact
     private void HandleObjectInteraction()
     {
-        clueManager.HandleCluePick();
-        guessManager.HandleGuessMachine();
-        weaponManager.HandleWeaponRack(0);
+        cluePickUpManager.HandleClueInteraction();
+
+        urbanGuessManager.HandleGuessInteraction();
+        suburbGuessManager.HandleGuessInteraction();
+        map3GuessManager.HandleGuessInteraction();
+        map4GuessManager.HandleGuessInteraction();
+
+        #region Weapon Rack Interaction
+        if (homeBaseInteractions.currentActiveMap == 1)
+        {
+            urbanWeaponsManager.HandleWeaponRack(0);
+        }
+        else if (homeBaseInteractions.currentActiveMap == 2)
+        {
+            suburbWeaponsManager.HandleWeaponRack(0);
+        }
+        else if (homeBaseInteractions.currentActiveMap == 3)
+        {
+            map3WeaponsManager.HandleWeaponRack(0);
+        }
+        else if (homeBaseInteractions.currentActiveMap == 4)
+        {
+            map4WeaponsManager.HandleWeaponRack(0);
+        }
+        #endregion
     }
 
     private void HandleDPadPress(int padDirection)
     {
-        if(guessManager.guessScreenOpen)
+        if(pauseMenu.activeSelf)
         {
-            guessManager.PlayerGuessSubmission(padDirection);
+            if(padDirection == 1)
+            {
+                if(pauseMenuCursorLocation == 1)
+                {
+                    pauseMenuCursorLocation = 3;
+                }
+                else
+                {
+                    pauseMenuCursorLocation--;
+                }
+            }
+            else if(padDirection == 3)
+            {
+                if(pauseMenuCursorLocation == 3)
+                {
+                    pauseMenuCursorLocation = 1;
+                }
+                else
+                {
+                    pauseMenuCursorLocation++;
+                }
+            }
+            pauseManager.HandleDirectionInput(padDirection);
         }
-        if(weaponManager.weaponScreenOpen)
+
+        #region Monster Guess Submission
+        if(homeBaseInteractions.currentActiveMap == 1)
         {
-            weaponManager.HandleWeaponRack(padDirection);
+            if (urbanWeaponsManager.weaponScreenOpen)
+            {
+                urbanWeaponsManager.HandleWeaponRack(padDirection);
+            }
+            else
+            {
+                urbanGuessManager.PlayerGuessSubmission(padDirection);
+            }  
         }
+        else if(homeBaseInteractions.currentActiveMap == 2)
+        {
+            if(suburbWeaponsManager.weaponScreenOpen)
+            {
+                suburbWeaponsManager.HandleWeaponRack(padDirection);
+            }
+            else
+            {
+                suburbGuessManager.PlayerGuessSubmission(padDirection);
+            }
+        }
+        else if(homeBaseInteractions.currentActiveMap == 3)
+        {
+            if(map3WeaponsManager.weaponScreenOpen)
+            {
+                map3WeaponsManager.HandleWeaponRack(padDirection);
+            } else
+            {
+                map3GuessManager.PlayerGuessSubmission(padDirection);
+            }  
+        }
+        else if(homeBaseInteractions.currentActiveMap == 4)
+        {
+            if(map4WeaponsManager.weaponScreenOpen)
+            {
+                map4WeaponsManager.HandleWeaponRack(padDirection);
+            }
+            else
+            {
+                map4GuessManager.PlayerGuessSubmission(padDirection);
+            } 
+        }
+        #endregion
+
+        
     }
 
     private void HandleFlashLightStatus()
@@ -237,6 +433,30 @@ public class ManageInput : MonoBehaviour
         {
             flashLightOn = true;
             flashLight.SetActive(true);
+        }
+    }
+
+    private void OpenPauseMenu()
+    {
+        if(pauseMenu.activeSelf)
+        {
+            pauseMenu.SetActive(false);
+        }
+        else
+        {
+            pauseMenu.SetActive(true);
+        }
+    }
+
+    private void PauseMenuSelection()
+    {
+        if(pauseMenuCursorLocation == 1)
+        {
+            pauseMenu.SetActive(false);
+        }
+        else
+        {
+            pauseManager.PauseMenuSeleciton();
         }
     }
 }

@@ -11,11 +11,26 @@ public class PlayerCombat : MonoBehaviour
     public GameObject axe;
     public GameObject pitchFork;
 
+    // Monster Enemies
+    [Header("Enemies")]
+    public GameObject werewolf;
+    Werewolf_Master werewolfMasterScript;
+    public GameObject vampire;
+    Vampire_Master vampireMasterScript;
+    public GameObject witch;
+    Witch_Master witchMasterScript;
+    public GameObject demon;
+    Demon_Master demonMasterScript;
+
     // Objects for the weapon colliders
     private Collider knifeCollider;
     private Collider butcherCollider;
     private Collider axeCollider;
     private Collider forkCollider;
+
+    // Combat stats
+    private bool availableToAttackAgain;
+    private int currentWeapon;
 
     private void Awake()
     {
@@ -25,52 +40,68 @@ public class PlayerCombat : MonoBehaviour
         axeCollider = (BoxCollider)axe.GetComponent<Collider>();
         forkCollider = (BoxCollider)pitchFork.GetComponent<Collider>();
 
+        // Gets the Monster Scripts
+        werewolfMasterScript = werewolf.GetComponent<Werewolf_Master>();
+        vampireMasterScript = vampire.GetComponent<Vampire_Master>();
+        witchMasterScript = witch.GetComponent<Witch_Master>();
+        demonMasterScript = demon.GetComponent<Demon_Master>();
+
+        currentWeapon = 0;
+    }
+
+    private void Start()
+    {
         // Initially disables the weapon colliders
         knifeCollider.enabled = false;
         butcherCollider.enabled = false;
         axeCollider.enabled = false;
         forkCollider.enabled = false;
+
+        // Combat Stats
+        availableToAttackAgain = true;
     }
 
     // Starts the attack process
-    public void StartAttack(int currentWeapon)
+    public void StartAttack(int weapon)
     {
-        if(currentWeapon == 1)
+        currentWeapon = weapon;
+
+        if(availableToAttackAgain)
         {
-            AttackCommands(knifeCollider);
-        }
-        else if(currentWeapon == 2)
-        {
-            AttackCommands(butcherCollider);
-        }
-        else if(currentWeapon == 3)
-        {
-            AttackCommands(axeCollider);
-        } 
-        else if(currentWeapon == 4)
-        {
-            AttackCommands(forkCollider);
+            if (currentWeapon == 1)
+            {
+                AttackCommands(knifeCollider);
+            }
+            else if (currentWeapon == 2)
+            {
+                AttackCommands(butcherCollider);
+            }
+            else if (currentWeapon == 3)
+            {
+                AttackCommands(axeCollider);
+            }
+            else if (currentWeapon == 4)
+            {
+                AttackCommands(forkCollider);
+            }
+            else
+            {
+                Debug.Log("Uhh, I'll Punch");
+                Debug.Log("My weapon: " + currentWeapon);
+            }
         }
         else
         {
-            Debug.Log("Uhh");
+            Debug.Log("Can't attack yet");
         }
     }
 
     private void AttackCommands(Collider weapon)
     {
         weapon.enabled = true;
-        Attack(weapon);
-        StartCoroutine(DisableDelay(1, weapon));
-    }
-
-    private void Attack(Collider weapon)
-    {
-        // Detect Enemy
+        // Attack(weapon);
         OnTriggerEnter(weapon);
-
-        // Damage the enemies
-
+        StartCoroutine(DisableDelay(1, weapon));
     }
 
     // Detect the enemy
@@ -78,7 +109,78 @@ public class PlayerCombat : MonoBehaviour
     {
         if(other.gameObject.tag == "Enemy")
         {
-            Debug.Log("You have hit the werewolf with");
+            Debug.Log("You have hit an enemy");
+            werewolfMasterScript.MonsterTookDamage(1);
+            availableToAttackAgain = false;
+            StartCoroutine(PauseAttack(3));
+        }
+        else if(other.gameObject.tag == "Werewolf")
+        {
+            if(currentWeapon == 3)
+            {
+                Debug.Log("You hit with an Axe");
+                werewolfMasterScript.MonsterTookDamage(3);
+                availableToAttackAgain = false;
+                StartCoroutine(PauseAttack(3));
+            }
+            else
+            {
+                Debug.Log("You hit with the wrong weapon");
+                werewolfMasterScript.MonsterTookDamage(1);
+                availableToAttackAgain = false;
+                StartCoroutine(PauseAttack(2));
+            }
+        }
+        else if(other.gameObject.tag == "Vampire")
+        {
+            if(currentWeapon == 1)
+            {
+                Debug.Log("You hit with a Knife");
+                vampireMasterScript.MonsterTookDamage(2);
+                availableToAttackAgain=false;
+                StartCoroutine(PauseAttack(2));
+            }
+            else
+            {
+                Debug.Log("You hit with the wrong weapon");
+                vampireMasterScript.MonsterTookDamage(1);
+                availableToAttackAgain = false;
+                StartCoroutine(PauseAttack(4));
+            }
+        }
+        else if(other.gameObject.tag == "Witch")
+        {
+            if(currentWeapon == 4)
+            {
+                Debug.Log("You hit with a Pitch Fork");
+                witchMasterScript.MonsterTookDamage(4);
+                availableToAttackAgain = false;
+                StartCoroutine(PauseAttack(3));
+            }
+            else
+            {
+                Debug.Log("You hit with the wrong weapon");
+                witchMasterScript.MonsterTookDamage(1);
+                availableToAttackAgain = false;
+                StartCoroutine(PauseAttack(4));
+            }
+        }
+        else if(other.gameObject.tag == "Demon")
+        {
+            if(currentWeapon == 2)
+            {
+                Debug.Log("You hit with a Butcher Cleaver");
+                demonMasterScript.MonsterTookDamage(2);
+                availableToAttackAgain = false;
+                StartCoroutine(PauseAttack(2));
+            }
+            else
+            {
+                Debug.Log("You hit with the wrong weapon");
+                demonMasterScript.MonsterTookDamage(1);
+                availableToAttackAgain = false;
+                StartCoroutine(PauseAttack(4));
+            }
         }
     }
 
@@ -87,5 +189,12 @@ public class PlayerCombat : MonoBehaviour
     {
         yield return new WaitForSeconds(sec);
         weapon.enabled = false;
+    }
+
+    // Disables the ability to attack for X seconds
+    IEnumerator PauseAttack(int pauseLength)
+    {
+        yield return new WaitForSeconds(pauseLength);
+        availableToAttackAgain = true;
     }
 }

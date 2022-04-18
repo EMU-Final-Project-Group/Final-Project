@@ -63,6 +63,7 @@ public class HomeBaseInteractions : MonoBehaviour
 
     [Header("UI Elements to Disable in Homebase")]
     public GameObject clueScreenDisable;
+    public GameObject combatScreenDisable;
 
     [Header("Homebase Elements to Disable when leaving homebase")]
     public GameObject controlsPanel;
@@ -93,12 +94,16 @@ public class HomeBaseInteractions : MonoBehaviour
     private int mapCurrentlySelected;
     private int genderCurrentlySelected;
     private int accCursonLocation;
+    private int monstersDefeated;
+    private int playMessageOnce;
 
     private void Start()
     {
         playerAccessoryManagement = GetComponent<PlayerAccessoryManagement>();
         controllerPrompt.SetActive(true);
         currentActiveMap = 0;
+        monstersDefeated = 0;
+        playMessageOnce = 1;
 
         #region Bathroom Items
         // Gets the Bathroom player detection Items
@@ -207,6 +212,12 @@ public class HomeBaseInteractions : MonoBehaviour
             accDisplayPrompt.SetActive(false);
             controllerPrompt.SetActive(false);
             genderDisplayPrompt.SetActive(false);
+        }
+
+        if(monstersDefeated == 4 && playMessageOnce == 1)
+        {
+            Debug.Log("YOU WIN THE GAME");
+            playMessageOnce--;
         }
     }
 
@@ -541,10 +552,11 @@ public class HomeBaseInteractions : MonoBehaviour
 
     public void EnableHomebaseItems()
     {
+        monstersDefeated++;
+        combatScreenDisable.SetActive(false);
         controlsPanel.SetActive(true);
         genderPanel.SetActive(true);
         accessoriesPanel.SetActive(true);
         mapPanel.SetActive(true);
-        Debug.Log("Map is now: " + currentActiveMap);
     }
 }

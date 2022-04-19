@@ -11,6 +11,11 @@ public class Witch_Master : MonoBehaviour
     public GameObject monsterSelf;
     Locomotion getPlayerStance;
 
+    // Monster Items
+    [Header("Main Monster Items")]
+    public GameObject mainMonster;
+    MainMonsterManager mainMonsterManager;
+
     // Distance to the Target
     [Header("Distance Values")]
     public float distanceToTarget;
@@ -36,6 +41,7 @@ public class Witch_Master : MonoBehaviour
     // Combat Variables
     [Header("Combat Stats")]
     private int currentHealth;
+    private bool availableToAttackAgain;
     public bool witchIsDefeated;
 
     private void Awake()
@@ -79,6 +85,13 @@ public class Witch_Master : MonoBehaviour
                 transform.position += transform.forward * moveSpeed * Time.deltaTime;
                 _agent.SetDestination(player.transform.position);
                 animationManager.UpdateAnimatorValues(0, 1.0f);
+                if (distanceToTarget < 2 && availableToAttackAgain)
+                {
+                    animator.SetTrigger("monsterAttack");
+                    availableToAttackAgain = false;
+                    mainMonsterManager.AddMadness(100);
+                    StartCoroutine(PauseAttack(5));
+                }
             }
             else
             {
@@ -145,6 +158,13 @@ public class Witch_Master : MonoBehaviour
         {
             return false;
         }
+    }
+
+    // Disables the ability to attack for X seconds
+    IEnumerator PauseAttack(int pauseLength)
+    {
+        yield return new WaitForSeconds(pauseLength);
+        availableToAttackAgain = true;
     }
 
     // Despawns the monster after 30 seconds

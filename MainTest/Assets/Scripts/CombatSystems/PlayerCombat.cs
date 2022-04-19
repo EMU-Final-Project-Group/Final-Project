@@ -32,6 +32,11 @@ public class PlayerCombat : MonoBehaviour
     private bool availableToAttackAgain;
     private int currentWeapon;
 
+    // Main Monster Script
+    [Header("Monster Items")]
+    public GameObject mainMonster;
+    MainMonsterManager mainMonsterManager;
+
     private void Awake()
     {
         // Gets the weapon box colliders
@@ -45,6 +50,7 @@ public class PlayerCombat : MonoBehaviour
         vampireMasterScript = vampire.GetComponent<Vampire_Master>();
         witchMasterScript = witch.GetComponent<Witch_Master>();
         demonMasterScript = demon.GetComponent<Demon_Master>();
+        mainMonsterManager = mainMonster.GetComponent<MainMonsterManager>();
 
         currentWeapon = 0;
     }
@@ -126,6 +132,7 @@ public class PlayerCombat : MonoBehaviour
             else
             {
                 Debug.Log("You hit with the wrong weapon");
+                mainMonsterManager.AddMadness(15);
                 werewolfMasterScript.MonsterTookDamage(1);
                 availableToAttackAgain = false;
                 StartCoroutine(PauseAttack(2));
@@ -143,6 +150,7 @@ public class PlayerCombat : MonoBehaviour
             else
             {
                 Debug.Log("You hit with the wrong weapon");
+                mainMonsterManager.AddMadness(15);
                 vampireMasterScript.MonsterTookDamage(1);
                 availableToAttackAgain = false;
                 StartCoroutine(PauseAttack(4));
@@ -160,6 +168,7 @@ public class PlayerCombat : MonoBehaviour
             else
             {
                 Debug.Log("You hit with the wrong weapon");
+                mainMonsterManager.AddMadness(15);
                 witchMasterScript.MonsterTookDamage(1);
                 availableToAttackAgain = false;
                 StartCoroutine(PauseAttack(4));
@@ -177,6 +186,7 @@ public class PlayerCombat : MonoBehaviour
             else
             {
                 Debug.Log("You hit with the wrong weapon");
+                mainMonsterManager.AddMadness(15);
                 demonMasterScript.MonsterTookDamage(1);
                 availableToAttackAgain = false;
                 StartCoroutine(PauseAttack(4));

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class MainMonsterManager : MonoBehaviour
@@ -86,7 +87,7 @@ public class MainMonsterManager : MonoBehaviour
 
     #region Vampire Objects
     // (2) Vampire Game Objects
-    [Header("Werewolf Game Objects")]
+    [Header("Vampire Game Objects")]
     public GameObject vampirefMonsterMain;
     public GameObject vampireClue1;
     public GameObject vampireClue2;
@@ -152,6 +153,19 @@ public class MainMonsterManager : MonoBehaviour
 
     // Randomize Lists
     private List<int> listRandom = new List<int>() { 1, 2, 3, 4 };
+
+    // Madness Score Items
+    [Header("Madness Items")]
+    public Text madnessDisplay;
+    private int madnessScore;
+    private bool startUrbanMadnessClock;
+    private bool startSuburbMadnessClock;
+    private bool startMap3MadnessClock;
+    private bool startMap4MadnessClock;
+
+    // Madness Clock Items
+    protected float Timer;
+    public float DelayAmount = 0.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -230,10 +244,28 @@ public class MainMonsterManager : MonoBehaviour
         witchMonsterMain.SetActive(false);
         demonMonsterMain.SetActive(false);
         #endregion
+
+        madnessScore = 0;
+        startUrbanMadnessClock = false;
+        startSuburbMadnessClock = false;
+        startMap3MadnessClock = false;
+        startMap4MadnessClock = false;
     }
 
     private void Update()
     {
+        // Madness Clock Items
+        Timer += Time.deltaTime;
+        if(startUrbanMadnessClock || startSuburbMadnessClock || startMap3MadnessClock || startMap4MadnessClock)
+        {
+            if(Timer >= DelayAmount)
+            {
+                Timer = 0f;
+                madnessScore++;
+                madnessDisplay.text = madnessScore.ToString();
+            }
+        }
+
         if(urbanGuessObjects.spawnMonster)
         {
             SpawnUrbanMonster();
@@ -257,18 +289,22 @@ public class MainMonsterManager : MonoBehaviour
             if(listRandom[0] == 1)
             {
                 urbanReturn.LocalMonsterDefeated = true;
+                startUrbanMadnessClock = false;
             }
             else if(listRandom[1] == 1)
             {
                 suburbReturn.LocalMonsterDefeated = true;
+                startSuburbMadnessClock = false;
             }
             else if(listRandom[2] == 1)
             {
                 map3Return.LocalMonsterDefeated = true;
+                startMap3MadnessClock = false;
             }
             else if(listRandom[3] == 1)
             {
                 map4Return.LocalMonsterDefeated = true;
+                startMap4MadnessClock = false;
             }
         }
         if (vampireAI.vampireIsDefeated)
@@ -276,18 +312,22 @@ public class MainMonsterManager : MonoBehaviour
             if (listRandom[0] == 2)
             {
                 urbanReturn.LocalMonsterDefeated = true;
+                startUrbanMadnessClock = false;
             }
             else if (listRandom[1] == 2)
             {
                 suburbReturn.LocalMonsterDefeated = true;
+                startSuburbMadnessClock = false;
             }
             else if (listRandom[2] == 2)
             {
                 map3Return.LocalMonsterDefeated = true;
+                startMap3MadnessClock = false;
             }
             else if (listRandom[3] == 2)
             {
                 map4Return.LocalMonsterDefeated = true;
+                startMap4MadnessClock = false;
             }
         }
         if (witchAI.witchIsDefeated)
@@ -295,18 +335,22 @@ public class MainMonsterManager : MonoBehaviour
             if (listRandom[0] == 3)
             {
                 urbanReturn.LocalMonsterDefeated = true;
+                startUrbanMadnessClock = false;
             }
             else if (listRandom[1] == 3)
             {
                 suburbReturn.LocalMonsterDefeated = true;
+                startSuburbMadnessClock = false;
             }
             else if (listRandom[2] == 3)
             {
                 map3Return.LocalMonsterDefeated = true;
+                startMap3MadnessClock = false;
             }
             else if (listRandom[3] == 3)
             {
                 map4Return.LocalMonsterDefeated = true;
+                startMap4MadnessClock = false;
             }
         }
         if (demonAI.demnonIsDefeated)
@@ -314,18 +358,22 @@ public class MainMonsterManager : MonoBehaviour
             if (listRandom[0] == 4)
             {
                 urbanReturn.LocalMonsterDefeated = true;
+                startUrbanMadnessClock = false;
             }
             else if (listRandom[1] == 4)
             {
                 suburbReturn.LocalMonsterDefeated = true;
+                startSuburbMadnessClock = false;
             }
             else if (listRandom[2] == 4)
             {
                 map3Return.LocalMonsterDefeated = true;
+                startMap3MadnessClock = false;
             }
             else if (listRandom[3] == 4)
             {
                 map4Return.LocalMonsterDefeated = true;
+                startMap4MadnessClock = false;
             }
         }
         #endregion
@@ -491,21 +539,25 @@ public class MainMonsterManager : MonoBehaviour
     private void SpawnUrbanMonster()
     {
         StartMonsterFight(listRandom[0]);
+        startUrbanMadnessClock = true;
     }
 
     private void SpawnSuburbMonster()
     {
         StartMonsterFight(listRandom[1]);
+        startSuburbMadnessClock = true;
     }
 
     private void SpawnMap3Monster()
     {
         StartMonsterFight(listRandom[2]);
+        startMap3MadnessClock = true;
     }
 
     private void SpawnMap4Monster()
     {
         StartMonsterFight(listRandom[3]);
+        startMap4MadnessClock = true;
     }
 
     private void StartMonsterFight(int monster)
@@ -528,4 +580,9 @@ public class MainMonsterManager : MonoBehaviour
         }
     }
     #endregion
+
+    public void AddMadness(int more)
+    {
+        madnessScore += more;
+    }
 }

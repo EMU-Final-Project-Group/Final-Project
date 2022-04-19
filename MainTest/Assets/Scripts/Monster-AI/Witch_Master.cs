@@ -47,7 +47,9 @@ public class Witch_Master : MonoBehaviour
     private void Awake()
     {
         getPlayerStance = player.GetComponent<Locomotion>();
-        animationManager = GetComponent<WerewolfAnimationManager>(); 
+        animationManager = GetComponent<WerewolfAnimationManager>();
+        mainMonsterManager = mainMonster.GetComponent<MainMonsterManager>();
+        availableToAttackAgain = true;
     }
 
     private void Start()

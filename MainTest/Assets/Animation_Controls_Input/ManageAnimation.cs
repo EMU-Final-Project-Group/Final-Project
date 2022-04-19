@@ -82,4 +82,23 @@ public class ManageAnimation : MonoBehaviour
         animator.SetFloat(horizontal, snappedHorizontal, 0.1f, Time.deltaTime);
         animator.SetFloat(vertical, snappedVertical, 0.1f, Time.deltaTime);
     }
+
+    public void Dance(bool setState, int dance)
+    {
+        switch(dance)
+        {
+            case 1:
+                animator.SetBool("startDanceChicken", setState);
+                break;
+            case 2:
+                animator.SetBool("startDanceGangnam", setState);
+                break;
+            case 3:
+                animator.SetBool("startDanceRumba", setState);
+                break;
+            case 4:
+                animator.SetBool("startDanceSilly", setState);
+                break;
+        }
+    }
 }

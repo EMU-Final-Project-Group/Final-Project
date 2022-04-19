@@ -14,6 +14,7 @@ public class ManageInput : MonoBehaviour
     [Header("Clue System")]
     public GameObject clueSystem;
     CluePickUpManager cluePickUpManager;
+    public GameObject GuessScreen;
 
     [Header("Toggle Flashlight")]
     public GameObject flashLight;
@@ -24,6 +25,8 @@ public class ManageInput : MonoBehaviour
     private float sprintCharge;
     private bool isSprinting;
     private bool sprintAvailable;
+    public float delayAmount = 0.01f;
+    protected float Timer;
 
     [Header("Guess Machine")]
     public GameObject urbanGuess;
@@ -67,9 +70,13 @@ public class ManageInput : MonoBehaviour
     // Sprint Function
     public bool b_input;
     public bool jump_input;
+    public bool leftBump_input;
 
     // Stealth
     public bool currentlySneaking = false;
+
+    // Dance
+    private int dancePhase;
 
     // Object Interaction
     public bool itemPickedUp;
@@ -103,9 +110,11 @@ public class ManageInput : MonoBehaviour
 
         homeBaseInteractions = homeBase.GetComponent<HomeBaseInteractions>();
 
+        dancePhase = 1;
+
         // Sprint Items
-        sprintCharge = 100;
-        sprintDisplay.color = Color.white;
+        sprintCharge = 25;
+        sprintDisplay.color = Color.green;
         isSprinting = false;
         sprintAvailable = true;
     }
@@ -119,24 +128,37 @@ public class ManageInput : MonoBehaviour
 
     private void HandleSprintCharge()
     {
+        Timer += Time.deltaTime;
+
         if(isSprinting && sprintCharge > 0)
         {
-            sprintCharge -= 0.08f;
+            // sprintCharge -= 0.08f;
+            sprintDisplay.color = Color.white;
+            if (Timer >= delayAmount)
+            {
+                Timer = 0f;
+                sprintCharge--;
+            }
         }
-        else if (!isSprinting && sprintCharge < 100)
+        else if (!isSprinting && sprintCharge < 25)
         {
-            sprintCharge += 0.07f;
+            // sprintCharge += 0.07f;
+            if (Timer >= delayAmount)
+            {
+                Timer = 0f;
+                sprintCharge++;
+            }
         }
         else if(sprintCharge <= 0)
         {
             sprintAvailable = false;
             sprintDisplay.color = Color.red;
         }
-        else if(sprintCharge >= 100)
+        else if(sprintCharge >= 25)
         {
-            sprintCharge = 100;
+            sprintDisplay.color = Color.green;
+            sprintCharge = 25;
             sprintAvailable = true;
-            sprintDisplay.color = Color.white;
         }
     }
 
@@ -179,6 +201,10 @@ public class ManageInput : MonoBehaviour
             // Toggle Pause Menu
             playerControls.MenuActions.Pause.performed += i => OpenPauseMenu();
             playerControls.MenuActions.Select.performed += i => PauseMenuSelection();
+
+            // Dance
+            playerControls.PlayerAction.Dance.performed += i => leftBump_input = true;
+            playerControls.PlayerAction.Dance.canceled += i => leftBump_input = false;
         }
 
         playerControls.Enable();
@@ -198,8 +224,7 @@ public class ManageInput : MonoBehaviour
         HandleSprintInput();
         HandleJumpingInput();
         HandleSneak();
-
-        // Handle Action Input
+        HandleDancing();
     }
 
     private void HandleMovementInput()
@@ -225,6 +250,26 @@ public class ManageInput : MonoBehaviour
         {
             playerLocomotion.isSprinting = false;
             isSprinting = false;
+        }
+    }
+
+    private void HandleDancing()
+    {
+        if(leftBump_input && moveAmount <= 0)
+        {
+            animatorManager.Dance(true, dancePhase);
+        }
+        else
+        {
+            animatorManager.Dance(false, dancePhase);
+            if (dancePhase == 4)
+            {
+                dancePhase = 1;
+            }
+            else
+            {
+                dancePhase++;
+            }
         }
     }
 
@@ -380,7 +425,7 @@ public class ManageInput : MonoBehaviour
             {
                 urbanWeaponsManager.HandleWeaponRack(padDirection);
             }
-            else
+            else if(GuessScreen.activeSelf)
             {
                 urbanGuessManager.PlayerGuessSubmission(padDirection);
             }  
@@ -391,7 +436,7 @@ public class ManageInput : MonoBehaviour
             {
                 suburbWeaponsManager.HandleWeaponRack(padDirection);
             }
-            else
+            else if (GuessScreen.activeSelf)
             {
                 suburbGuessManager.PlayerGuessSubmission(padDirection);
             }
@@ -401,7 +446,8 @@ public class ManageInput : MonoBehaviour
             if(map3WeaponsManager.weaponScreenOpen)
             {
                 map3WeaponsManager.HandleWeaponRack(padDirection);
-            } else
+            }
+            else if (GuessScreen.activeSelf)
             {
                 map3GuessManager.PlayerGuessSubmission(padDirection);
             }  
@@ -412,7 +458,7 @@ public class ManageInput : MonoBehaviour
             {
                 map4WeaponsManager.HandleWeaponRack(padDirection);
             }
-            else
+            else if (GuessScreen.activeSelf)
             {
                 map4GuessManager.PlayerGuessSubmission(padDirection);
             } 

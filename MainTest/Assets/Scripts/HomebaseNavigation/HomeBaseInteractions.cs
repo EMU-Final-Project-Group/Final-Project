@@ -388,7 +388,6 @@ public class HomeBaseInteractions : MonoBehaviour
                 {
                     accCursonLocation--;
                 }
-
             }
             playerAccessoryManagement.HandleCursor(accCursonLocation);
         }
@@ -493,7 +492,6 @@ public class HomeBaseInteractions : MonoBehaviour
             currentActiveMap = 1;
             HandleDisplayEnable(mainMonsterManager.urbanMonsterSpawn);
             DisableHomebaseItems();
-            // clueScreenDisable.SetActive(true);
             player.transform.position = urbanSpawnPoint;
         }
         else if(mapDisplayToggle.activeSelf && mapCurrentlySelected == 2)
@@ -501,7 +499,6 @@ public class HomeBaseInteractions : MonoBehaviour
             currentActiveMap = 2;
             HandleDisplayEnable(mainMonsterManager.suburbMonsterSpawn);
             DisableHomebaseItems();
-            // clueScreenDisable.SetActive(true);
             player.transform.position = suburbSpawnPoint;
         }
         else if(mapDisplayToggle.activeSelf && mapCurrentlySelected == 3)
@@ -509,7 +506,6 @@ public class HomeBaseInteractions : MonoBehaviour
             currentActiveMap = 3;
             HandleDisplayEnable(mainMonsterManager.map3MonsterSpawn);
             DisableHomebaseItems();
-            // clueScreenDisable.SetActive(true);
             player.transform.position = map3SpawnPoint;
         }
         else if(mapDisplayToggle.activeSelf && mapCurrentlySelected == 4)
@@ -517,7 +513,6 @@ public class HomeBaseInteractions : MonoBehaviour
             currentActiveMap = 4;
             HandleDisplayEnable(mainMonsterManager.map4MonsterSpawn);
             DisableHomebaseItems();
-            // clueScreenDisable.SetActive(true);
             player.transform.position = map4SpawnPoint;
         }
     }

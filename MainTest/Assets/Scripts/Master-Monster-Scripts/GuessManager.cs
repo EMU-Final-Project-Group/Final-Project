@@ -10,6 +10,7 @@ public class GuessManager : MonoBehaviour
     public GameObject combatScreen;
     public GameObject monsterMaster;
     ClueDisplayManager monsterClueDisplay;
+    MainMonsterManager mainMonsterManager;
 
     [Header("Guess Machine Distance")]
     public GameObject urbanGuessDetection;
@@ -20,6 +21,9 @@ public class GuessManager : MonoBehaviour
     PlayerNearbyDetection suburbGuessMachineDistanceCheck;
     PlayerNearbyDetection map3GuessMachineDistanceCheck;
     PlayerNearbyDetection map4GuessMachineDistanceCheck;
+
+    [Header("Wrong Guess Notice")]
+    public GameObject wrongGuessNotice;
 
     private GameObject clue1;
     private GameObject clue2;
@@ -52,11 +56,14 @@ public class GuessManager : MonoBehaviour
         combatScreen.SetActive(false);
 
         monsterClueDisplay = monsterMaster.GetComponent<ClueDisplayManager>();
+        mainMonsterManager = monsterMaster.GetComponent<MainMonsterManager>();
 
         urbanGuessMachineDistanceCheck = urbanGuessDetection.GetComponent<PlayerNearbyDetection>();
         suburbGuessMachineDistanceCheck = suburbGuessDetection.GetComponent<PlayerNearbyDetection>();
         map3GuessMachineDistanceCheck = map3GuessDetection.GetComponent<PlayerNearbyDetection>();
         map4GuessMachineDistanceCheck = map4GuessDetection.GetComponent<PlayerNearbyDetection>();
+
+        wrongGuessNotice.SetActive(false);
     }
 
     private void Update()
@@ -140,29 +147,36 @@ public class GuessManager : MonoBehaviour
         {
             Debug.Log("Correct Guess");
             spawnMonster = true;
+            wrongGuessNotice.SetActive(false);
             CorrectGuess();
         }
         else if(isVampire && guessValue == 2)
         {
             Debug.Log("Correct Guess");
             spawnMonster = true;
+            wrongGuessNotice.SetActive(false);
             CorrectGuess();
         }
         else if(isWitch && guessValue == 3)
         {
             Debug.Log("Correct Guess");
             spawnMonster = true;
+            wrongGuessNotice.SetActive(false);
             CorrectGuess();
         }
         else if(isDemon && guessValue == 4)
         {
             Debug.Log("Correct Guess");
             spawnMonster = true;
+            wrongGuessNotice.SetActive(false);
             CorrectGuess();
         }
         else
         {
             Debug.Log("WRONG");
+            mainMonsterManager.AddMadness(60);
+            wrongGuessNotice.SetActive(true);
+            StartCoroutine(DisplayWrongGuessMessage(5));
         }
     }
 
@@ -170,7 +184,7 @@ public class GuessManager : MonoBehaviour
     {
         guessScreen.SetActive(false);
         combatScreen.SetActive(true);
-        monsterClueDisplay.DisableAllDisplays();
+        monsterClueDisplay.DisableAllDisplays(); 
     }
 
     public bool CheckIfAllCluesCollected()
@@ -188,5 +202,12 @@ public class GuessManager : MonoBehaviour
     private void DisplayTip()
     {
         popUpTip.SetActive(true);
+    }
+
+    // Displays the wrong guess message for X seconds
+    IEnumerator DisplayWrongGuessMessage(int pauseLength)
+    {
+        yield return new WaitForSeconds(pauseLength);
+        wrongGuessNotice.SetActive(false);
     }
 }

@@ -126,9 +126,9 @@
     <None Include="Assets\UI_Elements\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\z_Import_Skyboxes\readme.txt" />
     <None Include="Assets\UI_Elements\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
-    <None Include="Assets\PolygonHorrorMansion\Materials\Shaders\SyntyStudios_Ghost.shader" />
+    <None Include="Assets\zMaybe\Materials\Shaders\SyntyStudios_Ghost.shader" />
     <None Include="Assets\UI_Elements\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
-    <None Include="Assets\PolygonHorrorMansion\Materials\Shaders\SyntyStudios_Grunge.shader" />
+    <None Include="Assets\zMaybe\Materials\Shaders\SyntyStudios_Grunge.shader" />
     <None Include="Assets\UI_Elements\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\UI_Elements\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\UI_Elements\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />

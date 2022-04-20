@@ -157,7 +157,7 @@ public class MainMonsterManager : MonoBehaviour
     // Madness Score Items
     [Header("Madness Items")]
     public Text madnessDisplay;
-    private int madnessScore;
+    public int madnessScore;
     private bool startUrbanMadnessClock;
     private bool startSuburbMadnessClock;
     private bool startMap3MadnessClock;
@@ -167,6 +167,9 @@ public class MainMonsterManager : MonoBehaviour
     protected float Timer;
     public float DelayAmount = 0.5f;
 
+    //gameover screen
+    public GameObject gameOverScreen;
+    public bool isGameOver = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -250,10 +253,27 @@ public class MainMonsterManager : MonoBehaviour
         startSuburbMadnessClock = false;
         startMap3MadnessClock = false;
         startMap4MadnessClock = false;
+
+        //hides game over at start
+        gameOverScreen.SetActive(false);
     }
 
+    public Text madnessText;
+
+    public void GameOver()
+    {
+        //put number from GAMEOVER CANVAS HERE
+        madnessText.text = madnessScore.ToString();
+    }
     private void Update()
     {
+        if (isGameOver == true)
+        {
+            gameOverScreen.SetActive(true);
+            GameOver();
+        }
+            
+
         // Madness Clock Items
         Timer += Time.deltaTime;
         if(startUrbanMadnessClock || startSuburbMadnessClock || startMap3MadnessClock || startMap4MadnessClock)

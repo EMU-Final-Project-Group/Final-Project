@@ -15,8 +15,7 @@ public class ClueManager : MonoBehaviour
     RandomSpawner spawner2;
     RandomSpawner spawner3;
     RandomSpawner spawner4;
-
-
+	
     public bool itemInteraction;
 
     // Start is called before the first frame update

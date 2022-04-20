@@ -16,6 +16,8 @@ public class RandomSpawner : MonoBehaviour
     PlayerNearbyDetection clueNearby2;
     PlayerNearbyDetection clueNearby3;
     PlayerNearbyDetection clueNearby4;
+	
+	AudioSource audioSrc;
 
     void Awake()
     {
@@ -62,6 +64,8 @@ public class RandomSpawner : MonoBehaviour
         clueNearby2 = clue2.GetComponent<PlayerNearbyDetection>();
         clueNearby3 = clue3.GetComponent<PlayerNearbyDetection>();
         clueNearby4 = clue4.GetComponent<PlayerNearbyDetection>();
+		
+		audioSrc = GetComponent<AudioSource>();
     }
 
     public void CluePickUpCheck()
@@ -69,18 +73,22 @@ public class RandomSpawner : MonoBehaviour
         if(clue1.activeSelf)
         {
             clueNearby1.PickUpClue();
+			audioSrc.Play();
         }
         if (clue2.activeSelf)
         {
             clueNearby2.PickUpClue();
+			audioSrc.Play();
         }
         if (clue3.activeSelf)
         {
             clueNearby3.PickUpClue();
+			audioSrc.Play();
         }
         if (clue4.activeSelf)
         {
             clueNearby4.PickUpClue();
+			audioSrc.Play();
         }
     }
 

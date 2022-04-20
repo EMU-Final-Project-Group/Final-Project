@@ -1,0 +1,7 @@
+"Weapon Swing.mp3" and "Weapon Hit.mp3" are "unsheath sword" and "Knife thrust into wall" respectively from https://pixabay.com/sound-effects/search/knife/
+
+"Clue Collected.mp3" is "scale e6" from https://pixabay.com/sound-effects/search/pick-up/
+
+"Monster Roar.mp3" is "Scary Monster Roar #2" from https://pixabay.com/sound-effects/search/monster/
+
+"Walk.mp3" and "Run.mp3" are "steps" and "RUNNING 1" respectively from https://pixabay.com/sound-effects/search/step/

@@ -170,6 +170,7 @@ public class MainMonsterManager : MonoBehaviour
     //gameover screen
     public GameObject gameOverScreen;
     public bool isGameOver = false;
+
     // Start is called before the first frame update
     void Start()
     {

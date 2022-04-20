@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class HomeBaseInteractions : MonoBehaviour
 {
@@ -75,6 +76,15 @@ public class HomeBaseInteractions : MonoBehaviour
     public GameObject monsterManager;
     MainMonsterManager mainMonsterManager;
     ClueDisplayManager clueDisplayManager;
+
+    [Header("Game Over Items")]
+    // public GameObject gameOverDisplay;
+    // public GameObject finalGameScore;
+    public Button mainMenuButton;
+    public Button quitGameButton;
+    private Vector3 largeCursor;
+    private Vector3 smallCursor;
+    private int currentGameOverButton;
 
     // Player Bathroom Interaction Items
     PlayerInteraction doorInteractionClosed;
@@ -177,6 +187,18 @@ public class HomeBaseInteractions : MonoBehaviour
         clueDisplayManager = monsterManager.GetComponent<ClueDisplayManager>();
         clueDisplayManager.DisableAllDisplays();
         #endregion
+
+        #region Game Over Items
+        largeCursor = new Vector3(1.1f, 1.6f, 1.1f);
+        smallCursor = new Vector3(1f, 1.2f, 1f);
+        mainMenuButton.GetComponent<Image>().color = Color.red;
+        mainMenuButton.transform.localScale = largeCursor;
+        quitGameButton.GetComponent<Image>().color = Color.white;
+        quitGameButton.transform.localScale = smallCursor;
+        // gameOverDisplay.SetActive(false);
+
+        currentGameOverButton = 1;
+        #endregion
     }
 
     private void Update()
@@ -218,6 +240,7 @@ public class HomeBaseInteractions : MonoBehaviour
         {
             Debug.Log("YOU WIN THE GAME");
             playMessageOnce--;
+            StartCoroutine(DelayGameOverScreen());
         }
     }
 
@@ -232,6 +255,9 @@ public class HomeBaseInteractions : MonoBehaviour
 
             // Pressing the Y button
             playerControls.MenuActions.SelectWithY.performed += i => HandleMenuSelection();
+
+            // Pressing the A Bu
+            playerControls.MenuActions.Select.performed += i => HandleGameOverSelection();
 
             // D Pad directions
             playerControls.MenuActions.NavUp.performed += i => HandleDPadPress(1);
@@ -289,6 +315,31 @@ public class HomeBaseInteractions : MonoBehaviour
 
     private void HandleDPadPress(int direction)
     {
+        // Game Over Screen
+        if(mainMonsterManager.isGameOver)
+        {
+            if(direction == 3 || direction == 4)
+            {
+                if(currentGameOverButton == 1)
+                {
+                    mainMenuButton.GetComponent<Image>().color = Color.white;
+                    mainMenuButton.transform.localScale = smallCursor;
+                    quitGameButton.GetComponent<Image>().color = Color.red;
+                    quitGameButton.transform.localScale = largeCursor;
+                    currentGameOverButton = 2;
+                }
+                else if(currentGameOverButton == 2)
+                {
+                    mainMenuButton.GetComponent<Image>().color = Color.red;
+                    mainMenuButton.transform.localScale = largeCursor;
+                    quitGameButton.GetComponent<Image>().color = Color.white;
+                    quitGameButton.transform.localScale = smallCursor;
+                    currentGameOverButton = 1;
+                }
+            }
+        }
+
+
         // Map Interaction
         if (mapDisplayToggle.activeSelf)
         {
@@ -390,6 +441,19 @@ public class HomeBaseInteractions : MonoBehaviour
                 }
             }
             playerAccessoryManagement.HandleCursor(accCursonLocation);
+        }
+    }
+
+    private void HandleGameOverSelection()
+    {
+        if(currentGameOverButton == 1 && mainMonsterManager.isGameOver)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        }
+        else if(currentGameOverButton == 2 && mainMonsterManager.isGameOver)
+        {
+            Debug.Log("Quiting...");
+            Application.Quit();
         }
     }
 
@@ -553,5 +617,12 @@ public class HomeBaseInteractions : MonoBehaviour
         genderPanel.SetActive(true);
         accessoriesPanel.SetActive(true);
         mapPanel.SetActive(true);
+    }
+
+    IEnumerator DelayGameOverScreen()
+    {
+        yield return new WaitForSeconds(3);
+        mainMonsterManager.isGameOver = true;
+        // gameOverDisplay.SetActive(true);
     }
 }

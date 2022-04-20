@@ -36,6 +36,8 @@ public class PlayerCombat : MonoBehaviour
     [Header("Monster Items")]
     public GameObject mainMonster;
     MainMonsterManager mainMonsterManager;
+	
+	AudioSource audioSrc;
 
     private void Awake()
     {
@@ -65,6 +67,8 @@ public class PlayerCombat : MonoBehaviour
 
         // Combat Stats
         availableToAttackAgain = true;
+		
+		audioSrc = GetComponent<AudioSource>();
     }
 
     // Starts the attack process
@@ -119,6 +123,7 @@ public class PlayerCombat : MonoBehaviour
             werewolfMasterScript.MonsterTookDamage(1);
             availableToAttackAgain = false;
             StartCoroutine(PauseAttack(3));
+			audioSrc.Play();
         }
         else if(other.gameObject.tag == "Werewolf")
         {
@@ -137,6 +142,7 @@ public class PlayerCombat : MonoBehaviour
                 availableToAttackAgain = false;
                 StartCoroutine(PauseAttack(2));
             }
+			audioSrc.Play();
         }
         else if(other.gameObject.tag == "Vampire")
         {
@@ -155,6 +161,7 @@ public class PlayerCombat : MonoBehaviour
                 availableToAttackAgain = false;
                 StartCoroutine(PauseAttack(4));
             }
+			audioSrc.Play();
         }
         else if(other.gameObject.tag == "Witch")
         {
@@ -173,6 +180,7 @@ public class PlayerCombat : MonoBehaviour
                 availableToAttackAgain = false;
                 StartCoroutine(PauseAttack(4));
             }
+			audioSrc.Play();
         }
         else if(other.gameObject.tag == "Demon")
         {
@@ -191,6 +199,7 @@ public class PlayerCombat : MonoBehaviour
                 availableToAttackAgain = false;
                 StartCoroutine(PauseAttack(4));
             }
+			audioSrc.Play();
         }
     }
 
